@@ -505,7 +505,7 @@ def page_about():
 
 <section id="clinic"><div class="wrap">
   <div class="section-head"><div class="eyebrow">The clinic</div><h2>What is on the first floor</h2>
-  <p class="lead">A CBCT 3D scanner, a dental microscope, an implant surgery room and a digital lab that mills crowns on site. Instruments are sterilised in a Class B autoclave, and single-use items are used once.</p></div>
+  <p class="lead">A CBCT 3D scanner, a dental microscope, an implant surgery room and <a href="/lab.html">our in-house lab, Titanium Arts Dental Studio</a>, which mills crowns on site. Instruments are sterilised in a Class B autoclave, and single-use items are used once.</p></div>
   {photo_grid(PHOTOS)}
 </div></section>
 
@@ -531,6 +531,7 @@ def page_treatments():
         ("Braces", "Fixed braces for teenagers and adults.", f"{SMILE}/braces-cost-delhi.html", "Braces cost"),
         ("Root canal treatment", "Saves an infected or badly decayed tooth; often finished in one sitting.", f"{SMILE}/root-canal-cost-delhi.html", "Root canal cost"),
         ("Crowns and bridges", "Caps made in the clinic's own lab, sometimes fitted the same day.", f"{SMILE}/dental-crown-cost-delhi.html", "Crown cost"),
+        ("Our in-house lab", "Titanium Arts Dental Studio makes our crowns, veneers and implant teeth on the same floor.", "/lab.html", "See the lab"),
         ("Teeth cleaning", "Scaling and air polishing to remove tartar and stains.", f"{SMILE}/teeth-cleaning-cost-delhi.html", "Cleaning cost"),
         ("Wisdom tooth removal", "Surgical removal of impacted wisdom teeth, planned on a scan when needed.", "/booking.html", "Book"),
         ("Fillings and extractions", "Tooth-coloured fillings, and gentle extractions when a tooth cannot be saved.", "/booking.html", "Book"),
@@ -554,6 +555,43 @@ def page_treatments():
     <li>Teeth whitening: from ₹8,000, depending on the case</li>
     <li>Implants: see <a href="{IMPLANTS}/dental-implant-cost-delhi/">implant costs in Delhi</a></li>
   </ul><p class="muted" style="margin:12px 0 0">Every plan comes with a written estimate after your examination.</p></div>
+</div></section>
+{cta_band()}"""
+
+
+def page_lab():
+    made = [
+        ("Zirconia crowns and bridges", "Milled in-house on a Roland dry mill. Zirconia crowns from ₹8,000 per tooth, with a warranty.", f"{SMILE}/dental-crown-cost-delhi.html", "Crown cost"),
+        ("E-max crowns and glass-ceramic veneers", "Milled on an Upcera wet mill. E-max crowns from ₹10,000 per tooth; veneers from ₹10,000 per tooth.", f"{SMILE}/veneers.html", "Veneers"),
+        ("Teeth on implants", "Titanium parts for implant teeth milled on a Kelkar wet mill, so the crown, bridge or full-arch teeth fit the implant exactly.", f"{IMPLANTS}/dental-implant-cost-delhi/", "Implant cost"),
+        ("Surgical guides", "3D-printed guides that carry the implant plan from the CBCT scan to the mouth.", f"{IMPLANTS}/", "Guided implants"),
+        ("Temporaries and trial smiles", "PMMA temporary teeth, mock-ups and study models, printed or milled in-house.", f"{SMILE}/treatments.html", "Smile design"),
+    ]
+    cards = "".join(f'<article class="card"><h3>{e(n)}</h3><p class="muted">{e(d)}</p><p><a href="{h}" rel="noopener">{e(l)} →</a></p></article>' for n, d, h, l in made)
+    return pagehead("Our in-house dental lab: Titanium Arts Dental Studio", "Our lab",
+                    "Crowns, veneers and implant teeth for our patients are designed and made on the same floor as the clinic, at Titanium Arts Dental Studio (TADS), our in-house digital lab.") + f"""
+<section><div class="wrap grid g2">
+  <div class="prose">
+    <h2>Why an in-house lab matters to you</h2>
+    <ul>
+      <li><strong>Fewer visits.</strong> A crown can often be scanned, milled and fitted on the same day, instead of waiting a week for an outside lab.</li>
+      <li><strong>A better fit.</strong> Your doctor checks the crown's design on screen against your scan before it is milled.</li>
+      <li><strong>Changes on the spot.</strong> If a shade or shape needs adjusting, it is done in the clinic, not sent away again.</li>
+    </ul>
+    <h2>How a crown is made here</h2>
+    <ol>
+      <li>Your tooth is scanned with an intraoral 3D scanner (Medit i900, Medit i500 or Upcera). No impression trays.</li>
+      <li>The crown is designed in exocad and checked against your bite.</li>
+      <li>It is milled from zirconia or E-max and finished to match your teeth.</li>
+      <li>It is fitted and checked, often on the same day for a single crown.</li>
+    </ol>
+  </div>
+  <figure style="margin:0"><img src="/assets/img/clinic-dental-lab.jpg" alt="3D printers and milling machines at Titanium Arts Dental Studio" width="1200" height="900" loading="lazy" style="width:100%;height:auto;border-radius:16px"><figcaption class="muted">3D printers and milling machines at Titanium Arts Dental Studio</figcaption></figure>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="section-head"><div class="eyebrow">Made at TADS</div><h2>What our lab makes</h2></div>
+  <div class="grid g3">{cards}</div>
 </div></section>
 {cta_band()}"""
 
@@ -645,6 +683,9 @@ PAGES = [
     ("treatments.html", "Dental Treatments in Rajouri Garden | Dr Sobti's Dental Care",
      "Implants, full mouth implants, veneers, teeth whitening, aligners, braces, root canal, crowns, cleaning and children's dentistry at Dr Sobti's Dental Care, Rajouri Garden.",
      page_treatments, "treatments.html", [crumbs_schema("treatments.html", "Treatments")], 0.9),
+    ("lab.html", "In-House Dental Lab in Rajouri Garden: Titanium Arts Dental Studio | Dr Sobti's",
+     "Crowns, veneers and implant teeth made on site at Titanium Arts Dental Studio, the in-house digital lab of Dr Sobti's Dental Care, Rajouri Garden. Same-day crowns for many patients.",
+     page_lab, "about.html", [crumbs_schema("lab.html", "Our lab")], 0.6),
     ("reviews.html", "Patient Reviews | Dr Sobti's Dental Care, Rajouri Garden",
      "Rated 5.0 by 118 patients on Google. Read what patients say about implants, root canals, cleanings and smile work at Dr Sobti's Dental Care, Rajouri Garden.",
      page_reviews, "reviews.html", [crumbs_schema("reviews.html", "Reviews")], 0.6),

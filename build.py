@@ -40,6 +40,7 @@ MAP_EMBED = "https://maps.google.com/maps?q=Dr+Sobti%27s+Dental+Care,+J+12/26+Ra
 IMPLANTS = "https://dentalimplantsdelhi.com"
 SMILE = "https://drparulssobti.com"
 SOCIAL = {
+    "Google": "https://maps.google.com/maps?cid=6577991291147149801",
     "Instagram": "https://www.instagram.com/sobtidentalcare/",
     "Facebook": "https://www.facebook.com/sobtidentalcare",
     "YouTube": "https://www.youtube.com/@DrSobtiDental",
@@ -99,7 +100,7 @@ def clinic_schema():
             {"@type": "ContactPoint", "telephone": "+91-87449-85976", "contactType": "customer service", "areaServed": "IN", "availableLanguage": ["English", "Hindi"]},
             {"@type": "ContactPoint", "telephone": "+91-80767-77307", "contactType": "reservations", "description": "WhatsApp", "availableLanguage": ["English", "Hindi"]},
         ],
-        "areaServed": ["Rajouri Garden", "Punjabi Bagh", "Tagore Garden", "Subhash Nagar", "Tilak Nagar", "Janakpuri", "West Delhi"],
+        "areaServed": ["Rajouri Garden", "Punjabi Bagh", "Tagore Garden", "Subhash Nagar", "Ramesh Nagar", "Tilak Nagar", "Janakpuri", "Vikaspuri", "Paschim Vihar", "West Delhi"],
         "medicalSpecialty": ["Dentistry"],
         "isAcceptingNewPatients": True,
         "employee": [{"@id": f"{SITE}/#dr-pushkar"}, {"@id": f"{SITE}/#dr-parul"}],
@@ -216,7 +217,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
     <div><h3>Our websites</h3><ul>
       <li><a href="{IMPLANTS}/">dentalimplantsdelhi.com</a><br><small>Dr Pushkar Sobti, implants</small></li>
       <li><a href="{SMILE}/">drparulssobti.com</a><br><small>Dr Parul Sharma Sobti, smile design</small></li>
-      <li><a href="{SOCIAL['Instagram']}" rel="noopener">Instagram</a> · <a href="{SOCIAL['Facebook']}" rel="noopener">Facebook</a> · <a href="{SOCIAL['YouTube']}" rel="noopener">YouTube</a></li>
+      <li><a href="{SOCIAL['Google']}" rel="noopener">Google</a> · <a href="{SOCIAL['Instagram']}" rel="noopener">Instagram</a> · <a href="{SOCIAL['Facebook']}" rel="noopener">Facebook</a> · <a href="{SOCIAL['YouTube']}" rel="noopener">YouTube</a></li>
     </ul></div>
   </div>
   <div class="legal"><span>© 2026 {e(CLINIC['name'])}, Rajouri Garden, New Delhi.</span><span>Information on this site is general and is not a diagnosis. Treatment is planned after an examination.</span></div>
@@ -250,9 +251,9 @@ TREATMENT_GROUPS = [
         "cls": "", "title": "Dental implants", "who": "Dr Pushkar Sobti",
         "intro": "Fixed teeth for one gap or a whole jaw, planned in 3D on our own CBCT scanner.",
         "items": [
-            ("Single tooth implant", f"{IMPLANTS}/dental-implant-cost-delhi/", ""),
-            ("Implant cost in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", "prices"),
-            ("Full mouth implants (All-on-4, All-on-X)", f"{IMPLANTS}/", ""),
+            ("Single tooth implant in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", ""),
+            ("Dental implant cost in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", "prices"),
+            ("Full mouth implants (All-on-4, All-on-X)", f"{IMPLANTS}/", "dentalimplantsdelhi.com"),
             ("Basal implants", f"{IMPLANTS}/basal-implants-delhi/", ""),
             ("Bone grafting and sinus lift", f"{IMPLANTS}/", ""),
             ("Implant consultation: what happens", f"{IMPLANTS}/blog/dental-implant-consultation/", "guide"),
@@ -263,11 +264,11 @@ TREATMENT_GROUPS = [
         "cls": "gold", "title": "Smile design and cosmetic", "who": "Dr Parul Sharma Sobti",
         "intro": "Changes to colour, shape and line of the smile, planned around your face before anything is done.",
         "items": [
-            ("Veneers", f"{SMILE}/veneers.html", "from ₹10,000 per tooth"),
-            ("Teeth whitening", f"{SMILE}/teeth-whitening-cost-delhi.html", "from ₹8,000"),
+            ("Veneers in Delhi", f"{SMILE}/veneers.html", "from ₹10,000 per tooth"),
+            ("Teeth whitening cost in Delhi", f"{SMILE}/teeth-whitening-cost-delhi.html", "from ₹8,000"),
             ("Smile makeover", f"{SMILE}/treatments.html", "case by case"),
-            ("Clear aligners", f"{SMILE}/clear-aligners-cost-delhi.html", ""),
-            ("Braces", f"{SMILE}/braces-cost-delhi.html", ""),
+            ("Clear aligners (invisible braces)", f"{SMILE}/clear-aligners-cost-delhi.html", "cost"),
+            ("Braces cost in Delhi", f"{SMILE}/braces-cost-delhi.html", ""),
             ("Composite bonding", f"{SMILE}/treatments.html", ""),
         ],
         "more": (f"{SMILE}/", "drparulssobti.com"),
@@ -276,9 +277,9 @@ TREATMENT_GROUPS = [
         "cls": "teal", "title": "Everyday dental care", "who": "Both doctors and the team",
         "intro": "Check-ups, pain relief and repairs for the whole family, including children.",
         "items": [
-            ("Root canal treatment", f"{SMILE}/root-canal-cost-delhi.html", ""),
-            ("Crowns and caps", f"{SMILE}/dental-crown-cost-delhi.html", ""),
-            ("Teeth cleaning (air polishing)", f"{SMILE}/teeth-cleaning-cost-delhi.html", ""),
+            ("Root canal (RCT) cost in Delhi", f"{SMILE}/root-canal-cost-delhi.html", ""),
+            ("Tooth cap and zirconia crown price", f"{SMILE}/dental-crown-cost-delhi.html", ""),
+            ("Teeth cleaning cost (air polishing)", f"{SMILE}/teeth-cleaning-cost-delhi.html", ""),
             ("Wisdom tooth removal", "/booking.html", ""),
             ("Fillings, extractions and dentures", "/booking.html", ""),
             ("Children's dentistry", "/booking.html", ""),
@@ -389,6 +390,11 @@ def visit_html():
 </div>"""
 
 
+def social_buttons():
+    labels = {"Google": "Google reviews", "Instagram": "Instagram", "Facebook": "Facebook", "YouTube": "YouTube"}
+    return "".join(f'<a class="btn ghost" href="{SOCIAL[k]}" rel="noopener">{v}</a>' for k, v in labels.items())
+
+
 def cta_band():
     return f"""<section><div class="wrap"><div class="cta">
   <div><h2>Not sure what you need?</h2><p>Send a photo or your X-ray on WhatsApp for a free first opinion, or book an in-clinic consultation (₹700) with an examination and a written plan.</p></div>
@@ -401,6 +407,8 @@ HOME_FAQ = [
     ("What are the clinic timings?", "The clinic is open all seven days, Monday to Sunday, from 10 am to 7 pm. Please call or WhatsApp ahead so the right doctor is free for you."),
     ("How much is a consultation?", "A first opinion on WhatsApp is free: send a photo or an X-ray and the doctors will reply. An in-clinic consultation with an examination is ₹700."),
     ("Do you place dental implants at the clinic?", "Yes. Dr Pushkar Sobti places implants at the clinic, from single teeth to full mouth implants, planned on the clinic's own CBCT 3D scanner."),
+    ("Is the clinic open on Sunday?", "Yes. Dr Sobti's Dental Care in Rajouri Garden is open on Sundays too, 10 am to 7 pm, which helps patients from across West Delhi who cannot come on weekdays."),
+    ("Which areas do your patients come from?", "Mostly West Delhi: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Implant patients also travel from elsewhere in Delhi NCR and from abroad."),
     ("Do you treat children?", "Yes. The clinic sees patients of all ages, including children, for check-ups, fillings and other routine care."),
 ]
 
@@ -415,9 +423,9 @@ def page_home():
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in HOME_FAQ)
     return f"""<section class="hero"><div class="wrap">
   <div>
-    <div class="eyebrow">Dentist in Rajouri Garden, West Delhi</div>
-    <h1>Dental care that is <em>explained</em> before it begins</h1>
-    <p class="lead">Dr Sobti's Dental Care is a family-run clinic led by implantologist Dr Pushkar Sobti and aesthetic dentist Dr Parul Sharma Sobti. Implants, smile design and everyday dentistry, with 3D scanning and our own dental lab in the same building.</p>
+    <div class="eyebrow">Dr Sobti's Dental Care · since 2009</div>
+    <h1>Your dentist in Rajouri Garden, <em>West Delhi</em></h1>
+    <p class="lead">Dental care that is explained before it begins. Dr Sobti's Dental Care is a family-run dental clinic in Rajouri Garden led by implantologist Dr Pushkar Sobti and aesthetic dentist Dr Parul Sharma Sobti. Implants, smile design and everyday dentistry, with 3D scanning and our own dental lab in the same building.</p>
     <div class="actions"><a class="btn" href="/booking.html">Book a visit</a><a class="btn ghost" href="tel:{CLINIC['phone_tel']}" data-track="call">Call {CLINIC['phone_display']}</a></div>
     {facts}
   </div>
@@ -451,6 +459,16 @@ def page_home():
   <div class="section-head"><div class="eyebrow">Reviews</div><h2>Rated {CLINIC['rating']} by {CLINIC['review_count']} patients on Google</h2></div>
   <div class="grid g3">{review_cards(REVIEWS[:3])}</div>
   <p style="margin-top:24px" class="actions"><a class="btn ghost" href="/reviews.html">Read more reviews</a></p>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="grid g2" style="align-items:start">
+    <div><div class="eyebrow">Areas we serve</div><h2>A dentist close to home in West Delhi</h2>
+    <p class="muted">Patients reach us easily from Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Rajouri Garden metro station (Blue and Pink lines) is the nearest stop.</p></div>
+    <div><div class="eyebrow">Follow the clinic</div><h2>Find us online</h2>
+    <p class="actions">{social_buttons()}</p>
+    <p class="muted">Before-and-after cases, short videos and answers to common questions, posted by the doctors.</p></div>
+  </div>
 </div></section>
 
 <section id="visit"><div class="wrap">
@@ -562,6 +580,7 @@ def page_contact():
                     "Open all seven days, 10 am to 7 pm. Call, WhatsApp or walk in at J 12/26, Rajouri Garden.") + f"""
 <section><div class="wrap">{visit_html()}</div></section>
 <section class="tint"><div class="wrap">
+  <p class="actions" style="margin-bottom:24px">{social_buttons()}</p>
   <div class="grid g3">
     <div class="card"><h3>Call</h3><p>For appointments and emergencies.</p><p><a class="btn" href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a></p></div>
     <div class="card"><h3>WhatsApp</h3><p>Send photos or X-rays for a free first opinion.</p><p><a class="btn gold" href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a></p></div>
@@ -617,7 +636,7 @@ def page_404():
 
 
 PAGES = [
-    ("index.html", "Dentist in Rajouri Garden, Delhi | Dr Sobti's Dental Care",
+    ("index.html", "Dentist in Rajouri Garden, West Delhi | Dr Sobti's Dental Care",
      "Dr Sobti's Dental Care, J 12/26 Rajouri Garden, New Delhi. Dental implants, veneers, whitening, root canal and family dentistry. Open 7 days, 10 am to 7 pm. Call +91 87449 85976.",
      page_home, "index.html", [faq_schema(HOME_FAQ)], 1.0),
     ("about.html", "About Us and Our Dentists | Dr Sobti's Dental Care, Rajouri Garden",
@@ -629,7 +648,7 @@ PAGES = [
     ("reviews.html", "Patient Reviews | Dr Sobti's Dental Care, Rajouri Garden",
      "Rated 5.0 by 118 patients on Google. Read what patients say about implants, root canals, cleanings and smile work at Dr Sobti's Dental Care, Rajouri Garden.",
      page_reviews, "reviews.html", [crumbs_schema("reviews.html", "Reviews")], 0.6),
-    ("contact.html", "Contact, Timings and Directions | Dr Sobti's Dental Care",
+    ("contact.html", "Dental Clinic in Rajouri Garden: Timings and Directions | Dr Sobti's",
      "J 12/26, First Floor, Rajouri Garden, New Delhi 110027, above Rajmandir. Open 7 days, 10 am to 7 pm. Call +91 87449 85976 or WhatsApp +91 80767 77307.",
      page_contact, "contact.html", [crumbs_schema("contact.html", "Contact"), faq_schema(CONTACT_FAQ)], 0.8),
     ("booking.html", "Book an Appointment | Dr Sobti's Dental Care, Rajouri Garden",

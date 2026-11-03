@@ -538,7 +538,7 @@ def page_about():
   <li><h3>Treatment</h3><p>Done in our rooms, with crowns and teeth made in our own lab.</p></li>
 </ol>"""
     return pagehead("About Dr Sobti's Dental Care", "About us",
-                    "A dental clinic in Rajouri Garden run by two dentists, Dr Pushkar Sobti and Dr Parul Sharma Sobti. A family practice since 1982, when Dr Pushkar's father opened his first clinic; Dr Pushkar joined him in 2009 and opened this Rajouri Garden clinic, on the first floor of J 12/26, in 2024.") + f"""
+                    "A dental clinic in Rajouri Garden run by two dentists, Dr Pushkar Sobti and Dr Parul Sharma Sobti. A family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH) opened it in Vishnu Garden; Dr Pushkar joined in 2009 and opened this Rajouri Garden dental clinic, on the first floor of J 12/26, in 2024.") + f"""
 <section id="doctors"><div class="wrap">
   <div class="section-head"><div class="eyebrow">Your dentists</div><h2>Meet the doctors</h2></div>
   {doctors_html()}
@@ -721,7 +721,7 @@ FAQ_GROUPS = [
         ("What are the clinic timings?", "The clinic is open every day, Monday to Sunday, from 10 am to 7 pm, including Sundays."),
         ("How do I book an appointment?", "Call +91 87449 85976, WhatsApp +91 80767 77307, or use the booking page on this website, which opens WhatsApp with your message ready. Walk-ins are seen when a doctor is free."),
         ("Can I be seen the same day for tooth pain?", "Usually yes. Call the clinic for pain, swelling or a broken tooth and the team will try to see you the same day."),
-        ("How long has Dr Sobti's Dental Care been running?", "The Sobti family dental practice began in 1982, founded by Dr Pushkar Sobti's father. Dr Pushkar Sobti joined in 2009 and opened the Rajouri Garden clinic in 2024."),
+        ("How long has Dr Sobti's Dental Care been running?", "It has been a family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH) opened it in Vishnu Garden. Dr Pushkar Sobti joined in 2009 and opened the Rajouri Garden dental clinic in 2024."),
         ("Which languages do the dentists speak?", "English and Hindi."),
         ("Which areas do patients come from?", "Mostly West Delhi: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Implant patients also come from across Delhi NCR and from abroad."),
     ]),
@@ -760,7 +760,7 @@ def page_faq():
         ("WhatsApp", CLINIC["wa_display"]),
         ("Email", CLINIC["email"]),
         ("Dentists", "Dr Pushkar Sobti (implantologist) and Dr Parul Sharma Sobti (aesthetic dentist)"),
-        ("History", "Family dental practice since 1982 (founded by Dr Pushkar Sobti's father); Dr Pushkar Sobti in practice since 2009; Rajouri Garden clinic opened in 2024"),
+        ("History", "A family clinic since 1982, opened by Dr Rajesh Sobti (MBBS, DCH) in Vishnu Garden; Dr Pushkar Sobti joined in 2009 and opened the Rajouri Garden dental clinic in 2024"),
         ("Experience", "5,000+ implants placed by Dr Pushkar Sobti"),
         ("Equipment", "CBCT 3D scanner, dental microscope, implant surgery room, Class B autoclave"),
         ("In-house lab", "Titanium Arts Dental Studio (zirconia and E-max crowns, veneers, implant teeth)"),
@@ -857,7 +857,7 @@ def main():
     faq_md = "\n".join(f"- {q} {a}" for q, a in FAQ_ALL)
     (OUT / "llms.txt").write_text(f"""# {CLINIC['name']}
 
-> {CLINIC['name']} is a family dental practice (since 1982; this Rajouri Garden clinic opened in 2024) at {ADDRESS_LINE}, India (above Rajmandir), open 7 days a week from 10 am to 7 pm. It is led by implantologist Dr Pushkar Sobti (BDS, MDS, PG in Oral Implantology, UCAM; in practice since 2009; 5,000+ implants placed) and aesthetic dentist Dr Parul Sharma Sobti (BDS). The clinic has its own CBCT 3D scanner and in-house dental lab (Titanium Arts Dental Studio) on the same floor. Google rating {CLINIC['rating']} from {CLINIC['review_count']} reviews.
+> {CLINIC['name']} is a dental clinic at {ADDRESS_LINE}, India (above Rajmandir), open 7 days a week from 10 am to 7 pm. It has been a family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH) opened it in Vishnu Garden; Dr Pushkar Sobti joined in 2009 and opened this Rajouri Garden dental clinic in 2024. It is led by implantologist Dr Pushkar Sobti (BDS, MDS, PG in Oral Implantology, UCAM; in practice since 2009; 5,000+ implants placed) and aesthetic dentist Dr Parul Sharma Sobti (BDS). The clinic has its own CBCT 3D scanner and in-house dental lab (Titanium Arts Dental Studio) on the same floor. Google rating {CLINIC['rating']} from {CLINIC['review_count']} reviews.
 
 ## Key facts
 - Address: {ADDRESS_LINE}, India. Landmark: {CLINIC['landmark']}. Nearest metro: Rajouri Garden (Blue and Pink lines).

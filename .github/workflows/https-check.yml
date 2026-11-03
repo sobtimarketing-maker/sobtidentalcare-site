@@ -1,0 +1,35 @@
+# Checks DNS for www.sobtidentalcare.com and turns on "Enforce HTTPS" once GitHub Pages has a certificate.
+# Runs every 30 minutes until HTTPS is enforced, then does nothing. Safe to delete afterwards.
+name: HTTPS check
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: DNS
+        run: |
+          echo "apex A:"; dig +short sobtidentalcare.com A
+          echo "www CNAME:"; dig +short www.sobtidentalcare.com CNAME
+          echo "NS:"; dig +short sobtidentalcare.com NS
+          echo "HTTP:"; curl -sI http://www.sobtidentalcare.com/ | head -5 || true
+          echo "HTTPS:"; curl -sI https://www.sobtidentalcare.com/ | head -5 || echo "no https yet"
+      - name: Pages status and enforce HTTPS
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/${{ github.repository }}/pages || true
+          enforced=$(gh api repos/${{ github.repository }}/pages --jq .https_enforced 2>/dev/null || echo unknown)
+          echo "https_enforced=$enforced"
+          if [ "$enforced" != "true" ]; then
+            gh api -X PUT repos/${{ github.repository }}/pages -F https_enforced=true \
+              -f cname=www.sobtidentalcare.com && echo "ENFORCED" || echo "Not yet possible"
+          fi

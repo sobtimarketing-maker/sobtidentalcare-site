@@ -638,6 +638,15 @@ PAGES = [
 ]
 
 
+REDIRECTS = {
+    "home": "/", "index": "/",
+    "about-us": "/about.html", "our-team": "/about.html#doctors", "team": "/about.html#doctors", "doctors": "/about.html#doctors",
+    "services": "/treatments.html", "our-services": "/treatments.html", "treatment": "/treatments.html",
+    "testimonials": "/reviews.html", "gallery": "/about.html#clinic",
+    "contact-us": "/contact.html", "appointment": "/booking.html", "book-appointment": "/booking.html", "book": "/booking.html",
+}
+
+
 def main():
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -675,7 +684,15 @@ def main():
 - [Dental implants, Dr Pushkar Sobti]({IMPLANTS}/)
 - [Smile design, Dr Parul Sharma Sobti]({SMILE}/)
 """, encoding="utf-8")
-    print(f"Built {len(PAGES) + 1} pages into {OUT}")
+    # Common addresses from the old site and typical links, sent to the matching new page.
+    for old, new in REDIRECTS.items():
+        d = OUT / old
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "index.html").write_text(
+            f'<!doctype html><meta charset="utf-8"><title>Redirecting</title><link rel="canonical" href="{SITE}{new}">'
+            f'<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={new}"><a href="{new}">Continue</a>\n',
+            encoding="utf-8")
+    print(f"Built {len(PAGES) + 1} pages and {len(REDIRECTS)} redirects into {OUT}")
 
 
 if __name__ == "__main__":

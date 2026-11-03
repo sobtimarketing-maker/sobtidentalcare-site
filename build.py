@@ -56,8 +56,9 @@ BRAND = {
     "name": "Dr Sobti's Dental Care",
     "founding_year": "1982",
     "founding_place": "Vishnu Garden, New Delhi",
-    "founder": "",  # Dr Pushkar Sobti's father, who opened the first clinic in 1982 (name to confirm)
-    "story": "A family dental practice since 1982, when Dr Pushkar Sobti's father opened the first clinic in Vishnu Garden. Dr Pushkar joined him in 2009 and opened the Rajouri Garden clinic in 2024.",
+    "founder": "Dr Rajesh Sobti",
+    "founder_quals": "MBBS, DCH",
+    "story": "A family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH), Dr Pushkar Sobti's father, opened it in Vishnu Garden. Dr Pushkar joined him in 2009 and opened the Rajouri Garden dental clinic in 2024.",
 }
 CLINIC_AREA = "Rajouri Garden"
 CLINIC_OPENED = "2024-10-01"  # opening date on the Rajouri Garden Google profile
@@ -77,7 +78,7 @@ BRANCHES = [
         "lat": None, "lng": None,
         "maps": "https://www.google.com/maps/place/?q=place_id:ChIJ1YZ8rb4FDTkRQpgLNuN0yDo",
         "opened": "1982",
-        "about": "The family's first clinic, opened in 1982 by Dr Pushkar Sobti's father. Dr Pushkar began practice here in 2009.",
+        "about": "The family's first clinic, opened in 1982 by Dr Rajesh Sobti (MBBS, DCH). Dr Pushkar Sobti began practice here in 2009.",
     },
 ]
 LIVE_BRANCHES = [b for b in BRANCHES if b["publish"]]
@@ -137,7 +138,8 @@ def org_schema():
         "employee": [{"@id": f"{SITE}/#dr-pushkar"}, {"@id": f"{SITE}/#dr-parul"}],
     }
     if BRAND["founder"]:
-        org["founder"] = {"@type": "Person", "name": BRAND["founder"]}
+        org["founder"] = {"@type": "Person", "name": BRAND["founder"], "honorificSuffix": BRAND["founder_quals"],
+                          "jobTitle": "Physician"}
     return org
 
 

@@ -38,6 +38,8 @@ CLINIC = {
 ADDRESS_LINE = f'{CLINIC["street"]}, {CLINIC["locality"]}, {CLINIC["region"]} {CLINIC["postcode"]}'
 MAP_EMBED = "https://maps.google.com/maps?q=Dr+Sobti%27s+Dental+Care,+J+12/26+Rajouri+Garden,+New+Delhi+110027&z=16&output=embed"
 IMPLANTS = "https://dentalimplantsdelhi.com"
+UPDATED = "2026-11-03"  # change when facts on the site change; shown to AI search as dateModified
+LINKEDIN_PUSHKAR = "https://www.linkedin.com/in/pushkar-sobti-159699200/"
 SMILE = "https://drparulssobti.com"
 SOCIAL = {
     "Google": "https://maps.google.com/maps?cid=6577991291147149801",
@@ -45,6 +47,53 @@ SOCIAL = {
     "Facebook": "https://www.facebook.com/sobtidentalcare",
     "YouTube": "https://www.youtube.com/@DrSobtiDental",
 }
+# ---- Brand and branches ----
+# One brand, several clinics. Rajouri Garden (CLINIC above) is the main clinic: it owns the home page
+# and all marketing. Other branches get their own page at /<slug>.html, built from BRANCHES.
+# A branch is only published once its signboard name, own phone and hours are confirmed by Dr,
+# and its NAP must match that branch's own Google Business Profile exactly.
+BRAND = {
+    "name": "Dr Sobti's Dental Care",
+    "founding_year": "1982",
+    "founding_place": "Vishnu Garden, New Delhi",
+    "founder": "Dr Rajesh Sobti",
+    "founder_quals": "MBBS, DCH",
+    "story": "A family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH), Dr Pushkar Sobti's father, opened it in Vishnu Garden. Dr Pushkar joined him in 2009 and opened the Rajouri Garden dental clinic in 2024.",
+}
+CLINIC_AREA = "Rajouri Garden"
+CLINIC_OPENED = "2024-10-01"  # opening date on the Rajouri Garden Google profile
+CLINIC_DOCTORS = ["dr-pushkar", "dr-parul"]
+BRANCHES = [
+    {
+        "slug": "vishnu-garden",
+        "publish": False,  # waiting on Dr: signboard name, own phone, hours, doctors' days, Google profile access
+        "area": "Vishnu Garden",
+        "name": "",  # exactly as on the signboard and the branch's Google profile
+        "street": "WZ-168, Mangal Bazar Road, Chand Nagar, Vishnu Garden",
+        "landmark": "",
+        "locality": "New Delhi", "region": "Delhi", "postcode": "110018",
+        "phone_display": "+91 11 4214 3719", "phone_tel": "+911142143719",  # Vishnu Garden landline (Dr, 4 Nov 2026)
+        "hours": [],  # e.g. [("Monday to Saturday", "Mo-Sa", "10:00", "19:00")]
+        "doctors": [],  # e.g. [("dr-pushkar", "Tuesday and Thursday evenings")]
+        "lat": None, "lng": None,
+        "maps": "https://www.google.com/maps/place/?q=place_id:ChIJ1YZ8rb4FDTkRQpgLNuN0yDo",
+        "opened": "1982",
+        "about": "The family's first clinic, opened in 1982 by Dr Rajesh Sobti (MBBS, DCH). Dr Pushkar Sobti began practice here in 2009.",
+    },
+]
+LIVE_BRANCHES = [b for b in BRANCHES if b["publish"]]
+DAY_NAMES = {"Mo": "Monday", "Tu": "Tuesday", "We": "Wednesday", "Th": "Thursday", "Fr": "Friday", "Sa": "Saturday", "Su": "Sunday"}
+DAY_ORDER = list(DAY_NAMES)
+
+
+def day_list(spec):
+    """'Mo-Sa' or 'Mo,We,Fr' -> schema.org day names."""
+    if "-" in spec:
+        a, b = spec.split("-")
+        return [DAY_NAMES[d] for d in DAY_ORDER[DAY_ORDER.index(a):DAY_ORDER.index(b) + 1]]
+    return [DAY_NAMES[d] for d in spec.split(",")]
+
+
 FONTS = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap"
 
 NAV = [
@@ -67,10 +116,62 @@ WA_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path
 
 # ---------------- Schema ----------------
 
+ORG_ID = f"{SITE}/#organization"
+
+
+def org_schema():
+    org = {
+        "@type": "MedicalOrganization",
+        "@id": ORG_ID,
+        "name": BRAND["name"],
+        "url": f"{SITE}/",
+        "logo": f"{SITE}/assets/img/logo.png",
+        "description": BRAND["story"],
+        "foundingDate": BRAND["founding_year"],
+        "foundingLocation": {"@type": "Place", "name": BRAND["founding_place"]},
+        "email": CLINIC["email"],
+        "medicalSpecialty": ["Dentistry"],
+        "sameAs": [SOCIAL["Instagram"], SOCIAL["Facebook"], SOCIAL["YouTube"]],
+        "subOrganization": [{"@id": f"{SITE}/#clinic", "name": f"{CLINIC['name']}, {CLINIC_AREA}", "url": f"{SITE}/"}]
+        + [{"@id": f"{SITE}/{b['slug']}.html#clinic", "name": f"{b['name']}, {b['area']}", "url": f"{SITE}/{b['slug']}.html"}
+           for b in LIVE_BRANCHES],
+        "employee": [{"@id": f"{SITE}/#dr-pushkar"}, {"@id": f"{SITE}/#dr-parul"}],
+    }
+    if BRAND["founder"]:
+        org["founder"] = {"@type": "Person", "name": BRAND["founder"], "honorificSuffix": BRAND["founder_quals"],
+                          "jobTitle": "Physician"}
+    return org
+
+
+def branch_schema(b):
+    node = {
+        "@type": "Dentist",
+        "@id": f"{SITE}/{b['slug']}.html#clinic",
+        "name": b["name"],
+        "url": f"{SITE}/{b['slug']}.html",
+        "parentOrganization": {"@id": ORG_ID},
+        "telephone": b["phone_tel"],
+        "address": {"@type": "PostalAddress", "streetAddress": b["street"], "addressLocality": b["locality"],
+                    "addressRegion": b["region"], "postalCode": b["postcode"], "addressCountry": "IN"},
+        "hasMap": b["maps"],
+        "foundingDate": b["opened"],
+        "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": day_list(spec),
+                                       "opens": o, "closes": c} for _, spec, o, c in b["hours"]],
+        "employee": [{"@id": f"{SITE}/#{d}"} for d, _ in b["doctors"]],
+        "medicalSpecialty": ["Dentistry"],
+        "sameAs": [b["maps"]],
+    }
+    if b["lat"]:
+        node["geo"] = {"@type": "GeoCoordinates", "latitude": b["lat"], "longitude": b["lng"]}
+    return node
+
+
 def clinic_schema():
     return {
         "@type": "Dentist",
         "@id": f"{SITE}/#clinic",
+        "parentOrganization": {"@id": ORG_ID},
+        "foundingDate": CLINIC_OPENED,
         "name": CLINIC["name"],
         "url": f"{SITE}/",
         "logo": f"{SITE}/assets/img/logo.png",
@@ -103,8 +204,13 @@ def clinic_schema():
         "areaServed": ["Rajouri Garden", "Punjabi Bagh", "Tagore Garden", "Subhash Nagar", "Ramesh Nagar", "Tilak Nagar", "Janakpuri", "Vikaspuri", "Paschim Vihar", "West Delhi"],
         "medicalSpecialty": ["Dentistry"],
         "isAcceptingNewPatients": True,
-        "employee": [{"@id": f"{SITE}/#dr-pushkar"}, {"@id": f"{SITE}/#dr-parul"}],
-        "sameAs": [CLINIC["maps"], SOCIAL["Instagram"], SOCIAL["Facebook"], SOCIAL["YouTube"], f"{IMPLANTS}/", f"{SMILE}/"],
+        "knowsLanguage": ["English", "Hindi"],
+        "knowsAbout": ["Dental implants", "All-on-4 and All-on-X full mouth implants", "CBCT 3D dental scanning",
+                       "Veneers", "Teeth whitening", "Smile design", "Root canal treatment", "Zirconia and E-max crowns",
+                       "Children's dentistry", "Emergency dental care"],
+        "makesOffer": [offer(n, price, unit) for n, price, unit in PRICES],
+        "employee": [{"@id": f"{SITE}/#{d}"} for d in CLINIC_DOCTORS],
+        "sameAs": [CLINIC["maps"], SOCIAL["Instagram"], SOCIAL["Facebook"], SOCIAL["YouTube"]],
         "availableService": [{"@type": "MedicalProcedure", "name": n} for n in [
             "Dental implants", "Full mouth dental implants (All-on-4 / All-on-X)", "Veneers", "Teeth whitening",
             "Smile makeover", "Root canal treatment", "Dental crowns and bridges", "Braces", "Clear aligners",
@@ -112,17 +218,57 @@ def clinic_schema():
     }
 
 
+PRICES = [
+    # (service, starting price in INR, unit). Only prices already published on the clinic's sites.
+    ("In-clinic dental consultation with examination", 700, None),
+    ("Single dental implant with crown", 35000, None),
+    ("All-on-4 full arch dental implants", 300000, "per arch"),
+    ("Veneers", 10000, "per tooth"),
+    ("Teeth whitening", 8000, None),
+    ("Zirconia crown", 8000, "per tooth"),
+    ("E-max crown", 10000, "per tooth"),
+]
+
+
+def inr(n):
+    """Indian digit grouping: 300000 -> 3,00,000."""
+    t = str(n)
+    if len(t) <= 3:
+        return t
+    head, tail = t[:-3], t[-3:]
+    parts = []
+    while len(head) > 2:
+        parts.insert(0, head[-2:]); head = head[:-2]
+    return ",".join([head, *parts, tail]) if head else ",".join([*parts, tail])
+
+
+def offer(name, price, unit):
+    return {"@type": "Offer", "itemOffered": {"@type": "MedicalProcedure", "name": name},
+            "priceSpecification": {"@type": "PriceSpecification", "minPrice": price, "priceCurrency": "INR",
+                                   **({"description": f"From ₹{inr(price)} {unit}"} if unit else {})}}
+
+
+def work_locations(doc):
+    """The clinic(s) a doctor works at: Rajouri Garden plus any published branch that lists them."""
+    locs = [{"@id": f"{SITE}/#clinic"}] if doc in CLINIC_DOCTORS else []
+    return locs + [{"@id": f"{SITE}/{b['slug']}.html#clinic"} for b in LIVE_BRANCHES if doc in dict(b["doctors"])]
+
+
 def doctor_schema():
     return [
         {"@type": "Person", "@id": f"{SITE}/#dr-pushkar", "name": "Dr Pushkar Sobti",
          "jobTitle": "Implantologist", "honorificSuffix": "BDS, MDS",
          "image": f"{SITE}/assets/img/dr-pushkar-sobti.jpg",
-         "worksFor": {"@id": f"{SITE}/#clinic"}, "url": f"{IMPLANTS}/",
+         "worksFor": {"@id": ORG_ID}, "workLocation": work_locations("dr-pushkar"), "url": f"{IMPLANTS}/",
+         "sameAs": [f"{IMPLANTS}/", LINKEDIN_PUSHKAR],
+         "alumniOf": {"@type": "CollegeOrUniversity", "name": "UCAM Universidad Católica San Antonio de Murcia"},
+         "description": "Implantologist at Dr Sobti's Dental Care, Rajouri Garden. In practice since 2009, more than 5,000 implants placed, focused on All-on-X full-arch implants planned on CBCT with guided surgery.",
          "knowsAbout": ["Dental implants", "All-on-X full-arch implants", "Guided implant surgery", "Bone grafting"],
          "knowsLanguage": ["English", "Hindi"]},
         {"@type": "Person", "@id": f"{SITE}/#dr-parul", "name": "Dr Parul Sharma Sobti",
          "jobTitle": "Aesthetic dentist", "honorificSuffix": "BDS",
-         "worksFor": {"@id": f"{SITE}/#clinic"}, "url": f"{SMILE}/",
+         "worksFor": {"@id": ORG_ID}, "workLocation": work_locations("dr-parul"), "url": f"{SMILE}/", "sameAs": [f"{SMILE}/"],
+         "description": "Aesthetic dentist at Dr Sobti's Dental Care, Rajouri Garden: veneers, whitening, smile makeovers and everyday dentistry.",
          "knowsAbout": ["Smile design", "Veneers", "Teeth whitening", "Cosmetic dentistry"],
          "knowsLanguage": ["English", "Hindi"]},
     ]
@@ -130,7 +276,7 @@ def doctor_schema():
 
 def website_schema():
     return {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": CLINIC["name"],
-            "publisher": {"@id": f"{SITE}/#clinic"}, "inLanguage": "en-IN"}
+            "publisher": {"@id": ORG_ID}, "inLanguage": "en-IN"}
 
 
 def crumbs_schema(path, name):
@@ -148,7 +294,11 @@ def faq_schema(faqs):
 
 def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/share.jpg"):
     canonical = f"{SITE}/" if path == "index.html" else f"{SITE}/{path}"
-    graph = [clinic_schema(), *doctor_schema(), website_schema(), *extra_ld]
+    webpage = {"@type": "WebPage", "@id": f"{canonical}#webpage", "url": canonical, "name": title, "description": desc,
+               "isPartOf": {"@id": f"{SITE}/#website"},
+               "about": {"@id": next((n["@id"] for n in extra_ld if n.get("@type") == "Dentist"), f"{SITE}/#clinic")},
+               "inLanguage": "en-IN", "dateModified": UPDATED}
+    graph = [org_schema(), clinic_schema(), *doctor_schema(), website_schema(), webpage, *extra_ld]
     ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
     nav = "".join(
         f'<a href="{href}"{" aria-current=\"page\"" if href == current else ""}>{label}</a>' for href, label in NAV)
@@ -204,6 +354,8 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
       <li><a href="/about.html#doctors">Our dentists</a></li>
       <li><a href="/reviews.html">Patient reviews</a></li>
       <li><a href="/contact.html">Timings and directions</a></li>
+      <li><a href="/faq.html">Clinic facts and FAQ</a></li>
+      {'<li><a href="/clinics.html">Our clinics</a></li>' if LIVE_BRANCHES else ''}
       <li><a href="/booking.html">Book an appointment</a></li>
     </ul></div>
     <div><h3>Treatments</h3><ul>
@@ -410,6 +562,8 @@ HOME_FAQ = [
     ("Is the clinic open on Sunday?", "Yes. Dr Sobti's Dental Care in Rajouri Garden is open on Sundays too, 10 am to 7 pm, which helps patients from across West Delhi who cannot come on weekdays."),
     ("Which areas do your patients come from?", "Mostly West Delhi: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Implant patients also travel from elsewhere in Delhi NCR and from abroad."),
     ("Do you treat children?", "Yes. The clinic sees patients of all ages, including children, for check-ups, fillings and other routine care."),
+    ("Who places dental implants at Dr Sobti's Dental Care?", "Dr Pushkar Sobti (BDS, MDS, PG in Oral Implantology, UCAM), who has placed more than 5,000 implants since 2009. A single implant with crown starts from ₹35,000 and All-on-4 from ₹3,00,000 per arch; the exact price follows a CBCT scan."),
+    ("How do patients rate the clinic?", "Dr Sobti's Dental Care in Rajouri Garden is rated 5.0 out of 5 from 118 Google reviews. Patients most often mention the in-house CBCT scan and lab, clear explanations before treatment and painless procedures."),
 ]
 
 
@@ -491,7 +645,7 @@ def page_about():
   <li><h3>Treatment</h3><p>Done in our rooms, with crowns and teeth made in our own lab.</p></li>
 </ol>"""
     return pagehead("About Dr Sobti's Dental Care", "About us",
-                    "A dental clinic in Rajouri Garden run by two dentists, Dr Pushkar Sobti and Dr Parul Sharma Sobti. In practice since 2009; this clinic opened on the first floor of J 12/26 in 2024.") + f"""
+                    "A dental clinic in Rajouri Garden run by two dentists, Dr Pushkar Sobti and Dr Parul Sharma Sobti. A family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH) opened it in Vishnu Garden; Dr Pushkar joined in 2009 and opened this Rajouri Garden dental clinic, on the first floor of J 12/26, in 2024.") + f"""
 <section id="doctors"><div class="wrap">
   <div class="section-head"><div class="eyebrow">Your dentists</div><h2>Meet the doctors</h2></div>
   {doctors_html()}
@@ -668,6 +822,128 @@ window.location.href='{CLINIC['wa_link']}?text='+encodeURIComponent(t)}});
 </script>"""
 
 
+FAQ_GROUPS = [
+    ("Visiting the clinic", [
+        ("Where is Dr Sobti's Dental Care?", "Dr Sobti's Dental Care is on the first floor of J 12/26, Rajouri Garden, New Delhi 110027, above Rajmandir. The nearest metro station is Rajouri Garden (Blue and Pink lines)."),
+        ("What are the clinic timings?", "The clinic is open every day, Monday to Sunday, from 10 am to 7 pm, including Sundays."),
+        ("How do I book an appointment?", "Call +91 87449 85976, WhatsApp +91 80767 77307, or use the booking page on this website, which opens WhatsApp with your message ready. Walk-ins are seen when a doctor is free."),
+        ("Can I be seen the same day for tooth pain?", "Usually yes. Call the clinic for pain, swelling or a broken tooth and the team will try to see you the same day."),
+        ("How long has Dr Sobti's Dental Care been running?", "It has been a family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH) opened it in Vishnu Garden. Dr Pushkar Sobti joined in 2009 and opened the Rajouri Garden dental clinic in 2024."),
+        ("Which languages do the dentists speak?", "English and Hindi."),
+        ("Which areas do patients come from?", "Mostly West Delhi: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Implant patients also come from across Delhi NCR and from abroad."),
+    ]),
+    ("Costs and payment", [
+        ("How much is a dental consultation?", "A first opinion on WhatsApp is free: send a photo or X-ray. An in-clinic consultation with an examination and a written plan is ₹700."),
+        ("How much does a dental implant cost at Dr Sobti's Dental Care?", "A single implant with crown starts from ₹35,000, and All-on-4 full arch implants start from ₹3,00,000 per arch. The final price depends on the implant brand, bone and the type of teeth, and is given in writing after a CBCT scan."),
+        ("How much do veneers and whitening cost?", "Veneers start from ₹10,000 per tooth and in-clinic teeth whitening from ₹8,000, depending on the case. A smile makeover is priced case by case after a digital design."),
+        ("How much does a crown cost?", "Zirconia crowns start from ₹8,000 per tooth and E-max crowns from ₹10,000 per tooth. Both are made in the clinic's own lab."),
+        ("How can I pay?", "Cash, credit or debit card, and bank transfer. Dr Sobti's Dental Care is not on the CGHS panel."),
+    ]),
+    ("Doctors and expertise", [
+        ("Who are the dentists at Dr Sobti's Dental Care?", "Dr Pushkar Sobti, an implantologist (BDS, MDS, PG in Oral Implantology, UCAM), and Dr Parul Sharma Sobti, an aesthetic dentist (BDS) who leads smile design, veneers and everyday dentistry."),
+        ("How experienced is the implant dentist?", "Dr Pushkar Sobti has been in practice since 2009 and has placed more than 5,000 dental implants, from single teeth to fixed teeth for a whole jaw on four to six implants (All-on-4, All-on-6, All-on-X)."),
+        ("Which implant brands does the clinic use?", "The brand is named in writing on every implant plan. The clinic regularly uses Osstem, Hiossen and Nobel Biocare, among others."),
+        ("Does the clinic have a CBCT scanner and its own lab?", "Yes. A CBCT 3D scanner, a dental microscope, an implant surgery room and an in-house lab, Titanium Arts Dental Studio, are all on the same floor in Rajouri Garden. Many crowns are made and fitted the same day."),
+        ("How are instruments sterilised?", "In a Class B autoclave, and single-use items are used once."),
+    ]),
+    ("Choosing a dentist in West Delhi", [
+        ("How do patients rate Dr Sobti's Dental Care?", "Dr Sobti's Dental Care in Rajouri Garden is rated 5.0 out of 5 from 118 Google reviews (November 2026). Reviews often mention painless treatment, clear explanations and having the CBCT scan and lab in the clinic."),
+        ("What should I look for in an implant clinic?", "Ask who places the implant and how many they have placed, whether a CBCT scan is used to plan it, which implant brand you will get, what warranty applies and whether the price is given in writing. Dr Sobti's Dental Care answers all of these in a written plan before treatment."),
+        ("Do you treat patients from abroad?", "Yes. Send an X-ray or CBCT on WhatsApp for a free online assessment from Dr Pushkar Sobti, usually within 24 hours. The clinic can provide a medical visa invitation letter and plan your visits around your travel."),
+        ("Do you treat children?", "Yes. The clinic sees patients of all ages, including children, for check-ups, fillings and preventive care."),
+    ]),
+]
+FAQ_ALL = [qa for _, qs in FAQ_GROUPS for qa in qs]
+
+
+def page_faq():
+    facts = [
+        ("Name", CLINIC["name"]),
+        ("Type", "Dental clinic (dentist), family-run"),
+        ("Address", f"{ADDRESS_LINE}, India"),
+        ("Landmark", "Above Rajmandir. Nearest metro: Rajouri Garden (Blue and Pink lines)"),
+        ("Timings", "Monday to Sunday, 10 am to 7 pm"),
+        ("Phone", CLINIC["phone_display"]),
+        ("WhatsApp", CLINIC["wa_display"]),
+        ("Email", CLINIC["email"]),
+        ("Dentists", "Dr Pushkar Sobti (implantologist) and Dr Parul Sharma Sobti (aesthetic dentist)"),
+        ("History", "A family clinic since 1982, opened by Dr Rajesh Sobti (MBBS, DCH) in Vishnu Garden; Dr Pushkar Sobti joined in 2009 and opened the Rajouri Garden dental clinic in 2024"),
+        ("Experience", "5,000+ implants placed by Dr Pushkar Sobti"),
+        ("Equipment", "CBCT 3D scanner, dental microscope, implant surgery room, Class B autoclave"),
+        ("In-house lab", "Titanium Arts Dental Studio (zirconia and E-max crowns, veneers, implant teeth)"),
+        ("Implant brands", "Osstem, Hiossen and Nobel Biocare, among others"),
+        ("Starting prices", "Consultation ₹700 · single implant with crown ₹35,000 · All-on-4 ₹3,00,000 per arch · veneers ₹10,000 per tooth · whitening ₹8,000 · zirconia crown ₹8,000"),
+        ("Languages", "English, Hindi"),
+        ("Payment", "Cash, card, bank transfer"),
+        ("Google rating", f"{CLINIC['rating']} from {CLINIC['review_count']} reviews"),
+        ("Websites", "sobtidentalcare.com (clinic) · dentalimplantsdelhi.com (implants) · drparulssobti.com (smile design and other treatments)"),
+    ]
+    rows = "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in facts)
+    groups = "".join(
+        f'<h2 style="margin-top:36px">{e(title)}</h2>' + "".join(
+            f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in qs)
+        for title, qs in FAQ_GROUPS)
+    return pagehead("Clinic facts and frequently asked questions", "FAQ",
+                    "Dr Sobti's Dental Care is a family-run dental clinic at J 12/26, Rajouri Garden, New Delhi, open 7 days from 10 am to 7 pm, led by implantologist Dr Pushkar Sobti and aesthetic dentist Dr Parul Sharma Sobti. The key facts and the questions patients ask most are below.") + f"""
+<section><div class="wrap" style="max-width:860px">
+  <div class="section-head"><div class="eyebrow">At a glance</div><h2>Clinic facts</h2></div>
+  <dl class="info">{rows}</dl>
+  <p class="muted" style="margin-top:14px">Last updated {UPDATED}.</p>
+</div></section>
+<section class="tint"><div class="wrap" style="max-width:860px">
+  <div class="section-head"><div class="eyebrow">Questions</div><h2>Frequently asked questions</h2></div>
+  {groups}
+</div></section>
+{cta_band()}"""
+
+
+DOCTOR_NAMES = {"dr-pushkar": "Dr Pushkar Sobti", "dr-parul": "Dr Parul Sharma Sobti"}
+
+
+def branch_card(name, area, street, postcode, phone_display, phone_tel, hours_line, href, note, main=False):
+    tag = '<div class="eyebrow">Main clinic</div>' if main else '<div class="eyebrow">Branch</div>'
+    return f"""<article class="card">{tag}<h3>{e(name)}, {e(area)}</h3>
+  <p>{e(street)}<br>New Delhi {postcode}</p>
+  <p>{e(hours_line)}<br>Phone <a href="tel:{phone_tel}" data-track="call">{phone_display}</a></p>
+  <p class="muted">{e(note)}</p>
+  <p><a class="btn ghost" href="{href}">{'Visit this clinic' if main else 'Branch details'}</a></p>
+</article>"""
+
+
+def page_clinics():
+    cards = [branch_card(CLINIC["name"], CLINIC_AREA, CLINIC["street"], CLINIC["postcode"], CLINIC["phone_display"],
+                         CLINIC["phone_tel"], "Open all 7 days, 10 am to 7 pm", "/", 
+                         "Opened in 2024. CBCT scanner, implant surgery room and our in-house lab are here.", main=True)]
+    cards += [branch_card(b["name"], b["area"], b["street"], b["postcode"], b["phone_display"], b["phone_tel"],
+                          "; ".join(f"{label}, {o} to {c}" for label, _, o, c in b["hours"]), f"/{b['slug']}.html", b["about"])
+              for b in LIVE_BRANCHES]
+    return pagehead("Our clinics", "Our clinics", BRAND["story"]) + f"""
+<section><div class="wrap">
+  <div class="grid g2">{''.join(cards)}</div>
+  <p style="margin-top:22px">For implants, smile design and anything that needs a CBCT scan, most patients are seen at the Rajouri Garden clinic. <a href="/booking.html">Book a visit</a> or <a href="{CLINIC['wa_link']}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']}</a> and we will suggest the right clinic.</p>
+</div></section>
+{cta_band()}"""
+
+
+def page_branch(b):
+    hours = "".join(f"<tr><td>{e(label)}</td><td>{o} – {c}</td></tr>" for label, _, o, c in b["hours"])
+    docs = "".join(f"<li><strong>{DOCTOR_NAMES[d]}</strong>: {e(when)}</li>" for d, when in b["doctors"])
+    return pagehead(f"{b['name']}, {b['area']}", b["area"], b["about"]) + f"""
+<section><div class="wrap"><div class="visit">
+  <div>
+    <dl class="info">
+      <div><dt>Address</dt><dd><strong>{e(b['name'])}</strong><br>{e(b['street'])}<br>{e(b['locality'])}, {e(b['region'])} {b['postcode']}{'<br><span class="muted">' + e(b['landmark']) + '</span>' if b['landmark'] else ''}</dd></div>
+      <div><dt>Phone</dt><dd><a href="tel:{b['phone_tel']}" data-track="call">{b['phone_display']}</a></dd></div>
+      <div><dt>Timings</dt><dd><table class="hours"><tbody>{hours}</tbody></table></dd></div>
+      <div><dt>Doctors here</dt><dd><ul>{docs}</ul></dd></div>
+    </dl>
+    <p style="margin-top:22px" class="actions"><a class="btn" href="{b['maps']}" rel="noopener">Get directions</a> <a class="btn ghost" href="/clinics.html">All our clinics</a></p>
+  </div>
+</div>
+<p style="margin-top:22px">Implant surgery, CBCT scans and lab work are done at our main clinic, <a href="/">{e(CLINIC['name'])} in Rajouri Garden</a>.</p>
+</div></section>"""
+
+
 def page_404():
     return f"""<section class="pagehead"><div class="wrap"><h1>Page not found</h1>
 <p class="lead">The page you were looking for is not here. Try the <a href="/">home page</a>, our <a href="/treatments.html">treatments</a> or <a href="/contact.html">contact details</a>.</p></div></section>"""
@@ -695,7 +971,21 @@ PAGES = [
     ("booking.html", "Book an Appointment | Dr Sobti's Dental Care, Rajouri Garden",
      "Book a dental appointment at Dr Sobti's Dental Care, Rajouri Garden, on WhatsApp or by phone. Free first opinion on WhatsApp; in-clinic consultation ₹700.",
      page_booking, "booking.html", [crumbs_schema("booking.html", "Book")], 0.7),
+    ("faq.html", "Dentist in Rajouri Garden: Clinic Facts, Prices and FAQ | Dr Sobti's",
+     "Timings, address, doctors, implant and treatment prices, and answers to common questions about Dr Sobti's Dental Care, J 12/26 Rajouri Garden, New Delhi. Open 7 days.",
+     page_faq, "contact.html", [crumbs_schema("faq.html", "FAQ"), faq_schema(FAQ_ALL)], 0.8),
 ]
+
+
+if LIVE_BRANCHES:
+    PAGES.append(("clinics.html", "Our Clinics in Rajouri Garden and West Delhi | Dr Sobti's Dental Care",
+                  f"{BRAND['story']} Addresses, phone numbers and timings for every Dr Sobti's clinic.",
+                  page_clinics, "about.html", [crumbs_schema("clinics.html", "Our clinics")], 0.6))
+    for _b in LIVE_BRANCHES:
+        PAGES.append((f"{_b['slug']}.html", f"{_b['name']}, {_b['area']}, New Delhi: Timings and Directions",
+                      f"{_b['name']}, {_b['street']}, New Delhi {_b['postcode']}. Call {_b['phone_display']}. A branch of {BRAND['name']}.",
+                      (lambda b=_b: page_branch(b)), "about.html",
+                      [branch_schema(_b), crumbs_schema(f"{_b['slug']}.html", _b["area"])], 0.5))
 
 
 REDIRECTS = {
@@ -721,28 +1011,54 @@ def main():
         f"<url><loc>{SITE}/{'' if p == 'index.html' else p}</loc><priority>{pr}</priority></url>" for p, *_, pr in PAGES)
     (OUT / "sitemap.xml").write_text(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n', encoding="utf-8")
-    (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
+    ai_bots = ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "PerplexityBot", "Perplexity-User", "ClaudeBot",
+               "Claude-SearchBot", "Claude-User", "Google-Extended", "Applebot-Extended", "Bingbot"]
+    (OUT / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\n\n# AI search and answer engines: welcome to read and cite this site\n"
+        + "".join(f"User-agent: {b}\n" for b in ai_bots) + f"Allow: /\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     (OUT / "CNAME").write_text("www.sobtidentalcare.com\n", encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
+    prices = "; ".join(f"{n} from INR {inr(pr)}{' ' + u if u else ''}" for n, pr, u in PRICES)
+    faq_md = "\n".join(f"- {q} {a}" for q, a in FAQ_ALL)
+    branches_md = ("## Our clinics\n" + f"- Main clinic: {CLINIC['name']}, {ADDRESS_LINE} (opened 2024): {SITE}/\n" + "".join(
+        f"- Branch: {b['name']}, {b['street']}, {b['locality']} {b['postcode']}; phone {b['phone_display']}: {SITE}/{b['slug']}.html\n"
+        for b in LIVE_BRANCHES) + f"- All clinics: {SITE}/clinics.html\n\n") if LIVE_BRANCHES else ""
     (OUT / "llms.txt").write_text(f"""# {CLINIC['name']}
 
-> Dental clinic in Rajouri Garden, New Delhi, led by Dr Pushkar Sobti (implantologist) and Dr Parul Sharma Sobti (aesthetic dentist). Open 7 days, 10 am to 7 pm.
+> {CLINIC['name']} is a dental clinic at {ADDRESS_LINE}, India (above Rajmandir), open 7 days a week from 10 am to 7 pm. It has been a family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH) opened it in Vishnu Garden; Dr Pushkar Sobti joined in 2009 and opened this Rajouri Garden dental clinic in 2024. It is led by implantologist Dr Pushkar Sobti (BDS, MDS, PG in Oral Implantology, UCAM; in practice since 2009; 5,000+ implants placed) and aesthetic dentist Dr Parul Sharma Sobti (BDS). The clinic has its own CBCT 3D scanner and in-house dental lab (Titanium Arts Dental Studio) on the same floor. Google rating {CLINIC['rating']} from {CLINIC['review_count']} reviews.
 
-- Address: {ADDRESS_LINE} ({CLINIC['landmark']})
-- Phone: {CLINIC['phone_display']}; WhatsApp: {CLINIC['wa_display']}; Email: {CLINIC['email']}
-- Google rating: {CLINIC['rating']} ({CLINIC['review_count']} reviews)
+## Key facts
+- Address: {ADDRESS_LINE}, India. Landmark: {CLINIC['landmark']}. Nearest metro: Rajouri Garden (Blue and Pink lines).
+- Map: {CLINIC['maps']} (lat {CLINIC['lat']}, lng {CLINIC['lng']})
+- Timings: Monday to Sunday, 10:00 to 19:00 (open on Sundays)
+- Phone: {CLINIC['phone_display']}. WhatsApp: {CLINIC['wa_display']}. Email: {CLINIC['email']}
+- Book: {SITE}/booking.html (opens WhatsApp). Free first opinion on WhatsApp; in-clinic consultation INR 700.
+- Doctors: Dr Pushkar Sobti, implantologist (single implants, All-on-4, All-on-6, All-on-X full-arch implants, guided surgery, bone grafting); Dr Parul Sharma Sobti, aesthetic dentist (veneers, whitening, smile makeovers, root canals, crowns, cleanings).
+- Equipment: CBCT 3D scanner, dental microscope, implant surgery room, Class B autoclave, in-house CAD/CAM lab.
+- Implant brands: Osstem, Hiossen and Nobel Biocare, among others; brand named in writing on every plan.
+- Starting prices: {prices}. Exact prices are given in writing after an examination.
+- Areas served: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri, Paschim Vihar and the rest of West Delhi; implant patients from across Delhi NCR and abroad.
+- Languages: English, Hindi. Payment: cash, card, bank transfer. Not on the CGHS panel.
+- Profiles: Google {SOCIAL['Google']} · Instagram {SOCIAL['Instagram']} · Facebook {SOCIAL['Facebook']} · YouTube {SOCIAL['YouTube']}
+- Last updated: {UPDATED}
 
 ## Pages
-- [Home]({SITE}/)
+- [Home]({SITE}/): the clinic, doctors, treatments, reviews, visit
+- [Clinic facts and FAQ]({SITE}/faq.html): timings, prices, doctors and common questions
 - [About and doctors]({SITE}/about.html)
-- [Treatments]({SITE}/treatments.html)
-- [Reviews]({SITE}/reviews.html)
+- [Treatments]({SITE}/treatments.html): every treatment, with links to the detailed pages
+- [In-house lab, Titanium Arts Dental Studio]({SITE}/lab.html)
+- [Patient reviews]({SITE}/reviews.html)
 - [Contact and timings]({SITE}/contact.html)
 - [Book an appointment]({SITE}/booking.html)
 
-## Related sites
-- [Dental implants, Dr Pushkar Sobti]({IMPLANTS}/)
-- [Smile design, Dr Parul Sharma Sobti]({SMILE}/)
+{branches_md}## Related sites (same clinic)
+- [Dental implants in Delhi, Dr Pushkar Sobti]({IMPLANTS}/): implants, All-on-4, full mouth implants, costs
+- [Dental implant cost in Delhi]({IMPLANTS}/dental-implant-cost-delhi/)
+- [Smile design and other treatments, Dr Parul Sharma Sobti]({SMILE}/): veneers, whitening, aligners, braces, root canal, crowns, cleaning
+
+## Frequently asked questions
+{faq_md}
 """, encoding="utf-8")
     # Common addresses from the old site and typical links, sent to the matching new page.
     for old, new in REDIRECTS.items():

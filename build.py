@@ -72,7 +72,7 @@ BRANCHES = [
         "street": "WZ-168, Mangal Bazar Road, Chand Nagar, Vishnu Garden",
         "landmark": "",
         "locality": "New Delhi", "region": "Delhi", "postcode": "110018",
-        "phone_display": "", "phone_tel": "",  # must ring at this branch, not 87449 85976
+        "phone_display": "+91 11 4214 3719", "phone_tel": "+911142143719",  # Vishnu Garden landline (Dr, 4 Nov 2026)
         "hours": [],  # e.g. [("Monday to Saturday", "Mo-Sa", "10:00", "19:00")]
         "doctors": [],  # e.g. [("dr-pushkar", "Tuesday and Thursday evenings")]
         "lat": None, "lng": None,

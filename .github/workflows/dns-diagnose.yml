@@ -18,4 +18,6 @@ jobs:
           echo "=== AAAA"; dig sobtidentalcare.com AAAA +short; dig www.sobtidentalcare.com AAAA +short
           echo "=== CAA"; dig sobtidentalcare.com CAA +short
           echo "=== delv www"; delv www.sobtidentalcare.com CNAME 2>&1 | head -5 || true
+          echo "=== old Hostinger nameservers"
+          for ns in ns1.dns-parking.com ns2.dns-parking.com; do echo "-- $ns"; dig @$ns www.sobtidentalcare.com +noall +answer +comments | grep -E "status|IN"; dig @$ns sobtidentalcare.com A +noall +answer | grep IN; done
           echo "=== curl"; curl -sI http://www.sobtidentalcare.com/ | head -3; curl -sI http://sobtidentalcare.com/ | head -4

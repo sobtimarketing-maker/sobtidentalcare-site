@@ -66,17 +66,25 @@ CLINIC_DOCTORS = ["dr-pushkar", "dr-parul"]
 BRANCHES = [
     {
         "slug": "vishnu-garden",
-        "publish": False,  # waiting on Dr: signboard name, own phone, hours, doctors' days, Google profile access
+        "publish": True,
         "area": "Vishnu Garden",
-        "name": "",  # exactly as on the signboard and the branch's Google profile
-        "street": "WZ-168, Mangal Bazar Road, Chand Nagar, Vishnu Garden",
+        "name": "Sobti Medical & Dental Clinic",  # signboard name (Dr, 4 Nov 2026)
+        "types": ["MedicalClinic", "Dentist"],
+        "specialty": ["Pediatric", "Dentistry"],
+        "street": "WZ 168, Mangal Bazaar Road, Vishnu Garden",  # as on the branch's Google profile
         "landmark": "",
         "locality": "New Delhi", "region": "Delhi", "postcode": "110018",
         "phone_display": "+91 11 4214 3719", "phone_tel": "+911142143719",  # Vishnu Garden landline (Dr, 4 Nov 2026)
-        "hours": [],  # e.g. [("Monday to Saturday", "Mo-Sa", "10:00", "19:00")]
-        "doctors": [],  # e.g. [("dr-pushkar", "Tuesday and Thursday evenings")]
-        "lat": None, "lng": None,
-        "maps": "https://www.google.com/maps/place/?q=place_id:ChIJ1YZ8rb4FDTkRQpgLNuN0yDo",
+        "hours": [("Monday to Saturday, morning", "Mo-Sa", "09:30", "12:00"),
+                  ("Monday to Saturday, evening", "Mo-Sa", "17:30", "19:30")],
+        "closed": "Sunday",
+        # (doctor, when, based here?). Dr Pushkar and Dr Parul are based at Rajouri Garden and see
+        # Vishnu Garden patients by appointment only (Dr, 4 Nov 2026), so they stay out of this branch's schema.
+        "doctors": [("dr-rajesh", "Monday to Saturday, 9:30 am to 12 noon and 5:30 pm to 7:30 pm", True),
+                    ("dr-pushkar", "By appointment only; based at the Rajouri Garden clinic", False),
+                    ("dr-parul", "By appointment only; based at the Rajouri Garden clinic", False)],
+        "lat": 28.6451866, "lng": 77.1008765,
+        "maps": "https://maps.google.com/maps?cid=4235763968755079234",
         "opened": "1982",
         "about": "The family's first clinic, opened in 1982 by Dr Rajesh Sobti (MBBS, DCH). Dr Pushkar Sobti began practice here in 2009.",
     },
@@ -84,6 +92,14 @@ BRANCHES = [
 LIVE_BRANCHES = [b for b in BRANCHES if b["publish"]]
 DAY_NAMES = {"Mo": "Monday", "Tu": "Tuesday", "We": "Wednesday", "Th": "Thursday", "Fr": "Friday", "Sa": "Saturday", "Su": "Sunday"}
 DAY_ORDER = list(DAY_NAMES)
+
+
+def clock(t):
+    """'17:30' -> '5:30 pm', '12:00' -> '12 noon'."""
+    h, m = map(int, t.split(":"))
+    if (h, m) == (12, 0):
+        return "12 noon"
+    return f"{h % 12 or 12}{':%02d' % m if m else ''} {'am' if h < 12 else 'pm'}"
 
 
 def day_list(spec):
@@ -138,14 +154,14 @@ def org_schema():
         "employee": [{"@id": f"{SITE}/#dr-pushkar"}, {"@id": f"{SITE}/#dr-parul"}],
     }
     if BRAND["founder"]:
-        org["founder"] = {"@type": "Person", "name": BRAND["founder"], "honorificSuffix": BRAND["founder_quals"],
+        org["founder"] = {"@type": "Person", "@id": f"{SITE}/#dr-rajesh", "name": BRAND["founder"], "honorificSuffix": BRAND["founder_quals"],
                           "jobTitle": "Physician"}
     return org
 
 
 def branch_schema(b):
     node = {
-        "@type": "Dentist",
+        "@type": b.get("types", "Dentist"),
         "@id": f"{SITE}/{b['slug']}.html#clinic",
         "name": b["name"],
         "url": f"{SITE}/{b['slug']}.html",
@@ -157,8 +173,8 @@ def branch_schema(b):
         "foundingDate": b["opened"],
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": day_list(spec),
                                        "opens": o, "closes": c} for _, spec, o, c in b["hours"]],
-        "employee": [{"@id": f"{SITE}/#{d}"} for d, _ in b["doctors"]],
-        "medicalSpecialty": ["Dentistry"],
+        "employee": [{"@id": f"{SITE}/#{d}"} for d, _, here in b["doctors"] if here],
+        "medicalSpecialty": b.get("specialty", ["Dentistry"]),
         "sameAs": [b["maps"]],
     }
     if b["lat"]:
@@ -251,7 +267,7 @@ def offer(name, price, unit):
 def work_locations(doc):
     """The clinic(s) a doctor works at: Rajouri Garden plus any published branch that lists them."""
     locs = [{"@id": f"{SITE}/#clinic"}] if doc in CLINIC_DOCTORS else []
-    return locs + [{"@id": f"{SITE}/{b['slug']}.html#clinic"} for b in LIVE_BRANCHES if doc in dict(b["doctors"])]
+    return locs + [{"@id": f"{SITE}/{b['slug']}.html#clinic"} for b in LIVE_BRANCHES if any(d == doc and here for d, _, here in b["doctors"])]
 
 
 def doctor_schema():
@@ -897,7 +913,8 @@ def page_faq():
 {cta_band()}"""
 
 
-DOCTOR_NAMES = {"dr-pushkar": "Dr Pushkar Sobti", "dr-parul": "Dr Parul Sharma Sobti"}
+DOCTOR_NAMES = {"dr-pushkar": "Dr Pushkar Sobti", "dr-parul": "Dr Parul Sharma Sobti",
+                "dr-rajesh": "Dr Rajesh Sobti (MBBS, DCH)"}
 
 
 def branch_card(name, area, street, postcode, phone_display, phone_tel, hours_line, href, note, main=False):
@@ -915,7 +932,7 @@ def page_clinics():
                          CLINIC["phone_tel"], "Open all 7 days, 10 am to 7 pm", "/", 
                          "Opened in 2024. CBCT scanner, implant surgery room and our in-house lab are here.", main=True)]
     cards += [branch_card(b["name"], b["area"], b["street"], b["postcode"], b["phone_display"], b["phone_tel"],
-                          "; ".join(f"{label}, {o} to {c}" for label, _, o, c in b["hours"]), f"/{b['slug']}.html", b["about"])
+                          "Mon to Sat, " + " and ".join(f"{clock(o)} to {clock(c)}" for _, _, o, c in b["hours"]) + (f"; {b['closed']} closed" if b.get("closed") else ""), f"/{b['slug']}.html", b["about"])
               for b in LIVE_BRANCHES]
     return pagehead("Our clinics", "Our clinics", BRAND["story"]) + f"""
 <section><div class="wrap">
@@ -926,8 +943,10 @@ def page_clinics():
 
 
 def page_branch(b):
-    hours = "".join(f"<tr><td>{e(label)}</td><td>{o} – {c}</td></tr>" for label, _, o, c in b["hours"])
-    docs = "".join(f"<li><strong>{DOCTOR_NAMES[d]}</strong>: {e(when)}</li>" for d, when in b["doctors"])
+    hours = "".join(f"<tr><td>{e(label)}</td><td>{clock(o)} – {clock(c)}</td></tr>" for label, _, o, c in b["hours"])
+    if b.get("closed"):
+        hours += f"<tr><td>{e(b['closed'])}</td><td>Closed</td></tr>"
+    docs = "".join(f"<li><strong>{DOCTOR_NAMES[d]}</strong>: {e(when)}</li>" for d, when, _ in b["doctors"])
     return pagehead(f"{b['name']}, {b['area']}", b["area"], b["about"]) + f"""
 <section><div class="wrap"><div class="visit">
   <div>
@@ -940,7 +959,7 @@ def page_branch(b):
     <p style="margin-top:22px" class="actions"><a class="btn" href="{b['maps']}" rel="noopener">Get directions</a> <a class="btn ghost" href="/clinics.html">All our clinics</a></p>
   </div>
 </div>
-<p style="margin-top:22px">Implant surgery, CBCT scans and lab work are done at our main clinic, <a href="/">{e(CLINIC['name'])} in Rajouri Garden</a>.</p>
+<p style="margin-top:22px">Implant surgery, CBCT scans and lab work are done at our main clinic, <a href="/">{e(CLINIC['name'])} in Rajouri Garden</a>, open all 7 days, 10 am to 7 pm. Call <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a> or WhatsApp <a href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a>.</p>
 </div></section>"""
 
 

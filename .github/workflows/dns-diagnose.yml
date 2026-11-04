@@ -1,0 +1,21 @@
+# Manual DNS diagnosis for www.sobtidentalcare.com. Run from the Actions tab. Changes nothing.
+name: DNS diagnose
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  dig:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for r in 8.8.8.8 1.1.1.1 9.9.9.9 ns11.domaincontrol.com; do
+            echo "=== resolver $r"
+            dig @$r www.sobtidentalcare.com CNAME +noall +answer +comments | grep -E "status|IN"
+            dig @$r sobtidentalcare.com A +noall +answer +comments | grep -E "status|IN"
+          done
+          echo "=== DS at .com registry"; dig sobtidentalcare.com DS +short @a.gtld-servers.net; dig sobtidentalcare.com DS +short
+          echo "=== NS at .com registry"; dig sobtidentalcare.com NS @a.gtld-servers.net +noall +authority
+          echo "=== AAAA"; dig sobtidentalcare.com AAAA +short; dig www.sobtidentalcare.com AAAA +short
+          echo "=== CAA"; dig sobtidentalcare.com CAA +short
+          echo "=== delv www"; delv www.sobtidentalcare.com CNAME 2>&1 | head -5 || true
+          echo "=== curl"; curl -sI http://www.sobtidentalcare.com/ | head -3; curl -sI http://sobtidentalcare.com/ | head -4

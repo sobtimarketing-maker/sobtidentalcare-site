@@ -274,7 +274,7 @@ def doctor_schema():
     return [
         {"@type": "Person", "@id": f"{SITE}/#dr-pushkar", "name": "Dr Pushkar Sobti",
          "jobTitle": "Implantologist", "honorificSuffix": "BDS, MDS",
-         "image": f"{SITE}/assets/img/dr-pushkar-sobti.jpg",
+         "image": f"{SITE}/assets/img/dr-pushkar-sobti-portrait.jpg",
          "worksFor": {"@id": ORG_ID}, "workLocation": work_locations("dr-pushkar"), "url": f"{IMPLANTS}/",
          "sameAs": [f"{IMPLANTS}/", LINKEDIN_PUSHKAR],
          "alumniOf": {"@type": "CollegeOrUniversity", "name": "UCAM Universidad Católica San Antonio de Murcia"},
@@ -283,6 +283,7 @@ def doctor_schema():
          "knowsLanguage": ["English", "Hindi"]},
         {"@type": "Person", "@id": f"{SITE}/#dr-parul", "name": "Dr Parul Sharma Sobti",
          "jobTitle": "Aesthetic dentist", "honorificSuffix": "BDS",
+         "image": f"{SITE}/assets/img/dr-parul-sharma-sobti.jpg",
          "worksFor": {"@id": ORG_ID}, "workLocation": work_locations("dr-parul"), "url": f"{SMILE}/", "sameAs": [f"{SMILE}/"],
          "description": "Aesthetic dentist at Dr Sobti's Dental Care, Rajouri Garden: veneers, whitening, smile makeovers and everyday dentistry.",
          "knowsAbout": ["Smile design", "Veneers", "Teeth whitening", "Cosmetic dentistry"],
@@ -544,7 +545,7 @@ def photo_grid(items):
 def doctors_html():
     return f"""<div class="grid g2">
   <article class="card doc" id="dr-pushkar">
-    <img class="pic" src="/assets/img/dr-pushkar-sobti.jpg" alt="Dr Pushkar Sobti" width="214" height="255" loading="lazy">
+    <img class="pic" src="/assets/img/dr-pushkar-sobti-portrait.jpg" alt="Dr Pushkar Sobti, implantologist" width="800" height="1000" loading="lazy">
     <div>
       <h3>Dr Pushkar Sobti</h3>
       <div class="role">Implantologist · Full mouth rehabilitation</div>
@@ -554,7 +555,7 @@ def doctors_html():
     </div>
   </article>
   <article class="card doc" id="dr-parul">
-    <div class="mono" aria-hidden="true">PS</div>
+    <img class="pic" src="/assets/img/dr-parul-sharma-sobti.jpg" alt="Dr Parul Sharma Sobti, aesthetic dentist" width="800" height="1000" loading="lazy">
     <div>
       <h3>Dr Parul Sharma Sobti</h3>
       <div class="role">Aesthetic dentist · Smile design</div>
@@ -691,6 +692,10 @@ def page_about():
 <section id="doctors"><div class="wrap">
   <div class="section-head"><div class="eyebrow">Your dentists</div><h2>Meet the doctors</h2></div>
   {doctors_html()}
+  <div class="duo">
+    <figure><img src="/assets/img/dr-pushkar-and-dr-parul-sobti.jpg" alt="Dr Pushkar Sobti and Dr Parul Sharma Sobti at Dr Sobti's Dental Care" width="1440" height="1200" loading="lazy"><figcaption>Dr Pushkar Sobti and Dr Parul Sharma Sobti</figcaption></figure>
+    <figure><img src="/assets/img/dr-pushkar-sobti-reception.jpg" alt="Dr Pushkar Sobti at the reception of Dr Sobti's Dental Care, Rajouri Garden" width="1600" height="901" loading="lazy"><figcaption>Dr Pushkar at the Rajouri Garden reception</figcaption></figure>
+  </div>
 </div></section>
 
 <section class="tint"><div class="wrap">

@@ -191,7 +191,7 @@ def clinic_schema():
         "name": CLINIC["name"],
         "url": f"{SITE}/",
         "logo": f"{SITE}/assets/img/logo.png",
-        "image": [f"{SITE}/assets/img/clinic-reception.jpg", f"{SITE}/assets/img/clinic-entrance.jpg"],
+        "image": [f"{SITE}/assets/img/clinic-reception-waiting.jpg", f"{SITE}/assets/img/clinic-treatment-room.jpg", f"{SITE}/assets/img/clinic-entrance.jpg"],
         "description": "Dental clinic in Rajouri Garden, West Delhi, led by implantologist Dr Pushkar Sobti and aesthetic dentist Dr Parul Sharma Sobti. Implants, cosmetic dentistry and family dental care with in-house CBCT and lab.",
         "telephone": "+91-87449-85976",
         "email": CLINIC["email"],
@@ -477,35 +477,61 @@ def treatment_groups_html(full=False):
 
 
 REVIEWS = [
-    ("Ravi G.", "Root canal and crown", "My Root Canal Treatment (RCT) was completed in a single sitting, and the crown was also prepared in-house and fitted on the same day. I am extremely happy and fully satisfied with the treatment."),
-    ("Nidhi G.", "Implant consultation", "I walked into the clinic feeling nervous, but I walked out smiling… Another thing I loved was that all the advanced dental imaging, including CBCT, is available within the clinic itself."),
-    ("Puran Chand K.", "Implants", "Though I am myself a Doctor and close to five decades in Medicine… Everything is so precise… as in house CBCT scan as well as inhouse implant lab. I can recommend to all my patients as well as fellow Doctors."),
-    ("Geet K.", "Wisdom tooth removal", "He was very professional, patient, and explained the entire procedure clearly, which made me feel comfortable and confident throughout the treatment. The surgery was handled smoothly, and the post-surgery guidance and care were excellent."),
-    ("Kiran N.", "Long-time patient", "I've been visiting Dr. Pushkar Sobti for almost two decades, and he has always been my go-to dentist. He is warm, patient and genuinely caring, and makes every visit feel comfortable and easy."),
-    ("Raghunandan K.", "Treatment for his son", "The clinic is neat, clean, and well-maintained. The entire procedure was handled very softly and gently. The doctor and staff were patient, caring, and made sure my son felt at ease throughout the treatment."),
-    ("Shaurya D.", "Root canal", "She and her team explained the procedure to me exceptionally well and gave me clarity, I would recommend this place to anyone looking for dental care."),
-    ("Sunita M.", "Implants", "I have been getting all my dental treatments done from them for 8 years now and recently got implants done from Dr Sobti's Dental Care, painless procedure throughout, very kind and patient doctors."),
-    ("Rohit K.", "CBCT consultation", "The doctor examined my condition, explained the findings of my CBCT scan, and discussed the possible treatment options in detail. The front desk receptionist was also professional, polite, and helpful."),
-    ("Jaspreet S.", "Air polishing cleaning", "The air polishing cleaning procedure was entirely pain free handled gently. The doctor and staff explained things in detail."),
-    ("Mona T.", "Dental implant", "Went in with lot of apprehension for tooth implant… but had an amazing experience with super supportive staff and thoroughly professional doctor."),
-    ("Ekta A.", "General care", "You don't get the usual feeling of being at a dentist's clinic—it has a very calm and relaxing atmosphere. The doctors are highly skilled, professional and make you feel completely at ease."),
+    # (name, treatment, words, source). Quoted word for word from Google and Practo, shortened only where marked "…".
+    ("Ravi G.", "Root canal and crown", "My Root Canal Treatment (RCT) was completed in a single sitting, and the crown was also prepared in-house and fitted on the same day. I am extremely happy and fully satisfied with the treatment.", "rg"),
+    ("Nidhi G.", "Implant consultation", "I walked into the clinic feeling nervous, but I walked out smiling… Another thing I loved was that all the advanced dental imaging, including CBCT, is available within the clinic itself.", "rg"),
+    ("Puran Chand K.", "Implants", "Though I am myself a Doctor and close to five decades in Medicine… Everything is so precise… as in house CBCT scan as well as inhouse implant lab. I can recommend to all my patients as well as fellow Doctors.", "rg"),
+    ("Geet K.", "Wisdom tooth removal", "He was very professional, patient, and explained the entire procedure clearly, which made me feel comfortable and confident throughout the treatment. The surgery was handled smoothly, and the post-surgery guidance and care were excellent.", "rg"),
+    ("Kiran N.", "Long-time patient", "I've been visiting Dr. Pushkar Sobti for almost two decades, and he has always been my go-to dentist. He is warm, patient and genuinely caring, and makes every visit feel comfortable and easy.", "rg"),
+    ("Raghunandan K.", "Treatment for his son", "The clinic is neat, clean, and well-maintained. The entire procedure was handled very softly and gently. The doctor and staff were patient, caring, and made sure my son felt at ease throughout the treatment.", "rg"),
+    ("Shaurya D.", "Root canal", "She and her team explained the procedure to me exceptionally well and gave me clarity, I would recommend this place to anyone looking for dental care.", "rg"),
+    ("Sunita M.", "Implants", "I have been getting all my dental treatments done from them for 8 years now and recently got implants done from Dr Sobti's Dental Care, painless procedure throughout, very kind and patient doctors.", "rg"),
+    ("Rohit K.", "CBCT consultation", "The doctor examined my condition, explained the findings of my CBCT scan, and discussed the possible treatment options in detail. The front desk receptionist was also professional, polite, and helpful.", "rg"),
+    ("Jaspreet S.", "Air polishing cleaning", "The air polishing cleaning procedure was entirely pain free handled gently. The doctor and staff explained things in detail.", "rg"),
+    ("Mona T.", "Dental implant", "Went in with lot of apprehension for tooth implant… but had an amazing experience with super supportive staff and thoroughly professional doctor.", "rg"),
+    ("Ekta A.", "General care", "You don't get the usual feeling of being at a dentist's clinic—it has a very calm and relaxing atmosphere. The doctors are highly skilled, professional and make you feel completely at ease.", "rg"),
+    ("Shobhit K.", "Fillings and root canal", "I have had the privilege to get treated by Both, Dr. Parul & Dr. Pushkar. I had minor fillings and a Root Canal Treatment, both of which were taken care with utmost care. All appointments were on time…", "vg"),
+    ("Ishmeet K.", "Treatment for her daughter", "I had a great experience with Dr Sobti. Actually I should say he is amazing doctor because the way he handle my daughter during treatment . He is friendly and make patient so comfortable while treating.", "vg"),
+    ("Soumyajit C.", "Treatment while travelling", "It is very neat and clean with professional staff. The treatment quality is extremely high… I had limited time because of travel and they did my work in time.", "vg"),
+    ("Seema S.", "Long-time patient", "I have been receiving treatment at Sobti Dental Care, Rajouri garden from Dr. Pushkar Sobti and Dr Parul Sobti since many years . Both doctors are very professional dentist and along with experienced staff… Highly meticulous and great quality of work.", "practo"),
+    ("Dhirendra S.", "Tooth pain", "I had severe pain in my tooth. The doctor not only explained me the treatment thoroughly but also answered all my queries patiently. My treatment was painless n smooth. The clinic is hygienic and the staff is friendly too.", "practo"),
+    ("Anju G.", "Scaling and filling", "I'm thoroughly impressed with Dr. Sobti's Dental Care all the staff here is friendly professional and made me feel at ease throughout my entire visit to Dr. Parul Sharma . I have got my scaling and filling done here smoothly and comfortably.", "practo"),
 ]
+
+
+PRACTO = "https://www.practo.com/delhi/clinic/sobti-dental-clinic-vishnu-garden/reviews"
+REVIEW_SOURCES = {
+    "rg": "Google review, Rajouri Garden",
+    "vg": "Google review, Vishnu Garden clinic",
+    "practo": "Practo patient story",
+}
 
 
 def review_cards(items):
     return "".join(f"""<article class="review"><div class="stars">{stars()}</div>
-<blockquote>“{e(text)}”</blockquote><cite>{e(name)}<small>{e(what)} · Google review</small></cite></article>""" for name, what, text in items)
+<blockquote>“{e(text)}”</blockquote><cite>{e(name)}<small>{e(what)} · {REVIEW_SOURCES[src]}</small></cite></article>""" for name, what, text, src in items)
 
 
 PHOTOS = [
-    ("clinic-entrance.jpg", "The entrance, first floor, above Rajmandir"),
-    ("clinic-reception.jpg", "Reception and waiting area"),
+    ("clinic-reception-waiting.jpg", "Reception and waiting area"),
+    ("clinic-treatment-room.jpg", "Treatment room, Rajouri Garden"),
+    ("clinic-treatment-room-blue.jpg", "Treatment room with dental microscope"),
+    ("clinic-treatment-room-2.jpg", "Second treatment room"),
+    ("clinic-lounge-certificates.jpg", "Patient lounge"),
     ("clinic-cbct-scanner.jpg", "CBCT 3D scanner, in the clinic"),
     ("clinic-dental-lab.jpg", "In-house digital lab"),
-    ("clinic-microscope-room.jpg", "Treatment room with dental microscope"),
-    ("clinic-implant-surgery-room.jpg", "Implant surgery room"),
-    ("clinic-class-b-autoclave.jpg", "Class B autoclave for sterilisation"),
-    ("clinic-lounge.jpg", "Patient lounge"),
+    ("clinic-entrance.jpg", "The entrance, first floor, above Rajmandir"),
+]
+
+LAB_WORK = [
+    ("lab-full-arch-implant-bridge.jpg", "Full-arch implant bridge on a titanium framework"),
+    ("lab-implant-bridge.jpg", "Implant bridge on its implant analogues"),
+    ("lab-zirconia-bridge.jpg", "Zirconia bridge, milled in-house"),
+    ("lab-veneers-on-model.jpg", "Veneers on the patient's model"),
+    ("lab-smile-design-mock-up.jpg", "Smile design mock-up on a printed model"),
+    ("lab-full-arch-teeth.jpg", "Full-arch teeth, finished in our lab"),
+    ("lab-full-arch-bridge-try-in.jpg", "Full-arch bridge beside its clear try-in"),
+    ("lab-clear-aligner.jpg", "Clear aligner"),
 ]
 
 
@@ -600,7 +626,7 @@ def page_home():
     {facts}
   </div>
   <div class="photo">
-    <img src="/assets/img/clinic-reception.jpg" alt="Reception at Dr Sobti's Dental Care, Rajouri Garden" width="1200" height="900" fetchpriority="high">
+    <img src="/assets/img/clinic-reception-waiting.jpg" alt="Reception and waiting area at Dr Sobti's Dental Care, Rajouri Garden" width="1280" height="720" fetchpriority="high">
     <a class="badge" href="/reviews.html" style="text-decoration:none"><b>{CLINIC['rating']}</b><div><div class="stars">★★★★★</div><small>{CLINIC['review_count']} Google reviews</small></div></a>
   </div>
 </div></section>
@@ -763,15 +789,21 @@ def page_lab():
   <div class="section-head"><div class="eyebrow">Made at TADS</div><h2>What our lab makes</h2></div>
   <div class="grid g3">{cards}</div>
 </div></section>
+
+<section><div class="wrap">
+  <div class="section-head"><div class="eyebrow">Recent work</div><h2>From our lab bench</h2>
+  <p class="lead">Teeth, bridges and veneers made at Titanium Arts Dental Studio for patients of the clinic.</p></div>
+  {photo_grid(LAB_WORK)}
+</div></section>
 {cta_band()}"""
 
 
 def page_reviews():
     return pagehead(f"Patient reviews: {CLINIC['rating']} stars on Google", "Reviews",
-                    f"{CLINIC['review_count']} patients have reviewed Dr Sobti's Dental Care on Google, with an average of {CLINIC['rating']} out of 5. A few of them are below, in their own words (shortened where marked …).") + f"""
+                    f"{CLINIC['review_count']} patients have reviewed Dr Sobti's Dental Care, Rajouri Garden on Google, with an average of {CLINIC['rating']} out of 5. Our family's Vishnu Garden clinic is rated 4.9 from 107 Google reviews, and the Rajouri Garden clinic has 59 patient stories on Practo (5.0). A few of them are below, in the patients' own words (shortened where marked …).") + f"""
 <section><div class="wrap">
   <div class="columns">{review_cards(REVIEWS)}</div>
-  <p class="actions" style="margin-top:12px"><a class="btn" href="{CLINIC['maps']}" rel="noopener">Read all reviews on Google</a><a class="btn ghost" href="{CLINIC['review_link']}" rel="noopener">Leave us a review</a></p>
+  <p class="actions" style="margin-top:12px"><a class="btn" href="{CLINIC['maps']}" rel="noopener">Read all reviews on Google</a><a class="btn ghost" href="{PRACTO}" rel="noopener">Read stories on Practo</a><a class="btn ghost" href="{CLINIC['review_link']}" rel="noopener">Leave us a review</a></p>
 </div></section>
 {cta_band()}"""
 

@@ -658,6 +658,15 @@ def page_home():
   <p style="margin-top:24px" class="actions"><a class="btn ghost" href="/reviews.html">Read more reviews</a></p>
 </div></section>
 
+<section><div class="wrap" style="max-width:960px">
+  <div class="section-head"><div class="eyebrow">Videos</div><h2>Watch our dentists explain treatments</h2>
+  <p class="lead">Short videos from Dr Pushkar Sobti and Dr Parul Sharma Sobti on implants, smile design and what to expect at the clinic. The latest videos from our YouTube channel play below.</p></div>
+  <div style="position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;background:#0b1b3a">
+    <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UUsgOAckYkgZCJXmDpgCAgVg" title="Latest videos from Dr Sobti's Dental Care on YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+  </div>
+  <p class="actions" style="margin-top:20px"><a class="btn ghost" href="{SOCIAL['YouTube']}" rel="noopener">See all videos on YouTube</a></p>
+</div></section>
+
 <section class="tint"><div class="wrap">
   <div class="grid g2" style="align-items:start">
     <div><div class="eyebrow">Areas we serve</div><h2>A dentist close to home in West Delhi</h2>

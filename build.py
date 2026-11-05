@@ -550,7 +550,7 @@ def visit_html():
       <div><dt>Timings</dt><dd><table class="hours"><tbody>
         <tr><td>Monday to Saturday</td><td>10:00 am – 7:00 pm</td></tr>
         <tr><td>Sunday</td><td>10:00 am – 7:00 pm</td></tr>
-      </tbody></table></dd></div>
+      </tbody></table><p class="muted" style="margin:8px 0 0;font-size:.92rem">Dr Pushkar Sobti and Dr Parul Sharma Sobti see patients by prior appointment only. Please call or WhatsApp to book a time.</p></dd></div>
     </dl>
     <p style="margin-top:22px" class="actions"><a class="btn" href="{CLINIC['maps']}" rel="noopener">Get directions</a> <a class="btn ghost" href="/booking.html">Book a visit</a></p>
   </div>
@@ -572,7 +572,7 @@ def cta_band():
 
 HOME_FAQ = [
     ("Where is Dr Sobti's Dental Care?", "On the first floor of J 12/26, Rajouri Garden, New Delhi 110027, above Rajmandir. It is a short walk from Rajouri Garden metro station and easy to reach from Punjabi Bagh, Tagore Garden, Subhash Nagar and Janakpuri."),
-    ("What are the clinic timings?", "The clinic is open all seven days, Monday to Sunday, from 10 am to 7 pm. Please call or WhatsApp ahead so the right doctor is free for you."),
+    ("What are the clinic timings?", "The clinic is open all seven days, Monday to Sunday, from 10 am to 7 pm. Dr Pushkar Sobti and Dr Parul Sharma Sobti see patients by prior appointment only, so please call or WhatsApp to book a time."),
     ("How much is a consultation?", "A first opinion on WhatsApp is free: send a photo or an X-ray and the doctors will reply. An in-clinic consultation with an examination is ₹700."),
     ("Do you place dental implants at the clinic?", "Yes. Dr Pushkar Sobti places implants at the clinic, from single teeth to full mouth implants, planned on the clinic's own CBCT 3D scanner."),
     ("Is the clinic open on Sunday?", "Yes. Dr Sobti's Dental Care in Rajouri Garden is open on Sundays too, 10 am to 7 pm, which helps patients from across West Delhi who cannot come on weekdays."),
@@ -778,7 +778,7 @@ def page_reviews():
 
 CONTACT_FAQ = [
     ("Which metro station is closest?", "Rajouri Garden metro station (Blue and Pink lines). The clinic is on the first floor of J 12/26, above Rajmandir."),
-    ("Do I need an appointment?", "Appointments are best, so a doctor is free when you arrive. For pain or swelling, call and we will try to see you the same day."),
+    ("Do I need an appointment?", "Yes. Dr Pushkar Sobti and Dr Parul Sharma Sobti see patients by prior appointment only. Call or WhatsApp to book; for pain or swelling, call and we will try to fit you in the same day."),
 ]
 
 

@@ -1060,6 +1060,11 @@ REDIRECTS = {
     "services": "/treatments.html", "our-services": "/treatments.html", "treatment": "/treatments.html",
     "testimonials": "/reviews.html", "gallery": "/about.html#clinic",
     "contact-us": "/contact.html", "appointment": "/booking.html", "book-appointment": "/booking.html", "book": "/booking.html",
+    # Old-site pages Google still lists (site: search, 5 Nov 2026); they 404 without these.
+    "our-doctors.html": "/about.html#doctors", "Pushkar-Sobti.html": "/about.html#doctors",
+    "services.html": "/treatments.html", "impaction.html": "/treatments.html",
+    "cosmetic-dental-fillings.html": "/treatments.html", "gallery.html": "/about.html#clinic",
+    "Careers.html": "/contact.html",
 }
 
 
@@ -1128,9 +1133,12 @@ def main():
 """, encoding="utf-8")
     # Common addresses from the old site and typical links, sent to the matching new page.
     for old, new in REDIRECTS.items():
-        d = OUT / old
-        d.mkdir(parents=True, exist_ok=True)
-        (d / "index.html").write_text(
+        if old.endswith(".html"):
+            f = OUT / old
+        else:
+            (OUT / old).mkdir(parents=True, exist_ok=True)
+            f = OUT / old / "index.html"
+        f.write_text(
             f'<!doctype html><meta charset="utf-8"><title>Redirecting</title><link rel="canonical" href="{SITE}{new}">'
             f'<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={new}"><a href="{new}">Continue</a>\n',
             encoding="utf-8")

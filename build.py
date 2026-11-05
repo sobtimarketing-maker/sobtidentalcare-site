@@ -10,6 +10,8 @@ import json
 import shutil
 from pathlib import Path
 
+from videos_data import V as VIDEOS, obj as video_obj, card as video_card, JS as VIDEO_JS
+
 ROOT = Path(__file__).parent
 OUT = ROOT / "_site"
 SITE = "https://www.sobtidentalcare.com"
@@ -387,7 +389,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
     <div><h3>Our websites</h3><ul>
       <li><a href="{IMPLANTS}/">dentalimplantsdelhi.com</a><br><small>Dr Pushkar Sobti, implants</small></li>
       <li><a href="{SMILE}/">drparulssobti.com</a><br><small>Dr Parul Sharma Sobti, smile design</small></li>
-      <li><a href="{SOCIAL['Google']}" rel="noopener">Google</a> · <a href="{SOCIAL['Instagram']}" rel="noopener">Instagram</a> · <a href="{SOCIAL['Facebook']}" rel="noopener">Facebook</a> · <a href="{SOCIAL['YouTube']}" rel="noopener">YouTube</a></li>
+      <li><a href="{SOCIAL['Google']}" rel="noopener">Google</a> · <a href="{SOCIAL['Instagram']}" rel="noopener">Instagram</a> · <a href="{SOCIAL['Facebook']}" rel="noopener">Facebook</a> · <a href="{SOCIAL['YouTube']}" rel="noopener">YouTube</a> · <a href="/videos.html">Videos</a></li>
     </ul></div>
   </div>
   <div class="legal"><span>© 2026 {e(CLINIC['name'])}, Rajouri Garden, New Delhi.</span><span>Information on this site is general and is not a diagnosis. Treatment is planned after an examination.</span></div>
@@ -670,7 +672,7 @@ def page_home():
   <div style="position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;background:#0b1b3a">
     <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UUsgOAckYkgZCJXmDpgCAgVg" title="Latest videos from Dr Sobti's Dental Care on YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
   </div>
-  <p class="actions" style="margin-top:20px"><a class="btn ghost" href="{SOCIAL['YouTube']}" rel="noopener">See all videos on YouTube</a></p>
+  <p class="actions" style="margin-top:20px"><a class="btn" href="/videos.html">Watch our videos by topic</a><a class="btn ghost" href="{SOCIAL['YouTube']}" rel="noopener">See all videos on YouTube</a></p>
 </div></section>
 
 <section class="tint"><div class="wrap">
@@ -815,6 +817,46 @@ def page_lab():
   <p class="lead">Teeth, bridges and veneers made at Titanium Arts Dental Studio for patients of the clinic.</p></div>
   {photo_grid(LAB_WORK)}
 </div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="section-head"><div class="eyebrow">On video</div><h2>Watch the lab at work</h2></div>
+  {video_grid(LAB_VIDEOS)}
+</div></section>
+{VIDEO_JS}
+{cta_band()}"""
+
+
+CLINIC_VIDEOS = [
+    ("The clinic", "Our story and a look inside the Rajouri Garden clinic.",
+     ["thmGh27-57I", "lDd7hbX0E9k", "VL64ySkZs60", "u_y8lzaJhoQ"]),
+    ("Patients in their own words", "Patients from Delhi, Greater Noida and abroad on their treatment here.",
+     ["YsTfqx1xLLM", "Q4XgYfekrpw", "_LgsARouKa0", "8W8GF76DnyA", "mOf8SY1nW9Y"]),
+    ("Made in our lab", "Crowns, bridges and implant parts designed and milled at Titanium Arts Dental Studio, on the same floor.",
+     ["kRn6ixupOLc", "nkUCoO-IgKk", "3rPYx82hlhk", "fvKcdFYR3R8"]),
+]
+LAB_VIDEOS = ["kRn6ixupOLc", "nkUCoO-IgKk", "3rPYx82hlhk", "fvKcdFYR3R8"]
+
+
+def video_grid(ids):
+    return '<div class="yt-grid">' + "".join(video_card(VIDEOS[i], e) for i in ids) + "</div>"
+
+
+def video_ld(ids, page):
+    return [dict(video_obj(VIDEOS[i], f"{SITE}/{page}"), publisher={"@id": f"{SITE}/#clinic"}) for i in ids]
+
+
+def page_videos():
+    secs = "".join(f"""<section{' class="tint"' if n % 2 else ''}><div class="wrap">
+  <div class="section-head"><div class="eyebrow">Videos</div><h2>{e(h)}</h2><p class="lead">{e(intro)}</p></div>
+  {video_grid(ids)}
+</div></section>""" for n, (h, intro, ids) in enumerate(CLINIC_VIDEOS))
+    return pagehead("Videos from Dr Sobti's Dental Care", "Videos",
+                    "Short videos from our clinic in Rajouri Garden, New Delhi: a tour of the clinic, patients in their own words, and work from our in-house lab. Tap a video to play it here.") + secs + f"""
+<section><div class="wrap grid g2">
+  <article class="card"><h3>Dental implant videos</h3><p class="muted">Dr Pushkar Sobti on CBCT scans, guided surgery, All-on-X, bone grafting, and implants for diabetics, patients on blood thinners and older patients.</p><p><a href="{IMPLANTS}/videos/" rel="noopener">Watch the implant videos →</a></p></article>
+  <article class="card"><h3>Smile makeover videos</h3><p class="muted">Smile designing, composite veneers, same-day crowns, gentle root canals for children, and laughing gas for nervous patients.</p><p><a href="{SMILE}/videos.html" rel="noopener">Watch the smile videos →</a></p></article>
+</div></section>
+{VIDEO_JS}
 {cta_band()}"""
 
 
@@ -1032,10 +1074,13 @@ PAGES = [
      page_treatments, "treatments.html", [crumbs_schema("treatments.html", "Treatments")], 0.9),
     ("lab.html", "In-House Dental Lab in Rajouri Garden: Titanium Arts Dental Studio | Dr Sobti's",
      "Crowns, veneers and implant teeth made on site at Titanium Arts Dental Studio, the in-house digital lab of Dr Sobti's Dental Care, Rajouri Garden. Same-day crowns for many patients.",
-     page_lab, "about.html", [crumbs_schema("lab.html", "Our lab")], 0.6),
+     page_lab, "about.html", [crumbs_schema("lab.html", "Our lab")] + video_ld(LAB_VIDEOS, "lab.html"), 0.6),
     ("reviews.html", "Patient Reviews | Dr Sobti's Dental Care, Rajouri Garden",
      "Rated 5.0 by 118 patients on Google. Read what patients say about implants, root canals, cleanings and smile work at Dr Sobti's Dental Care, Rajouri Garden.",
      page_reviews, "reviews.html", [crumbs_schema("reviews.html", "Reviews")], 0.6),
+    ("videos.html", "Videos: Clinic Tour, Patient Stories and Our Lab | Dr Sobti's Dental Care",
+     "Watch a tour of Dr Sobti's Dental Care, Rajouri Garden, patient testimonials, and crowns and bridges made in our in-house lab, plus implant and smile makeover videos.",
+     page_videos, "about.html", [crumbs_schema("videos.html", "Videos")] + video_ld([i for _, _, l in CLINIC_VIDEOS for i in l], "videos.html"), 0.6),
     ("contact.html", "Dental Clinic in Rajouri Garden: Timings and Directions | Dr Sobti's",
      "J 12/26, First Floor, Rajouri Garden, New Delhi 110027, above Rajmandir. Open 7 days, 10 am to 7 pm. Call +91 87449 85976 or WhatsApp +91 80767 77307.",
      page_contact, "contact.html", [crumbs_schema("contact.html", "Contact"), faq_schema(CONTACT_FAQ)], 0.8),
@@ -1124,6 +1169,7 @@ def main():
 - [About and doctors]({SITE}/about.html)
 - [Treatments]({SITE}/treatments.html): every treatment, with links to the detailed pages
 - [In-house lab, Titanium Arts Dental Studio]({SITE}/lab.html)
+- [Videos: clinic tour, patient stories, lab work]({SITE}/videos.html) · implant videos: {IMPLANTS}/videos/ · smile makeover videos: {SMILE}/videos.html
 - [Patient reviews]({SITE}/reviews.html)
 - [Contact and timings]({SITE}/contact.html)
 - [Book an appointment]({SITE}/booking.html)

@@ -238,7 +238,8 @@ PRICES = [
     # (service, starting price in INR, unit). Only prices already published on the clinic's sites.
     ("In-clinic dental consultation with examination", 700, None),
     ("Single dental implant with crown", 35000, None),
-    ("All-on-4 full arch dental implants", 300000, "per arch"),
+    ("All-on-4 full arch dental implants", 200000, "per jaw"),
+    ("All-on-6 full arch dental implants", 300000, "per jaw"),
     ("Veneers", 10000, "per tooth"),
     ("Teeth whitening", 8000, None),
     ("Zirconia crown", 8000, "per tooth"),
@@ -605,7 +606,7 @@ HOME_FAQ = [
     ("Is the clinic open on Sunday?", "Yes. Dr Sobti's Dental Care in Rajouri Garden is open on Sundays too, 10 am to 7 pm, which helps patients from across West Delhi who cannot come on weekdays."),
     ("Which areas do your patients come from?", "Mostly West Delhi: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Implant patients also travel from elsewhere in Delhi NCR and from abroad."),
     ("Do you treat children?", "Yes. The clinic sees patients of all ages, including children, for check-ups, fillings and other routine care."),
-    ("Who places dental implants at Dr Sobti's Dental Care?", "Dr Pushkar Sobti (BDS, MDS, PG in Oral Implantology, UCAM), who has placed more than 5,000 implants since 2009. A single implant with crown starts from ₹35,000 and All-on-4 from ₹3,00,000 per arch; the exact price follows a CBCT scan."),
+    ("Who places dental implants at Dr Sobti's Dental Care?", "Dr Pushkar Sobti (BDS, MDS, PG in Oral Implantology, UCAM), who has placed more than 5,000 implants since 2009. A single implant with crown starts from ₹35,000 and All-on-4 from ₹2,00,000 per jaw (All-on-6 from ₹3,00,000 per jaw); the exact price follows a CBCT scan."),
     ("How do patients rate the clinic?", "Dr Sobti's Dental Care in Rajouri Garden is rated 5.0 out of 5 from 118 Google reviews. Patients most often mention the in-house CBCT scan and lab, clear explanations before treatment and painless procedures."),
 ]
 
@@ -896,7 +897,7 @@ FAQ_GROUPS = [
     ]),
     ("Costs and payment", [
         ("How much is a dental consultation?", "A first opinion on WhatsApp is free: send a photo or X-ray. An in-clinic consultation with an examination and a written plan is ₹700."),
-        ("How much does a dental implant cost at Dr Sobti's Dental Care?", "A single implant with crown starts from ₹35,000, and All-on-4 full arch implants start from ₹3,00,000 per arch. The final price depends on the implant brand, bone and the type of teeth, and is given in writing after a CBCT scan."),
+        ("How much does a dental implant cost at Dr Sobti's Dental Care?", "A single implant with crown starts from ₹35,000, and All-on-4 full arch implants start from ₹2,00,000 per jaw and All-on-6 from ₹3,00,000 per jaw. The final price depends on the implant brand, bone and the type of teeth, and is given in writing after a CBCT scan."),
         ("How much do veneers and whitening cost?", "Veneers start from ₹10,000 per tooth and in-clinic teeth whitening from ₹8,000, depending on the case. A smile makeover is priced case by case after a digital design."),
         ("How much does a crown cost?", "Zirconia crowns start from ₹8,000 per tooth and E-max crowns from ₹10,000 per tooth. Both are made in the clinic's own lab."),
         ("How can I pay?", "Cash, credit or debit card, and bank transfer. Dr Sobti's Dental Care is not on the CGHS panel."),
@@ -934,7 +935,7 @@ def page_faq():
         ("Equipment", "CBCT 3D scanner, dental microscope, implant surgery room, Class B autoclave"),
         ("In-house lab", "Titanium Arts Dental Studio (zirconia and E-max crowns, veneers, implant teeth)"),
         ("Implant brands", "Osstem, Hiossen and Nobel Biocare, among others"),
-        ("Starting prices", "Consultation ₹700 · single implant with crown ₹35,000 · All-on-4 ₹3,00,000 per arch · veneers ₹10,000 per tooth · whitening ₹8,000 · zirconia crown ₹8,000"),
+        ("Starting prices", "Consultation ₹700 · single implant with crown ₹35,000 · All-on-4 ₹2,00,000 per jaw · veneers ₹10,000 per tooth · whitening ₹8,000 · zirconia crown ₹8,000"),
         ("Languages", "English, Hindi"),
         ("Payment", "Cash, card, bank transfer"),
         ("Google rating", f"{CLINIC['rating']} from {CLINIC['review_count']} reviews"),

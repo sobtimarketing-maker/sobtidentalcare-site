@@ -1,0 +1,14 @@
+# Read-only live check of all three clinic websites (redirects, HTTPS, sitemap pages, links, phone numbers).
+name: Live site audit
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 2 * * 1'   # every Monday 08:00 IST
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/audit/live_audit.py

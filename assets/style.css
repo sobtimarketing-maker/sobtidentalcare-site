@@ -111,6 +111,12 @@ section.dark h2, section.dark h3 { color: #fff; }
 .doc .role { color: var(--blue); font-weight: 700; font-size: .92rem; margin-bottom: .6em; }
 .doc .quals { font-size: .9rem; color: var(--muted); }
 
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+.duo figure { margin: 0; }
+.duo img { border-radius: 14px; aspect-ratio: 4/3; object-fit: cover; object-position: center 30%; width: 100%; }
+.duo figcaption { font-size: .86rem; color: var(--muted); margin-top: 6px; }
+@media (max-width: 700px) { .duo { grid-template-columns: 1fr; } }
+
 /* Photo strip */
 .photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .photos figure { margin: 0; }

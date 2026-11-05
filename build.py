@@ -191,7 +191,7 @@ def clinic_schema():
         "name": CLINIC["name"],
         "url": f"{SITE}/",
         "logo": f"{SITE}/assets/img/logo.png",
-        "image": [f"{SITE}/assets/img/clinic-reception-waiting.jpg", f"{SITE}/assets/img/clinic-treatment-room.jpg", f"{SITE}/assets/img/clinic-entrance.jpg"],
+        "image": [f"{SITE}/assets/img/clinic-reception-waiting.jpg", f"{SITE}/assets/img/clinic-treatment-room.jpg", f"{SITE}/assets/img/clinic-treatment-room-3.jpg"],
         "description": "Dental clinic in Rajouri Garden, West Delhi, led by implantologist Dr Pushkar Sobti and aesthetic dentist Dr Parul Sharma Sobti. Implants, cosmetic dentistry and family dental care with in-house CBCT and lab.",
         "telephone": "+91-87449-85976",
         "email": CLINIC["email"],
@@ -518,11 +518,10 @@ PHOTOS = [
     ("clinic-reception-waiting.jpg", "Reception and waiting area"),
     ("clinic-treatment-room.jpg", "Treatment room, Rajouri Garden"),
     ("clinic-treatment-room-blue.jpg", "Treatment room with dental microscope"),
+    ("clinic-treatment-room-3.jpg", "Treatment room, wide view"),
     ("clinic-treatment-room-2.jpg", "Second treatment room"),
     ("clinic-lounge-certificates.jpg", "Patient lounge"),
-    ("clinic-cbct-scanner.jpg", "CBCT 3D scanner, in the clinic"),
-    ("clinic-dental-lab.jpg", "In-house digital lab"),
-    ("clinic-entrance.jpg", "The entrance, first floor, above Rajmandir"),
+    ("clinic-lounge-sofa.jpg", "Waiting lounge"),
 ]
 
 LAB_WORK = [
@@ -534,6 +533,12 @@ LAB_WORK = [
     ("lab-full-arch-teeth.jpg", "Full-arch teeth, finished in our lab"),
     ("lab-full-arch-bridge-try-in.jpg", "Full-arch bridge beside its clear try-in"),
     ("lab-clear-aligner.jpg", "Clear aligner"),
+    ("lab-zirconia-molar-bridge.jpg", "Zirconia molar bridge"),
+    ("lab-front-implant-bridge.jpg", "Front implant bridge with pink gum"),
+    ("lab-implant-overdenture.jpg", "Implant-supported denture on bar attachments"),
+    ("lab-front-teeth-bridge.jpg", "Front teeth bridge, hand-finished"),
+    ("lab-crowns-on-printed-model.jpg", "Crowns on a 3D-printed model"),
+    ("lab-full-arch-try-in.jpg", "Full-arch try-in before the final teeth"),
 ]
 
 

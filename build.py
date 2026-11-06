@@ -42,6 +42,7 @@ MAP_EMBED = "https://maps.google.com/maps?q=Dr+Sobti%27s+Dental+Care,+J+12/26+Ra
 IMPLANTS = "https://dentalimplantsdelhi.com"
 UPDATED = "2026-11-03"  # change when facts on the site change; shown to AI search as dateModified
 LINKEDIN_PUSHKAR = "https://www.linkedin.com/in/pushkar-sobti-159699200/"
+LINKEDIN_CLINIC = "https://www.linkedin.com/company/sobti-dental-clinic/"
 SMILE = "https://drparulssobti.com"
 SOCIAL = {
     "Google": "https://maps.google.com/maps?cid=6577991291147149801",
@@ -149,7 +150,7 @@ def org_schema():
         "foundingLocation": {"@type": "Place", "name": BRAND["founding_place"]},
         "email": CLINIC["email"],
         "medicalSpecialty": ["Dentistry"],
-        "sameAs": [SOCIAL["Instagram"], SOCIAL["Facebook"], SOCIAL["YouTube"]],
+        "sameAs": [SOCIAL["Instagram"], SOCIAL["Facebook"], SOCIAL["YouTube"], LINKEDIN_CLINIC],
         "subOrganization": [{"@id": f"{SITE}/#clinic", "name": f"{CLINIC['name']}, {CLINIC_AREA}", "url": f"{SITE}/"}]
         + [{"@id": f"{SITE}/{b['slug']}.html#clinic", "name": f"{b['name']}, {b['area']}", "url": f"{SITE}/{b['slug']}.html"}
            for b in LIVE_BRANCHES],
@@ -228,7 +229,7 @@ def clinic_schema():
                        "Children's dentistry", "Emergency dental care"],
         "makesOffer": [offer(n, price, unit) for n, price, unit in PRICES],
         "employee": [{"@id": f"{SITE}/#{d}"} for d in CLINIC_DOCTORS],
-        "sameAs": [CLINIC["maps"], SOCIAL["Instagram"], SOCIAL["Facebook"], SOCIAL["YouTube"]],
+        "sameAs": [CLINIC["maps"], SOCIAL["Instagram"], SOCIAL["Facebook"], SOCIAL["YouTube"], LINKEDIN_CLINIC],
         "availableService": [{"@type": "MedicalProcedure", "name": n} for n in [
             "Dental implants", "Full mouth dental implants (All-on-4 / All-on-X)", "Veneers", "Teeth whitening",
             "Smile makeover", "Root canal treatment", "Dental crowns and bridges", "Braces", "Clear aligners",

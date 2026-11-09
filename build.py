@@ -40,7 +40,7 @@ CLINIC = {
 ADDRESS_LINE = f'{CLINIC["street"]}, {CLINIC["locality"]}, {CLINIC["region"]} {CLINIC["postcode"]}'
 MAP_EMBED = "https://maps.google.com/maps?q=Dr+Sobti%27s+Dental+Care,+J+12/26+Rajouri+Garden,+New+Delhi+110027&z=16&output=embed"
 IMPLANTS = "https://dentalimplantsdelhi.com"
-UPDATED = "2026-11-03"  # change when facts on the site change; shown to AI search as dateModified
+UPDATED = "2026-11-09"  # change when facts on the site change; shown to AI search as dateModified
 LINKEDIN_PUSHKAR = "https://www.linkedin.com/in/pushkar-sobti-159699200/"
 LINKEDIN_CLINIC = "https://www.linkedin.com/company/sobti-dental-clinic/"
 SMILE = "https://drparulssobti.com"
@@ -376,6 +376,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
       <li><a href="/reviews.html">Patient reviews</a></li>
       <li><a href="/contact.html">Timings and directions</a></li>
       <li><a href="/faq.html">Clinic facts and FAQ</a></li>
+      <li><a href="/dentist-west-delhi.html">Dentist in West Delhi</a></li>
       {'<li><a href="/clinics.html">Our clinics</a></li>' if LIVE_BRANCHES else ''}
       <li><a href="/booking.html">Book an appointment</a></li>
     </ul></div>
@@ -891,7 +892,7 @@ def page_contact():
   </div>
 </div></section>
 <section><div class="wrap" style="max-width:860px">
-  <div class="section-head"><h2>Getting here</h2><p class="lead">We see patients from Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Tilak Nagar, Janakpuri and across West Delhi.</p></div>
+  <div class="section-head"><h2>Getting here</h2><p class="lead">We see patients from Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, <a href="/dentist-tilak-nagar.html">Tilak Nagar</a>, <a href="/dentist-janakpuri.html">Janakpuri</a>, <a href="/dentist-vikaspuri.html">Vikaspuri</a>, <a href="/dentist-paschim-vihar.html">Paschim Vihar</a> and <a href="/dentist-west-delhi.html">across West Delhi</a>.</p></div>
   {faq}
 </div></section>"""
 
@@ -1058,6 +1059,160 @@ def page_branch(b):
 </div></section>"""
 
 
+# ---------------- West Delhi area pages ----------------
+# Honest "patients from" pages: the clinic is in Rajouri Garden only. Each page gives the real route,
+# what patients from that area usually come for, and answers local questions. No fake addresses.
+AREAS = [
+    {
+        "slug": "dentist-tilak-nagar",
+        "area": "Tilak Nagar",
+        "keyword": "Dentist near Tilak Nagar",
+        "distance": "about 2.5 km",
+        "route": [
+            ("By metro", "Take the Blue Line from Tilak Nagar towards Noida or Vaishali. Rajouri Garden is three stops away (Subhash Nagar, Tagore Garden, Rajouri Garden). From the station it is a short walk to J 12/26, above Rajmandir."),
+            ("By car or auto", "Come along Najafgarh Road towards Rajouri Garden. The clinic is on the first floor with a lift, and there is parking close by."),
+        ],
+        "intro": "Tilak Nagar is three metro stops from our clinic in Rajouri Garden, so many families from Tilak Nagar and Chaukhandi come to us for check-ups, root canals, crowns and dental implants.",
+        "faq": [
+            ("Is there a dental clinic of Dr Sobti's in Tilak Nagar?", "No. Our clinic is in Rajouri Garden, at J 12/26, First Floor, above Rajmandir. It is three stops from Tilak Nagar on the Blue Line, which is quicker for most patients than a drive through the market."),
+            ("Can I get an appointment on Sunday?", "Yes. The clinic is open all seven days from 10 am to 7 pm, including Sunday. The doctors see patients by appointment, so call or WhatsApp first."),
+            ("Can I send my X-ray before coming from Tilak Nagar?", "Yes. Send a photo of your teeth or your X-ray on WhatsApp for a free first opinion, so you know what to expect before you travel."),
+        ],
+    },
+    {
+        "slug": "dentist-janakpuri",
+        "area": "Janakpuri",
+        "keyword": "Dentist near Janakpuri",
+        "distance": "about 4 km",
+        "route": [
+            ("By metro", "From Janakpuri East take the Blue Line towards Noida or Vaishali; Rajouri Garden is four stops away. From Janakpuri West (Blue and Magenta lines) it is five stops. The clinic is a short walk from Rajouri Garden station."),
+            ("By car", "Drive along Najafgarh Road past Tilak Nagar to Rajouri Garden. The clinic has a lift, and parking is close by."),
+        ],
+        "intro": "Patients from Janakpuri, including A, B, C and D blocks, Asalatpur and Possangipur, come to our Rajouri Garden clinic mainly for dental implants, full mouth implants and smile design, because the clinic has its own CBCT 3D scanner and dental lab on the same floor.",
+        "faq": [
+            ("Is Dr Sobti's Dental Care in Janakpuri?", "No. The clinic is in Rajouri Garden, four metro stops from Janakpuri East on the Blue Line. Many Janakpuri patients choose to travel for implant and smile work because the scan, the surgery and the lab are all in one place."),
+            ("Why travel from Janakpuri for dental implants?", "Dr Pushkar Sobti has placed more than 5,000 implants since 2009. Each case is planned on the clinic's own CBCT scan with guided surgery, and the implant teeth are made in the in-house lab, so you do not visit three different places."),
+            ("Is the clinic open on Sundays?", "Yes, 10 am to 7 pm every day of the week, by appointment."),
+        ],
+    },
+    {
+        "slug": "dentist-vikaspuri",
+        "area": "Vikaspuri",
+        "keyword": "Dentist near Vikaspuri",
+        "distance": "about 5 km",
+        "route": [
+            ("By car or cab", "Most patients from Vikaspuri come by car or cab towards Rajouri Garden. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
+            ("By metro", "Take the metro to Janakpuri West or Janakpuri East and change to the Blue Line towards Noida or Vaishali. Get off at Rajouri Garden; the clinic is a short walk away."),
+        ],
+        "intro": "Vikaspuri is one of West Delhi's biggest residential areas, and many of our implant and full mouth patients come from its blocks and from nearby Hastsal and Krishna Park. They travel to Rajouri Garden for a team that plans, places and makes the implant teeth under one roof.",
+        "faq": [
+            ("Do you have a clinic in Vikaspuri?", "No. Our clinic is in Rajouri Garden. We would rather tell you that plainly: patients from Vikaspuri come to us for implants, full mouth implants and smile work, and we try to keep the number of visits low."),
+            ("How many visits does an implant need?", "Usually a consultation with a CBCT scan, the surgery visit, and a visit for the final tooth after the implant has healed, plus short check-ups. Your plan, written after the scan, tells you exactly how many."),
+            ("Can elderly patients manage the visit?", "Yes. The clinic is on the first floor and has a lift, and there is parking close by."),
+        ],
+    },
+    {
+        "slug": "dentist-paschim-vihar",
+        "area": "Paschim Vihar",
+        "keyword": "Dentist near Paschim Vihar",
+        "distance": "about 4 km",
+        "route": [
+            ("By car or cab", "Come towards Punjabi Bagh and then Rajouri Garden. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
+            ("By metro", "Take the Green Line to Punjabi Bagh, walk across to Punjabi Bagh West on the Pink Line, and ride two stops to Rajouri Garden. The clinic is a short walk from the station."),
+        ],
+        "intro": "Patients from Paschim Vihar, Meera Bagh and Punjabi Bagh come to our Rajouri Garden clinic for dental implants, veneers and everyday dentistry. The clinic is open seven days, so Sunday appointments are easy to fit in.",
+        "faq": [
+            ("Is there a Dr Sobti's clinic in Paschim Vihar?", "No. The clinic is in Rajouri Garden, a short drive from Paschim Vihar through Punjabi Bagh, or a short metro ride with one change to the Pink Line."),
+            ("What do patients from Paschim Vihar usually come for?", "Mostly dental implants and full mouth implants with Dr Pushkar Sobti, and veneers, whitening and smile design with Dr Parul Sharma Sobti, plus root canals and crowns."),
+            ("Can I get a first opinion without travelling?", "Yes. Send a photo or your X-ray on WhatsApp for a free first opinion. An in-clinic consultation with an examination is ₹700."),
+        ],
+    },
+]
+
+WEST_DELHI_NEARBY = [
+    ("Tagore Garden", "One stop west on the Blue Line, or a few minutes by auto."),
+    ("Ramesh Nagar and Moti Nagar", "One and two stops east on the Blue Line."),
+    ("Subhash Nagar", "Two stops west on the Blue Line."),
+    ("Punjabi Bagh", "Two stops north on the Pink Line (Punjabi Bagh West), or a short drive."),
+    ("Kirti Nagar", "Three stops east on the Blue Line."),
+    ("Mayapuri and Naraina", "One and two stops south on the Pink Line."),
+    ("Hari Nagar", "A short drive by car or auto."),
+]
+
+WEST_DELHI_FAQ = [
+    ("Where is Dr Sobti's Dental Care in West Delhi?", "At J 12/26, First Floor, Rajouri Garden, New Delhi 110027, above Rajmandir. It is a short walk from Rajouri Garden metro station, where the Blue and Pink lines meet, so it is easy to reach from most of West Delhi."),
+    ("Is the clinic open on Sunday?", "Yes. It is open all seven days, 10 am to 7 pm. Dr Pushkar Sobti and Dr Parul Sharma Sobti see patients by prior appointment, so please call or WhatsApp first."),
+    ("Which treatments do patients from across West Delhi come for?", "Mostly dental implants and full mouth implants with Dr Pushkar Sobti, and veneers, whitening and smile design with Dr Parul Sharma Sobti, along with root canals, crowns, cleanings and children's dentistry."),
+    ("How are the reviews?", "The Rajouri Garden clinic is rated 5.0 out of 5 from 118 Google reviews. Patients most often mention clear explanations before treatment, painless procedures and the in-house scan and lab."),
+    ("How much does a consultation cost?", "A first opinion on WhatsApp is free. An in-clinic consultation with an examination and a written plan is ₹700."),
+]
+
+
+def area_links_html(skip=""):
+    items = "".join(f'<li><a href="/{a["slug"]}.html">Patients from {e(a["area"])}</a></li>' for a in AREAS if a["slug"] != skip)
+    return f'<ul>{items}<li><a href="/dentist-west-delhi.html">All of West Delhi</a></li></ul>'
+
+
+def why_cards():
+    return f"""<div class="grid g3">
+  <article class="card"><h3>Implants planned in 3D</h3><p>Dr Pushkar Sobti has placed more than 5,000 implants since 2009. Every case is planned on the clinic's own CBCT scan, with guided surgery. <a href="{IMPLANTS}/">Implant details →</a></p></article>
+  <article class="card"><h3>Smile design</h3><p>Dr Parul Sharma Sobti plans veneers, whitening and bonding digitally first, so you see the result before treatment. <a href="{SMILE}/">Smile design →</a></p></article>
+  <article class="card"><h3>Our own lab</h3><p>Crowns, veneers and implant teeth are made in <a href="/lab.html">our in-house lab</a> on the same floor, which saves visits and waiting time.</p></article>
+</div>"""
+
+
+def page_area(a):
+    route = "".join(f"<div class=\"card\"><h3>{e(t)}</h3><p>{e(d)}</p></div>" for t, d in a["route"])
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(ans)}</p></details>" for q, ans in a["faq"])
+    return pagehead(f"{e(a['keyword'])}: Dr Sobti's Dental Care, Rajouri Garden", f"Patients from {a['area']}",
+                    e(a["intro"])) + f"""
+<section><div class="wrap">
+  <div class="section-head"><h2>Getting here from {e(a['area'])}</h2><p class="lead">The clinic is {a['distance']} from {e(a['area'])}, in Rajouri Garden. It is open every day, 10 am to 7 pm, by appointment.</p></div>
+  <div class="grid g2">{route}</div>
+</div></section>
+<section class="tint"><div class="wrap">
+  <div class="section-head"><h2>Why patients from {e(a['area'])} choose us</h2></div>
+  {why_cards()}
+  <p style="margin-top:22px"><span class="stars">★★★★★</span> Rated {CLINIC['rating']} from {CLINIC['review_count']} Google reviews. <a href="/reviews.html">Read the reviews →</a></p>
+</div></section>
+<section><div class="wrap">{visit_html()}</div></section>
+<section class="tint"><div class="wrap" style="max-width:860px">
+  <div class="section-head"><h2>Questions from {e(a['area'])} patients</h2></div>
+  {faq}
+  <h3 style="margin-top:28px">Patients from other areas</h3>
+  {area_links_html(a['slug'])}
+</div></section>
+{cta_band()}"""
+
+
+def page_west_delhi():
+    areas = "".join(
+        f'<div class="card"><h3><a href="/{a["slug"]}.html">{e(a["area"])}</a></h3><p>{e(a["route"][0][1] if a["route"][0][0] == "By metro" else a["route"][1][1])}</p></div>'
+        for a in AREAS)
+    near = "".join(f"<li><strong>{e(n)}</strong>: {e(d)}</li>" for n, d in WEST_DELHI_NEARBY)
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(ans)}</p></details>" for q, ans in WEST_DELHI_FAQ)
+    return pagehead("Dentist in West Delhi: Dr Sobti's Dental Care, Rajouri Garden", "West Delhi",
+                    "One clinic for implants, smile design and family dentistry, in the middle of West Delhi at Rajouri Garden metro. Open all seven days, 10 am to 7 pm.") + f"""
+<section><div class="wrap">
+  <div class="section-head"><h2>Why West Delhi patients choose Dr Sobti's</h2><p class="lead">Rated {CLINIC['rating']} from {CLINIC['review_count']} Google reviews. A family practice since 1982, with the Rajouri Garden clinic opened in 2024.</p></div>
+  {why_cards()}
+</div></section>
+<section class="tint"><div class="wrap">
+  <div class="section-head"><h2>Coming from further away</h2></div>
+  <div class="grid g2">{areas}</div>
+</div></section>
+<section><div class="wrap" style="max-width:860px">
+  <div class="section-head"><h2>Close by</h2><p class="lead">Rajouri Garden station is where the Blue and Pink lines meet, so these colonies are only a stop or two away.</p></div>
+  <ul>{near}</ul>
+</div></section>
+<section class="tint"><div class="wrap">{visit_html()}</div></section>
+<section><div class="wrap" style="max-width:860px">
+  <div class="section-head"><h2>Questions</h2></div>
+  {faq}
+</div></section>
+{cta_band()}"""
+
+
 def page_404():
     return f"""<section class="pagehead"><div class="wrap"><h1>Page not found</h1>
 <p class="lead">The page you were looking for is not here. Try the <a href="/">home page</a>, our <a href="/treatments.html">treatments</a> or <a href="/contact.html">contact details</a>.</p></div></section>"""
@@ -1092,6 +1247,16 @@ PAGES = [
      "Timings, address, doctors, implant and treatment prices, and answers to common questions about Dr Sobti's Dental Care, J 12/26 Rajouri Garden, New Delhi. Open 7 days.",
      page_faq, "contact.html", [crumbs_schema("faq.html", "FAQ"), faq_schema(FAQ_ALL)], 0.8),
 ]
+
+
+PAGES.append(("dentist-west-delhi.html", "Dentist in West Delhi, Open 7 Days | Dr Sobti's Dental Care, Rajouri Garden",
+              "Dental implants, smile design and family dentistry for West Delhi at Rajouri Garden metro. Rated 5.0 from 118 Google reviews. Open 7 days, 10 am to 7 pm.",
+              page_west_delhi, "contact.html", [crumbs_schema("dentist-west-delhi.html", "West Delhi"), faq_schema(WEST_DELHI_FAQ)], 0.8))
+for _a in AREAS:
+    PAGES.append((f"{_a['slug']}.html", f"{_a['keyword']} | Dr Sobti's Dental Care, Rajouri Garden",
+                  f"Dentist for {_a['area']} patients: Dr Sobti's Dental Care, J 12/26 Rajouri Garden, {_a['distance']} away. Implants, smile design, root canals. Open 7 days, 10 am to 7 pm.",
+                  (lambda a=_a: page_area(a)), "contact.html",
+                  [crumbs_schema(f"{_a['slug']}.html", f"Patients from {_a['area']}"), faq_schema(_a["faq"])], 0.6))
 
 
 if LIVE_BRANCHES:
@@ -1173,6 +1338,7 @@ def main():
 - [Videos: clinic tour, patient stories, lab work]({SITE}/videos.html) · implant videos: {IMPLANTS}/videos/ · smile makeover videos: {SMILE}/videos.html
 - [Patient reviews]({SITE}/reviews.html)
 - [Contact and timings]({SITE}/contact.html)
+- [Dentist in West Delhi: routes from Tilak Nagar, Janakpuri, Vikaspuri, Paschim Vihar and nearby colonies]({SITE}/dentist-west-delhi.html)
 - [Book an appointment]({SITE}/booking.html)
 
 {branches_md}## Related sites (same clinic)

@@ -322,7 +322,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
     graph = [org_schema(), clinic_schema(), *doctor_schema(), website_schema(), webpage, *extra_ld]
     ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
     nav = "".join(
-        f'<a href="{href}"{" aria-current=\"page\"" if href == current else ""}>{label}</a>' for href, label in NAV)
+        f'<a href="{"/" if href == "index.html" else "/" + href}"{" aria-current=\"page\"" if href == current else ""}>{label}</a>' for href, label in NAV)
     return f"""<!doctype html>
 <html lang="en-IN">
 <head>
@@ -1281,6 +1281,8 @@ REDIRECTS = {
     "services.html": "/treatments.html", "impaction.html": "/treatments.html",
     "cosmetic-dental-fillings.html": "/treatments.html", "gallery.html": "/about.html#clinic",
     "Careers.html": "/contact.html",
+    # Old-site blog page Google crawled in Jul 2026 (Search Console, 9 Nov 2026).
+    "blog.html": "/treatments.html", "blog": "/treatments.html",
 }
 
 

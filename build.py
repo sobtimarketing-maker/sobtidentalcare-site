@@ -381,7 +381,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
       <li><a href="/booking.html">Book an appointment</a></li>
     </ul></div>
     <div><h3>Treatments</h3><ul>
-      <li><a href="{IMPLANTS}/">Dental implants</a></li>
+      <li><a href="{IMPLANTS}/">Dental implants in Delhi</a></li>
       <li><a href="{IMPLANTS}/dental-implant-cost-delhi/">Implant cost in Delhi</a></li>
       <li><a href="{SMILE}/veneers.html">Veneers</a></li>
       <li><a href="{SMILE}/teeth-whitening-cost-delhi.html">Teeth whitening</a></li>
@@ -425,11 +425,12 @@ TREATMENT_GROUPS = [
         "cls": "", "title": "Dental implants", "who": "Dr Pushkar Sobti",
         "intro": "Fixed teeth for one gap or a whole jaw, planned in 3D on our own CBCT scanner.",
         "items": [
+            ("Dental implants in Delhi", f"{IMPLANTS}/", "Dr Pushkar Sobti"),
             ("Single tooth implant in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", ""),
             ("Dental implant cost in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", "prices"),
-            ("Full mouth implants (All-on-4, All-on-X)", f"{IMPLANTS}/", "dentalimplantsdelhi.com"),
+            ("Full mouth implants (All-on-4, All-on-X)", f"{IMPLANTS}/full-mouth-dental-implants-delhi/", ""),
             ("Basal implants", f"{IMPLANTS}/basal-implants-delhi/", ""),
-            ("Bone grafting and sinus lift", f"{IMPLANTS}/", ""),
+            ("Bone grafting and sinus lift", f"{IMPLANTS}/bone-grafting-for-dental-implants-delhi/", ""),
             ("Implant consultation: what happens", f"{IMPLANTS}/blog/dental-implant-consultation/", "guide"),
         ],
         "more": (f"{IMPLANTS}/", "dentalimplantsdelhi.com"),
@@ -1235,7 +1236,7 @@ def area_links_html(skip=""):
 
 def why_cards():
     return f"""<div class="grid g3">
-  <article class="card"><h3>Implants planned in 3D</h3><p>Dr Pushkar Sobti has placed more than 5,000 implants since 2009. Every case is planned on the clinic's own CBCT scan, with guided surgery. <a href="{IMPLANTS}/">Implant details →</a></p></article>
+  <article class="card"><h3>Implants planned in 3D</h3><p>Dr Pushkar Sobti has placed more than 5,000 implants since 2009. Every case is planned on the clinic's own CBCT scan, with guided surgery. <a href="{IMPLANTS}/">Dental implants in Delhi →</a></p></article>
   <article class="card"><h3>Smile design</h3><p>Dr Parul Sharma Sobti plans veneers, whitening and bonding digitally first, so you see the result before treatment. <a href="{SMILE}/">Smile design →</a></p></article>
   <article class="card"><h3>Our own lab</h3><p>Crowns, veneers and implant teeth are made in <a href="/lab.html">our in-house lab</a> on the same floor, which saves visits and waiting time.</p></article>
 </div>"""

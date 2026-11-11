@@ -631,7 +631,7 @@ def page_home():
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in HOME_FAQ)
     return f"""<section class="hero"><div class="wrap">
   <div>
-    <div class="eyebrow">Dr Sobti's Dental Care · since 2009</div>
+    <div class="eyebrow">Dr Sobti's Dental Care · family practice since 1982</div>
     <h1>Your dentist in Rajouri Garden, <em>West Delhi</em></h1>
     <p class="lead">Dental care that is explained before it begins. Dr Sobti's Dental Care is a family-run dental clinic in Rajouri Garden led by implantologist Dr Pushkar Sobti and aesthetic dentist Dr Parul Sharma Sobti. Implants, smile design and everyday dentistry, with 3D scanning and our own dental lab in the same building.</p>
     <div class="actions"><a class="btn" href="/booking.html">Book a visit</a><a class="btn ghost" href="tel:{CLINIC['phone_tel']}" data-track="call">Call {CLINIC['phone_display']}</a></div>
@@ -1378,7 +1378,7 @@ def main():
         layout("404.html", "Page not found | Dr Sobti's Dental Care", "Page not found.", page_404(), "")
         .replace('<meta name="viewport"', '<meta name="robots" content="noindex">\n<meta name="viewport"'), encoding="utf-8")
     urls = "".join(
-        f"<url><loc>{SITE}/{'' if p == 'index.html' else p}</loc><priority>{pr}</priority></url>" for p, *_, pr in PAGES)
+        f"<url><loc>{SITE}/{'' if p == 'index.html' else p}</loc><lastmod>{UPDATED}</lastmod><priority>{pr}</priority></url>" for p, *_, pr in PAGES)
     (OUT / "sitemap.xml").write_text(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n', encoding="utf-8")
     ai_bots = ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "PerplexityBot", "Perplexity-User", "ClaudeBot",
@@ -1433,6 +1433,9 @@ def main():
 {faq_md}
 """, encoding="utf-8")
     # Common addresses from the old site and typical links, sent to the matching new page.
+    # GitHub Pages cannot send a 301, so each stub is an instant meta refresh plus canonical, which
+    # Google treats as a permanent redirect. No noindex here: it would stop Google passing the old
+    # page's signals to the new one (Search Console audit, 11 Nov 2026).
     for old, new in REDIRECTS.items():
         if old.endswith(".html"):
             f = OUT / old
@@ -1441,7 +1444,7 @@ def main():
             f = OUT / old / "index.html"
         f.write_text(
             f'<!doctype html><meta charset="utf-8"><title>Redirecting</title><link rel="canonical" href="{SITE}{new}">'
-            f'<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={new}"><a href="{new}">Continue</a>\n',
+            f'<meta http-equiv="refresh" content="0; url={new}"><a href="{new}">Continue</a>\n',
             encoding="utf-8")
     print(f"Built {len(PAGES) + 1} pages and {len(REDIRECTS)} redirects into {OUT}")
 

@@ -230,10 +230,13 @@ def clinic_schema():
         "makesOffer": [offer(n, price, unit) for n, price, unit in PRICES],
         "employee": [{"@id": f"{SITE}/#{d}"} for d in CLINIC_DOCTORS],
         "sameAs": [CLINIC["maps"], SOCIAL["Instagram"], SOCIAL["Facebook"], SOCIAL["YouTube"], LINKEDIN_CLINIC],
-        "availableService": [{"@type": "MedicalProcedure", "name": n} for n in [
+        # hasOfferCatalog, not availableService: availableService is only valid on MedicalClinic/Hospital/Physician,
+        # so Semrush Site Audit flagged it as invalid on every page (11 Nov 2026).
+        "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Dental treatments", "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "MedicalProcedure", "name": n}} for n in [
             "Dental implants", "Full mouth dental implants (All-on-4 / All-on-X)", "Veneers", "Teeth whitening",
             "Smile makeover", "Root canal treatment", "Dental crowns and bridges", "Braces", "Clear aligners",
-            "Teeth cleaning (air polishing)", "Wisdom tooth removal", "Dentures", "Children's dentistry", "Emergency dental care"]],
+            "Teeth cleaning (air polishing)", "Wisdom tooth removal", "Dentures", "Children's dentistry", "Emergency dental care"]]},
     }
 
 

@@ -1124,11 +1124,12 @@ AREAS = [
             ("By car or cab", "Come towards Punjabi Bagh and then Rajouri Garden. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
             ("By metro", "Take the Green Line to Punjabi Bagh, walk across to Punjabi Bagh West on the Pink Line, and ride two stops to Rajouri Garden. The clinic is a short walk from the station."),
         ],
-        "intro": "Patients from Paschim Vihar, Meera Bagh and Punjabi Bagh come to our Rajouri Garden clinic for dental implants, veneers and everyday dentistry. The clinic is open seven days, so Sunday appointments are easy to fit in.",
+        "intro": "Patients from Paschim Vihar, Meera Bagh, Mianwali Nagar and Punjabi Bagh come to our Rajouri Garden clinic for dental implants, full mouth implants, veneers and everyday dentistry. Meera Bagh is about 15 minutes away by car along Outer Ring Road, and the clinic is open seven days, so Sunday appointments are easy to fit in.",
         "faq": [
             ("Is there a Dr Sobti's clinic in Paschim Vihar?", "No. The clinic is in Rajouri Garden, a short drive from Paschim Vihar through Punjabi Bagh, or a short metro ride with one change to the Pink Line."),
             ("What do patients from Paschim Vihar usually come for?", "Mostly dental implants and full mouth implants with Dr Pushkar Sobti, and veneers, whitening and smile design with Dr Parul Sharma Sobti, plus root canals and crowns."),
             ("Can I get a first opinion without travelling?", "Yes. Send a photo or your X-ray on WhatsApp for a free first opinion. An in-clinic consultation with an examination is ₹700."),
+            ("What does a dental implant cost for patients from Paschim Vihar and Meera Bagh?", "A single implant starts at ₹35,000, including the CBCT scan, guided surgery, a custom abutment and a zirconia crown, with nothing extra to pay later. Your written plan after the scan gives the exact cost."),
         ],
     },
     {
@@ -1172,7 +1173,7 @@ AREAS = [
             ("By metro", "From Kirti Nagar take the Blue Line towards Dwarka. Rajouri Garden is three stops away (Moti Nagar, Ramesh Nagar, Rajouri Garden); from Moti Nagar it is two stops. The clinic is a short walk from the station."),
             ("By car or auto", "Drive along Najafgarh Road towards Rajouri Garden. The clinic is on the first floor of J 12/26 with a lift, and parking is close by."),
         ],
-        "intro": "Patients from Kirti Nagar, Moti Nagar and Ramesh Nagar come to our Rajouri Garden clinic for dental implants, smile design with veneers, root canals and crowns. It is a short metro ride on the Blue Line.",
+        "intro": "Patients from Kirti Nagar, Moti Nagar, DLF Capital Greens and Ramesh Nagar come to our Rajouri Garden clinic for dental implants, smile design with veneers, root canals and crowns. It is a short metro ride on the Blue Line.",
         "faq": [
             ("Do you have a clinic in Kirti Nagar or Moti Nagar?", "No. The clinic is in Rajouri Garden, two or three stops away on the Blue Line."),
             ("Who does veneers and smile design?", "Dr Parul Sharma Sobti. She plans veneers, whitening and bonding digitally first, so you see the result before treatment starts."),
@@ -1204,11 +1205,12 @@ AREAS = [
             ("By metro", "From Netaji Subhash Place take the Pink Line; Rajouri Garden is four stops away (Shakurpur, Punjabi Bagh West, ESI Basaidarapur, Rajouri Garden). From Pitampura station, take the Red Line two stops to Netaji Subhash Place and change to the Pink Line."),
             ("By car", "Come down Ring Road past Punjabi Bagh to Rajouri Garden. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
         ],
-        "intro": "Patients from Pitampura, Netaji Subhash Place, Shalimar Bagh, Ashok Vihar and Wazirpur travel to our Rajouri Garden clinic for dental implants, full mouth implants and veneers. The clinic is four stops away on the Pink Line, and it is open every day.",
+        "intro": "Patients from Pitampura and Netaji Subhash Place, including Kohat Enclave, Sandesh Vihar, Lok Vihar, Harsh Vihar, Shakti Vihar, Sainik Vihar, Saraswati Vihar and Pushpanjali Enclave, travel to our Rajouri Garden clinic for dental implants, full mouth implants and veneers. The clinic is four stops away on the Pink Line, about 20 to 25 minutes by car, and it is open every day.",
         "faq": [
             ("Is Dr Sobti's Dental Care in Pitampura?", "No. The clinic is in Rajouri Garden, four stops from Netaji Subhash Place on the Pink Line, or about 8 to 9 km by road."),
             ("What is included in the implant price?", "A single implant starts at ₹35,000. That includes the CBCT scan, guided surgery, a custom abutment and a zirconia crown, with nothing extra to pay later. Your written plan after the scan gives the exact cost."),
             ("Can I get a first opinion before travelling from Pitampura?", "Yes. Send a photo or your X-ray on WhatsApp for a free first opinion, so you know what to expect before you make the trip."),
+            ("How many trips does an implant need from Kohat Enclave or Saraswati Vihar?", "Usually three main visits: a consultation with the CBCT scan, the guided surgery, and the visit for the final tooth after healing, plus short check-ups. The scan, surgery and lab are all in one clinic, so you do not travel to three different places."),
         ],
     },
 ]

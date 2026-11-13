@@ -281,6 +281,7 @@ def doctor_schema():
     return [
         {"@type": "Person", "@id": f"{SITE}/#dr-pushkar", "name": "Dr Pushkar Sobti",
          "jobTitle": "Implantologist", "honorificSuffix": "BDS, MDS",
+         "identifier": {"@type": "PropertyValue", "propertyID": "Dental Council registration", "value": "A-7647"},
          "image": f"{SITE}/assets/img/dr-pushkar-sobti-portrait.jpg",
          "worksFor": {"@id": ORG_ID}, "workLocation": work_locations("dr-pushkar"), "url": f"{IMPLANTS}/",
          "sameAs": [f"{IMPLANTS}/", LINKEDIN_PUSHKAR],
@@ -290,6 +291,7 @@ def doctor_schema():
          "knowsLanguage": ["English", "Hindi"]},
         {"@type": "Person", "@id": f"{SITE}/#dr-parul", "name": "Dr Parul Sharma Sobti",
          "jobTitle": "Aesthetic dentist", "honorificSuffix": "BDS",
+         "identifier": {"@type": "PropertyValue", "propertyID": "Dental Council registration", "value": "A-8604"},
          "image": f"{SITE}/assets/img/dr-parul-sharma-sobti.jpg",
          "worksFor": {"@id": ORG_ID}, "workLocation": work_locations("dr-parul"), "url": f"{SMILE}/", "sameAs": [f"{SMILE}/"],
          "description": "Aesthetic dentist at Dr Sobti's Dental Care, Rajouri Garden: veneers, whitening, smile makeovers and everyday dentistry.",
@@ -372,7 +374,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
     <div>
       <span class="flogo"><img src="/assets/img/logo.png" alt="{e(CLINIC['name'])}" width="560" height="167" loading="lazy"></span>
       <p><strong style="color:#fff">{e(CLINIC['name'])}</strong><br>{e(CLINIC['street'])}<br>{e(CLINIC['locality'])}, {e(CLINIC['region'])} {CLINIC['postcode']}<br><span class="muted" style="color:#9fb0cf">{e(CLINIC['landmark'])}</span></p>
-      <p>Phone <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a><br>WhatsApp <a href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a><br><a href="mailto:{CLINIC['email']}">{CLINIC['email']}</a></p>
+      <p>Phone <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a><br>WhatsApp <a href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a><br><a href="mailto:{CLINIC['email']}">{CLINIC['email']}</a><br>Open all 7 days, 10 am to 7 pm</p>
     </div>
     <div><h3>Clinic</h3><ul>
       <li><a href="/about.html">About the clinic</a></li>
@@ -395,7 +397,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
     <div><h3>Our websites</h3><ul>
       <li><a href="{IMPLANTS}/">dentalimplantsdelhi.com</a><br><small>Dr Pushkar Sobti, implants</small></li>
       <li><a href="{SMILE}/">drparulssobti.com</a><br><small>Dr Parul Sharma Sobti, smile design</small></li>
-      <li><a href="{SOCIAL['Google']}" rel="noopener">Google</a> · <a href="{SOCIAL['Instagram']}" rel="noopener">Instagram</a> · <a href="{SOCIAL['Facebook']}" rel="noopener">Facebook</a> · <a href="{SOCIAL['YouTube']}" rel="noopener">YouTube</a> · <a href="/videos.html">Videos</a></li>
+      <li><a href="{SOCIAL['Google']}" rel="noopener">Google</a> · <a href="{SOCIAL['Instagram']}" rel="noopener">Instagram</a> · <a href="{SOCIAL['Facebook']}" rel="noopener">Facebook</a> · <a href="{SOCIAL['YouTube']}" rel="noopener">YouTube</a> · <a href="{LINKEDIN_CLINIC}" rel="noopener">LinkedIn</a> · <a href="/videos.html">Videos</a></li>
     </ul></div>
   </div>
   <div class="legal"><span>© 2026 {e(CLINIC['name'])}, Rajouri Garden, New Delhi.</span><span>Information on this site is general and is not a diagnosis. Treatment is planned after an examination.</span></div>
@@ -531,6 +533,8 @@ PHOTOS = [
     ("clinic-treatment-room-2.jpg", "Second treatment room"),
     ("clinic-lounge-certificates.jpg", "Patient lounge"),
     ("clinic-lounge-sofa.jpg", "Waiting lounge"),
+    ("clinic-cbct-scanner.jpg", "CBCT 3D scanner"),
+    ("clinic-dental-lab.jpg", "In-house lab"),
 ]
 
 LAB_WORK = [
@@ -565,7 +569,7 @@ def doctors_html():
       <h3>Dr Pushkar Sobti</h3>
       <div class="role">Implantologist · Full mouth rehabilitation</div>
       <p>Dr Pushkar heads implant work at the clinic, from a single missing tooth to fixed teeth for a whole jaw on four to six implants. He has placed more than 5,000 implants since he began practice in 2009, and plans each case on the clinic's own CBCT scan with guided surgery.</p>
-      <p class="quals">BDS, MDS, PG in Oral Implantology (UCAM)</p>
+      <p class="quals">BDS, MDS, PG in Oral Implantology (UCAM) · Dental Council reg. A-7647</p>
       <p><a href="{IMPLANTS}/">His implant website →</a></p>
     </div>
   </article>
@@ -575,7 +579,7 @@ def doctors_html():
       <h3>Dr Parul Sharma Sobti</h3>
       <div class="role">Aesthetic dentist · Smile design</div>
       <p>Dr Parul looks after cosmetic and everyday dentistry: veneers, whitening, bonding and smile makeovers, along with root canals, crowns and gentle cleanings. Patients often mention how clearly she explains a treatment before starting it.</p>
-      <p class="quals">BDS · Digital Smile Design</p>
+      <p class="quals">BDS · Digital Smile Design · Dental Council reg. A-8604</p>
       <p><a href="{SMILE}/">Her smile design website →</a></p>
     </div>
   </article>

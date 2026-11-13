@@ -331,6 +331,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{canonical}">

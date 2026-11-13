@@ -787,6 +787,21 @@ def page_treatments():
 {cta_band()}"""
 
 
+LAB_MACHINES = [
+    ("lab-roland-dwx-52d-plus-mill.jpg", "Roland DWX-52D Plus dry mill: zirconia crowns and bridges"),
+    ("lab-upcera-a52w-mill.jpg", "Upcera A52W wet mill: E-max crowns and glass-ceramic veneers"),
+    ("lab-kelkar-ivorymill-5xw.jpg", "Kelkar ivoryMill 5XW wet mill: titanium parts for implant teeth"),
+    ("lab-zirconia-sintering-furnace.jpg", "Sintering furnace: hardens milled zirconia"),
+    ("lab-upcera-ceramic-furnace.jpg", "Upcera ceramic furnace: firing and glazing for a natural finish"),
+]
+
+
+def machine_grid(items):
+    return '<div class="photos tall">' + "".join(
+        f'<figure><img src="/assets/img/{f}" alt="{e(c)}, at Titanium Arts Dental Studio, Dr Sobti\'s Dental Care, Rajouri Garden" width="960" height="1200" loading="lazy"><figcaption>{e(c)}</figcaption></figure>'
+        for f, c in items) + "</div>"
+
+
 def page_lab():
     made = [
         ("Zirconia crowns and bridges", "Milled in-house on a Roland dry mill. Zirconia crowns from ₹8,000 per tooth, with a warranty.", f"{SMILE}/dental-crown-cost-delhi.html", "Crown cost"),
@@ -823,6 +838,12 @@ def page_lab():
 </div></section>
 
 <section><div class="wrap">
+  <div class="section-head"><div class="eyebrow">Equipment</div><h2>The machines in our lab</h2>
+  <p class="lead">Three milling machines and two furnaces, on the same floor as the treatment rooms.</p></div>
+  {machine_grid(LAB_MACHINES)}
+</div></section>
+
+<section class="tint"><div class="wrap">
   <div class="section-head"><div class="eyebrow">Recent work</div><h2>From our lab bench</h2>
   <p class="lead">Teeth, bridges and veneers made at Titanium Arts Dental Studio for patients of the clinic.</p></div>
   {photo_grid(LAB_WORK)}

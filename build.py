@@ -244,8 +244,7 @@ PRICES = [
     # (service, starting price in INR, unit). Only prices already published on the clinic's sites.
     ("In-clinic dental consultation with examination", 700, None),
     ("Single dental implant with crown", 35000, None),
-    ("All-on-4 full arch dental implants", 200000, "per jaw"),
-    ("All-on-6 full arch dental implants", 300000, "per jaw"),
+    ("All-on-X full arch dental implants (All-on-4 or All-on-6)", 200000, "per jaw"),
     ("Veneers", 10000, "per tooth"),
     ("Teeth whitening", 8000, None),
     ("Zirconia crown", 8000, "per tooth"),

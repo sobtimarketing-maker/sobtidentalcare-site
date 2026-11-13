@@ -789,7 +789,7 @@ def page_treatments():
 
 LAB_MACHINES = [
     ("lab-roland-dwx-52d-plus-mill.jpg", "Roland DWX-52D Plus dry mill: zirconia crowns and bridges"),
-    ("lab-upcera-a52w-mill.jpg", "Upcera A52W wet mill: E-max crowns and glass-ceramic veneers"),
+    ("lab-upcera-a52w-mill.jpg", "Upcera A52W wet mill: E-max crowns, glass-ceramic veneers and titanium pre-mill abutments"),
     ("lab-kelkar-ivorymill-5xw.jpg", "Kelkar ivoryMill 5XW wet mill: titanium parts for implant teeth"),
     ("lab-zirconia-sintering-furnace.jpg", "Sintering furnace: hardens milled zirconia"),
     ("lab-upcera-ceramic-furnace.jpg", "Upcera ceramic furnace: firing and glazing for a natural finish"),
@@ -806,7 +806,7 @@ def page_lab():
     made = [
         ("Zirconia crowns and bridges", "Milled in-house on a Roland dry mill. Zirconia crowns from ₹8,000 per tooth, with a warranty.", f"{SMILE}/dental-crown-cost-delhi.html", "Crown cost"),
         ("E-max crowns and glass-ceramic veneers", "Milled on an Upcera wet mill. E-max crowns from ₹10,000 per tooth; veneers from ₹10,000 per tooth.", f"{SMILE}/veneers.html", "Veneers"),
-        ("Teeth on implants", "Titanium parts for implant teeth milled on a Kelkar wet mill, so the crown, bridge or full-arch teeth fit the implant exactly.", f"{IMPLANTS}/dental-implant-cost-delhi/", "Implant cost"),
+        ("Teeth on implants", "Titanium parts for implant teeth, including custom abutments from pre-mill blanks, milled on our Kelkar and Upcera wet mills, so the crown, bridge or full-arch teeth fit the implant exactly.", f"{IMPLANTS}/dental-implant-cost-delhi/", "Implant cost"),
         ("Surgical guides", "3D-printed guides that carry the implant plan from the CBCT scan to the mouth.", f"{IMPLANTS}/", "Guided implants"),
         ("Temporaries and trial smiles", "PMMA temporary teeth, mock-ups and study models, printed or milled in-house.", f"{SMILE}/treatments.html", "Smile design"),
     ]

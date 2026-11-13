@@ -122,6 +122,8 @@ section.dark h2, section.dark h3 { color: #fff; }
 .photos figure { margin: 0; }
 .photos img { border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; width: 100%; }
 .photos figcaption { font-size: .86rem; color: var(--muted); margin-top: 6px; }
+.photos.tall { grid-template-columns: repeat(5, 1fr); }
+.photos.tall img { aspect-ratio: 4/5; }
 
 /* Reviews */
 .review { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; }
@@ -193,6 +195,7 @@ footer.site .legal { border-top: 1px solid rgba(255,255,255,.12); margin-top: 36
   .cta .actions { justify-content: flex-start; }
   .g3, .g4, .steps { grid-template-columns: repeat(2, 1fr); }
   .photos { grid-template-columns: repeat(2, 1fr); }
+  .photos.tall { grid-template-columns: repeat(3, 1fr); }
   footer.site .cols { grid-template-columns: 1fr 1fr; }
   .facts { grid-template-columns: repeat(2, 1fr); }
   .menu-btn { display: block; }
@@ -227,3 +230,4 @@ footer.site .legal { border-top: 1px solid rgba(255,255,255,.12); margin-top: 36
 .yt-time{position:absolute;right:.5rem;bottom:.5rem;background:rgba(0,0,0,.72);color:#fff;font-size:.75rem;padding:.1rem .4rem;border-radius:4px}
 .yt-card figcaption{display:flex;flex-direction:column;gap:.25rem;font-size:.92rem;line-height:1.4}
 .yt-card figcaption span{color:var(--muted,#5b6475);font-size:.86rem}
+@media (max-width: 600px) { .photos.tall { grid-template-columns: repeat(2, 1fr); } }

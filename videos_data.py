@@ -54,6 +54,12 @@ v("a3YGzvm1YsU","short","2026-07-21","0:26","Scared of wisdom tooth removal? A p
 v("kPXjCugNphI","short","2026-03-28","1:05","Saving fractured back teeth with root canal treatment","Painless root canal treatment saved a patient's fractured back teeth.")
 v("Vu4W2Kl_Mvs","short","2026-04-22","0:13","Gentler gum treatment with the Woodpecker PT-A","Periodontal (gum) cleaning with a newer, gentler ultrasonic system.")
 v("Q4XgYfekrpw","short","2026-09-28","0:40","Air polishing and pain-free cleaning: Rahul's story","A patient travels from Greater Noida for pain-free dental air polishing and cleaning.")
+# --- implants: November 2026 (on dentalimplantsdelhi.com/videos/; the long bone grafting video has its own page there)
+v("LQ7iloK2d2s","short","2026-11-05","0:26","Immediate dental implants: same-day teeth explained","When an implant can go in on the day the tooth comes out, and what decides it.")
+v("4SWuUtidiY0","video","2026-11-06","","Bone grafting for dental implants: is it necessary?","Most patients do not need a bone graft; the CBCT scan shows when one is needed.")
+v("3MrBCvGjHCM","short","2026-11-09","0:40","Why a CBCT scan is important for dental implants","A 3D scan shows bone, nerve and sinus so the implant can be planned before surgery.")
+v("W6RcpeG_Wi8","short","2026-11-10","0:56","Full-mouth implants for a medically compromised patient","A full-mouth case planned with the patient's physician, in Hindi.", "hi")
+v("WzzNP5tw_uk","short","2026-11-12","0:19","Does a dental implant feel like a real tooth?","Dr Pushkar Sobti answers in Hindi.", "hi")
 # --- clinic (sobtidentalcare.com)
 v("thmGh27-57I","short","2026-03-20","0:56","Our story: from 288 to 4,500 square feet","Dr Pushkar Sobti and Dr Parul Sobti on how the Rajouri Garden clinic grew.")
 v("lDd7hbX0E9k","short","2026-07-24","0:54","Clinic tour: Dr Sobti's Dental Care, Rajouri Garden","Reception, treatment rooms and the digital dentistry set-up.")
@@ -64,9 +70,14 @@ v("kRn6ixupOLc","short","2026-05-06","0:25","Our Roland DWX-52D Plus milling mac
 v("nkUCoO-IgKk","short","2026-03-11","0:46","A zirconia bridge made in-house, scan to delivery","Intraoral scan, design, milling, sintering, staining and glazing of a monolithic zirconia bridge.")
 
 def iso(d):
+    if not d:
+        return ""
     m, s = d.split(":"); return f"PT{int(m)}M{int(s)}S" if int(m) else f"PT{int(s)}S"
 
 def obj(x, page_url):
+    return {k: v for k, v in _obj(x).items() if v}
+
+def _obj(x):
     return {"@type": "VideoObject", "name": x["title"], "description": x["summary"],
             "thumbnailUrl": f"https://i.ytimg.com/vi/{x['id']}/hqdefault.jpg",
             "uploadDate": x["date"] + "T10:00:00+05:30", "duration": iso(x["dur"]),

@@ -116,6 +116,14 @@ def day_list(spec):
 
 FONTS = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap"
 
+# Named links to the main treatment pages, always visible under the header (Dr, 16 Nov 2026).
+QUICK_NAV = [
+    ("same-day-dental-implants-rajouri-garden.html", "Same-day implants"),
+    ("all-on-x-full-mouth-implants-rajouri-garden.html", "All-on-X full mouth"),
+    ("implant-crowns-bridges-rajouri-garden.html", "Implant crowns &amp; bridges"),
+    ("same-day-dentistry-rajouri-garden.html", "Same-day dentistry"),
+]
+
 NAV = [
     ("index.html", "Home"),
     ("about.html", "About us"),
@@ -326,6 +334,8 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
                "inLanguage": "en-IN", "dateModified": UPDATED}
     graph = [org_schema(), clinic_schema(), *doctor_schema(), website_schema(), webpage, *extra_ld]
     ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
+    quick = "".join(
+        f'<a href="/{href}"{" aria-current=\"page\"" if href == path else ""}>{label}</a>' for href, label in QUICK_NAV)
     nav = "".join(
         f'<a href="{"/" if href == "index.html" else "/" + href}"{" aria-current=\"page\"" if href == current else ""}>{label}</a>' for href, label in NAV)
     return f"""<!doctype html>
@@ -365,7 +375,9 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
   <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav class="main" id="nav" aria-label="Main">{nav}</nav>
   <a class="btn" href="/booking.html">Book a visit</a>
-</div></header>
+</div>
+<nav class="quick" aria-label="Popular treatments"><div class="wrap">{quick}</div></nav>
+</header>
 <main id="main">
 {body}
 </main>

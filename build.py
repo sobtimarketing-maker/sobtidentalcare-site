@@ -434,7 +434,9 @@ TREATMENT_GROUPS = [
             ("Dental implants in Delhi", f"{IMPLANTS}/", "Dr Pushkar Sobti"),
             ("Single tooth implant in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", ""),
             ("Dental implant cost in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", "prices"),
-            ("Full mouth implants (All-on-4, All-on-X)", f"{IMPLANTS}/full-mouth-dental-implants-delhi/", ""),
+            ("Full mouth implants (All-on-X)", f"{IMPLANTS}/full-mouth-dental-implants-delhi/", "with case photos"),
+            ("Same-day dental implants", f"{IMPLANTS}/same-day-dental-implants-delhi/", ""),
+            ("Implant crowns, bridges and full-arch teeth", f"{IMPLANTS}/implant-prosthesis-delhi/", ""),
             ("Basal implants", f"{IMPLANTS}/basal-implants-delhi/", ""),
             ("Bone grafting and sinus lift", f"{IMPLANTS}/bone-grafting-for-dental-implants-delhi/", ""),
             ("Implant consultation: what happens", f"{IMPLANTS}/blog/dental-implant-consultation/", "guide"),
@@ -460,6 +462,7 @@ TREATMENT_GROUPS = [
         "items": [
             ("Root canal (RCT) cost in Delhi", f"{SMILE}/root-canal-cost-delhi.html", ""),
             ("Tooth cap and zirconia crown price", f"{SMILE}/dental-crown-cost-delhi.html", ""),
+            ("Same-day crowns and one-visit treatments", f"{SMILE}/same-day-dentistry-delhi.html", ""),
             ("Teeth cleaning cost (air polishing)", f"{SMILE}/teeth-cleaning-cost-delhi.html", ""),
             ("Wisdom tooth removal", "/booking.html", ""),
             ("Fillings, extractions and dentures", "/booking.html", ""),

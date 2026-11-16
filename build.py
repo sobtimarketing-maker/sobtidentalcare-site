@@ -376,6 +376,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
       <p>Phone <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a><br>WhatsApp <a href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a><br><a href="mailto:{CLINIC['email']}">{CLINIC['email']}</a><br>Open all 7 days, 10 am to 7 pm</p>
     </div>
     <div><h3>Clinic</h3><ul>
+      <li><a href="/">Dental clinic in Rajouri Garden</a></li>
       <li><a href="/about.html">About the clinic</a></li>
       <li><a href="/about.html#doctors">Our dentists</a></li>
       <li><a href="/reviews.html">Patient reviews</a></li>
@@ -639,8 +640,8 @@ def page_home():
     return f"""<section class="hero"><div class="wrap">
   <div>
     <div class="eyebrow">Dr Sobti's Dental Care · family practice since 1982</div>
-    <h1>Your dentist in Rajouri Garden, <em>West Delhi</em></h1>
-    <p class="lead">Dental care that is explained before it begins. Dr Sobti's Dental Care is a family-run dental clinic in Rajouri Garden led by implantologist Dr Pushkar Sobti and aesthetic dentist Dr Parul Sharma Sobti. Implants, smile design and everyday dentistry, with 3D scanning and our own dental lab in the same building.</p>
+    <h1>Dental clinic in Rajouri Garden, <em>West Delhi</em></h1>
+    <p class="lead">Dr Sobti's Dental Care is a family-run dental clinic in Rajouri Garden, J 12/26 above Rajmandir, open all seven days. Your dentist here explains every step before treatment begins. The clinic is led by implantologist Dr Pushkar Sobti and aesthetic dentist Dr Parul Sharma Sobti. Implants, smile design and everyday dentistry, with 3D scanning and our own dental lab in the same building.</p>
     <div class="actions"><a class="btn" href="/booking.html">Book a visit</a><a class="btn ghost" href="tel:{CLINIC['phone_tel']}" data-track="call">Call {CLINIC['phone_display']}</a></div>
     {facts}
   </div>
@@ -715,7 +716,7 @@ def page_about():
   <li><h3>Treatment</h3><p>Done in our rooms, with crowns and teeth made in our own lab.</p></li>
 </ol>"""
     return pagehead("About Dr Sobti's Dental Care", "About us",
-                    "A dental clinic in Rajouri Garden run by two dentists, Dr Pushkar Sobti and Dr Parul Sharma Sobti. A family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH) opened it in Vishnu Garden; Dr Pushkar joined in 2009 and opened this Rajouri Garden dental clinic, on the first floor of J 12/26, in 2024.") + f"""
+                    "A <a href=\"/\">dental clinic in Rajouri Garden</a> run by two dentists, Dr Pushkar Sobti and Dr Parul Sharma Sobti. A family clinic since 1982, when Dr Rajesh Sobti (MBBS, DCH) opened it in Vishnu Garden; Dr Pushkar joined in 2009 and opened this Rajouri Garden dental clinic, on the first floor of J 12/26, in 2024.") + f"""
 <section id="doctors"><div class="wrap">
   <div class="section-head"><div class="eyebrow">Your dentists</div><h2>Meet the doctors</h2></div>
   {doctors_html()}
@@ -921,7 +922,7 @@ def page_contact():
   </div>
 </div></section>
 <section><div class="wrap" style="max-width:860px">
-  <div class="section-head"><h2>Getting here</h2><p class="lead">We see patients from Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, <a href="/dentist-tilak-nagar.html">Tilak Nagar</a>, <a href="/dentist-janakpuri.html">Janakpuri</a>, <a href="/dentist-vikaspuri.html">Vikaspuri</a>, <a href="/dentist-paschim-vihar.html">Paschim Vihar</a> and <a href="/dentist-west-delhi.html">across West Delhi</a>.</p></div>
+  <div class="section-head"><h2>Getting here</h2><p class="lead">Our <a href="/">dental clinic in Rajouri Garden</a> sees patients from Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, <a href="/dentist-tilak-nagar.html">Tilak Nagar</a>, <a href="/dentist-janakpuri.html">Janakpuri</a>, <a href="/dentist-vikaspuri.html">Vikaspuri</a>, <a href="/dentist-paschim-vihar.html">Paschim Vihar</a> and <a href="/dentist-west-delhi.html">across West Delhi</a>.</p></div>
   {faq}
 </div></section>"""
 
@@ -1278,7 +1279,7 @@ def page_area(a):
     return pagehead(f"{e(a['keyword'])}: Dr Sobti's Dental Care, Rajouri Garden", f"Patients from {a['area']}",
                     e(a["intro"])) + f"""
 <section><div class="wrap">
-  <div class="section-head"><h2>Getting here from {e(a['area'])}</h2><p class="lead">The clinic is {a['distance']} from {e(a['area'])}, in Rajouri Garden. It is open every day, 10 am to 7 pm, by appointment.</p></div>
+  <div class="section-head"><h2>Getting here from {e(a['area'])}</h2><p class="lead">Our <a href="/">dental clinic in Rajouri Garden</a> is {a['distance']} from {e(a['area'])}. It is open every day, 10 am to 7 pm, by appointment.</p></div>
   <div class="grid g2">{route}</div>
 </div></section>
 <section class="tint"><div class="wrap">
@@ -1330,8 +1331,8 @@ def page_404():
 
 
 PAGES = [
-    ("index.html", "Dentist in Rajouri Garden, West Delhi | Dr Sobti's Dental Care",
-     "Dr Sobti's Dental Care, J 12/26 Rajouri Garden, New Delhi. Dental implants, veneers, whitening, root canal and family dentistry. Open 7 days, 10 am to 7 pm. Call +91 87449 85976.",
+    ("index.html", "Dental Clinic in Rajouri Garden, West Delhi | Dr Sobti's Dental Care",
+     "Dental clinic in Rajouri Garden: Dr Sobti's Dental Care, J 12/26, above Rajmandir, New Delhi. Dental implants, veneers, whitening, root canal and family dentistry. Open 7 days, 10 am to 7 pm. Call +91 87449 85976.",
      page_home, "index.html", [faq_schema(HOME_FAQ)], 1.0),
     ("about.html", "About Us and Our Dentists | Dr Sobti's Dental Care, Rajouri Garden",
      "Meet Dr Pushkar Sobti (implantologist) and Dr Parul Sharma Sobti (aesthetic dentist), and see inside the clinic in Rajouri Garden: CBCT, dental microscope and in-house lab.",
@@ -1348,13 +1349,13 @@ PAGES = [
     ("videos.html", "Videos: Clinic Tour, Patient Stories and Our Lab | Dr Sobti's Dental Care",
      "Watch a tour of Dr Sobti's Dental Care, Rajouri Garden, patient testimonials, and crowns and bridges made in our in-house lab, plus implant and smile makeover videos.",
      page_videos, "about.html", [crumbs_schema("videos.html", "Videos")] + video_ld([i for _, _, l in CLINIC_VIDEOS for i in l], "videos.html"), 0.6),
-    ("contact.html", "Dental Clinic in Rajouri Garden: Timings and Directions | Dr Sobti's",
+    ("contact.html", "Contact, Timings and Directions | Dr Sobti's Dental Care, Rajouri Garden",
      "J 12/26, First Floor, Rajouri Garden, New Delhi 110027, above Rajmandir. Open 7 days, 10 am to 7 pm. Call +91 87449 85976 or WhatsApp +91 80767 77307.",
      page_contact, "contact.html", [crumbs_schema("contact.html", "Contact"), faq_schema(CONTACT_FAQ)], 0.8),
     ("booking.html", "Book an Appointment | Dr Sobti's Dental Care, Rajouri Garden",
      "Book a dental appointment at Dr Sobti's Dental Care, Rajouri Garden, on WhatsApp or by phone. Free first opinion on WhatsApp; in-clinic consultation ₹700.",
      page_booking, "booking.html", [crumbs_schema("booking.html", "Book")], 0.7),
-    ("faq.html", "Dentist in Rajouri Garden: Clinic Facts, Prices and FAQ | Dr Sobti's",
+    ("faq.html", "Clinic Facts, Prices and FAQ | Dr Sobti's Dental Care, Rajouri Garden",
      "Timings, address, doctors, implant and treatment prices, and answers to common questions about Dr Sobti's Dental Care, J 12/26 Rajouri Garden, New Delhi. Open 7 days.",
      page_faq, "contact.html", [crumbs_schema("faq.html", "FAQ"), faq_schema(FAQ_ALL)], 0.8),
 ]

@@ -11,6 +11,7 @@ import shutil
 from pathlib import Path
 
 from videos_data import V as VIDEOS, obj as video_obj, card as video_card, JS as VIDEO_JS
+from treatment_pages import TREATMENT_PAGES
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "_site"
@@ -40,7 +41,7 @@ CLINIC = {
 ADDRESS_LINE = f'{CLINIC["street"]}, {CLINIC["locality"]}, {CLINIC["region"]} {CLINIC["postcode"]}'
 MAP_EMBED = "https://maps.google.com/maps?q=Dr+Sobti%27s+Dental+Care,+J+12/26+Rajouri+Garden,+New+Delhi+110027&z=16&output=embed"
 IMPLANTS = "https://dentalimplantsdelhi.com"
-UPDATED = "2026-11-09"  # change when facts on the site change; shown to AI search as dateModified
+UPDATED = "2026-11-16"  # change when facts on the site change; shown to AI search as dateModified
 LINKEDIN_PUSHKAR = "https://www.linkedin.com/in/pushkar-sobti-159699200/"
 LINKEDIN_CLINIC = "https://www.linkedin.com/company/sobti-dental-clinic/"
 SMILE = "https://drparulssobti.com"
@@ -114,6 +115,14 @@ def day_list(spec):
 
 
 FONTS = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap"
+
+# Named links to the main treatment pages, always visible under the header (Dr, 16 Nov 2026).
+QUICK_NAV = [
+    ("same-day-dental-implants-rajouri-garden.html", "Same-day implants"),
+    ("all-on-x-full-mouth-implants-rajouri-garden.html", "All-on-X full mouth"),
+    ("implant-crowns-bridges-rajouri-garden.html", "Implant crowns &amp; bridges"),
+    ("same-day-dentistry-rajouri-garden.html", "Same-day dentistry"),
+]
 
 NAV = [
     ("index.html", "Home"),
@@ -325,6 +334,8 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
                "inLanguage": "en-IN", "dateModified": UPDATED}
     graph = [org_schema(), clinic_schema(), *doctor_schema(), website_schema(), webpage, *extra_ld]
     ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
+    quick = "".join(
+        f'<a href="/{href}"{" aria-current=\"page\"" if href == path else ""}>{label}</a>' for href, label in QUICK_NAV)
     nav = "".join(
         f'<a href="{"/" if href == "index.html" else "/" + href}"{" aria-current=\"page\"" if href == current else ""}>{label}</a>' for href, label in NAV)
     return f"""<!doctype html>
@@ -364,7 +375,9 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
   <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav class="main" id="nav" aria-label="Main">{nav}</nav>
   <a class="btn" href="/booking.html">Book a visit</a>
-</div></header>
+</div>
+<nav class="quick" aria-label="Popular treatments"><div class="wrap">{quick}</div></nav>
+</header>
 <main id="main">
 {body}
 </main>
@@ -434,9 +447,9 @@ TREATMENT_GROUPS = [
             ("Dental implants in Delhi", f"{IMPLANTS}/", "Dr Pushkar Sobti"),
             ("Single tooth implant in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", ""),
             ("Dental implant cost in Delhi", f"{IMPLANTS}/dental-implant-cost-delhi/", "prices"),
-            ("Full mouth implants (All-on-X)", f"{IMPLANTS}/full-mouth-dental-implants-delhi/", "with case photos"),
-            ("Same-day dental implants", f"{IMPLANTS}/same-day-dental-implants-delhi/", ""),
-            ("Implant crowns, bridges and full-arch teeth", f"{IMPLANTS}/implant-prosthesis-delhi/", ""),
+            ("All-on-X full mouth implants", "/all-on-x-full-mouth-implants-rajouri-garden.html", "with case photos"),
+            ("Same-day dental implants", "/same-day-dental-implants-rajouri-garden.html", ""),
+            ("Implant crowns, bridges and full-arch teeth", "/implant-crowns-bridges-rajouri-garden.html", ""),
             ("Basal implants", f"{IMPLANTS}/basal-implants-delhi/", ""),
             ("Bone grafting and sinus lift", f"{IMPLANTS}/bone-grafting-for-dental-implants-delhi/", ""),
             ("Implant consultation: what happens", f"{IMPLANTS}/blog/dental-implant-consultation/", "guide"),
@@ -462,7 +475,7 @@ TREATMENT_GROUPS = [
         "items": [
             ("Root canal (RCT) cost in Delhi", f"{SMILE}/root-canal-cost-delhi.html", ""),
             ("Tooth cap and zirconia crown price", f"{SMILE}/dental-crown-cost-delhi.html", ""),
-            ("Same-day crowns and one-visit treatments", f"{SMILE}/same-day-dentistry-delhi.html", ""),
+            ("Same-day crowns and one-visit treatments", "/same-day-dentistry-rajouri-garden.html", ""),
             ("Teeth cleaning cost (air polishing)", f"{SMILE}/teeth-cleaning-cost-delhi.html", ""),
             ("Wisdom tooth removal", "/booking.html", ""),
             ("Fillings, extractions and dentures", "/booking.html", ""),
@@ -754,7 +767,10 @@ def page_about():
 def page_treatments():
     rows = [
         ("Dental implants", "Single tooth, several teeth or full mouth (All-on-4, All-on-X). Planned on CBCT, guided surgery.", f"{IMPLANTS}/dental-implant-cost-delhi/", "Implant costs"),
-        ("Full mouth implants", "Fixed teeth for a whole jaw on four to six implants, for people with loose dentures or many failing teeth.", f"{IMPLANTS}/", "dentalimplantsdelhi.com"),
+        ("All-on-X full mouth implants", "Fixed teeth for a whole jaw on four to six implants, for people with loose dentures or many failing teeth. From ₹2,00,000 per jaw.", "/all-on-x-full-mouth-implants-rajouri-garden.html", "All-on-X"),
+        ("Same-day dental implants", "An implant and a fixed temporary tooth in one visit, when the bone allows.", "/same-day-dental-implants-rajouri-garden.html", "Same-day implants"),
+        ("Teeth on implants", "Implant crowns, bridges and full arches made in our own lab.", "/implant-crowns-bridges-rajouri-garden.html", "Implant teeth"),
+        ("Same-day dentistry", "Crowns in one visit, single-sitting root canal and one-visit whitening.", "/same-day-dentistry-rajouri-garden.html", "Same-day dentistry"),
         ("Basal implants", "An option for some patients with thin or low bone.", f"{IMPLANTS}/basal-implants-delhi/", "Basal implants"),
         ("Veneers", "Thin porcelain or composite facings that change the colour and shape of front teeth. From ₹10,000 per tooth.", f"{SMILE}/veneers.html", "Veneers"),
         ("Teeth whitening", "In-clinic whitening, from ₹8,000 depending on the case.", f"{SMILE}/teeth-whitening-cost-delhi.html", "Whitening cost"),
@@ -1328,6 +1344,64 @@ def page_west_delhi():
 {cta_band()}"""
 
 
+def page_treatment(t):
+    """Hub treatment page (local intent); the in-depth guide is on the doctor's site."""
+    secs = "".join(f"<h2>{h}</h2>{body}" for h, body in t["sections"])
+    facts = "".join(f"<li><strong>{e(k)}</strong>: {e(v)}</li>" for k, v in t["facts"])
+    steps = "".join(f"<li><h3>{e(a)}</h3><p class=\"muted\">{e(b)}</p></li>" for a, b in t["steps"])
+    hero_f, hero_c = t["hero"]
+    photos = (f"""<section class="tint"><div class="wrap">
+  <div class="section-head"><div class="eyebrow">Our work</div><h2>{e(t['photos_title'])}</h2>
+  <p class="lead">Made at Titanium Arts Dental Studio, our in-house lab, for patients of the clinic.</p></div>
+  {photo_grid(t['photos'])}
+</div></section>""" if t["photos"] else "")
+    machines = (f"""<section><div class="wrap">
+  <div class="section-head"><div class="eyebrow">Equipment</div><h2>The machines in our lab</h2>
+  <p class="lead">Three milling machines and two furnaces, on the same floor as the treatment rooms. <a href="/lab.html">See the lab</a>.</p></div>
+  {machine_grid(LAB_MACHINES)}
+</div></section>""" if t["machines"] else "")
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in t["faq"])
+    g_url, g_label, g_text = t["guide"]
+    return pagehead(e(t["h1"]), t["crumb"], e(t["lead"])) + f"""
+<section><div class="wrap grid g2">
+  <div class="prose">{secs}</div>
+  <div>
+    <figure style="margin:0 0 22px"><img src="/assets/img/{hero_f}" alt="{e(hero_c)}" width="1200" height="900" loading="lazy" style="width:100%;height:auto;border-radius:16px"><figcaption class="muted">{e(hero_c)}</figcaption></figure>
+    <div class="pricebox"><h3>At a glance</h3><ul>{facts}</ul>
+    <p class="muted" style="margin:12px 0 0">Every plan comes with a written estimate after your examination.</p></div>
+  </div>
+</div></section>
+<section class="tint"><div class="wrap">
+  <div class="section-head"><div class="eyebrow">At our clinic</div><h2>How it works, step by step</h2></div>
+  <ol class="steps">{steps}</ol>
+</div></section>
+{photos}
+{machines}
+<section class="tint"><div class="wrap">
+  <div class="section-head"><div class="eyebrow">On video</div><h2>Watch it explained</h2></div>
+  {video_grid(t['videos'])}
+</div></section>
+<section><div class="wrap grid g2">
+  <article class="card"><h3>{e(g_label)}</h3><p class="muted">{e(g_text)}</p><p><a href="{g_url}" rel="noopener">Open the full guide →</a></p></article>
+  <article class="card"><h3>Free first opinion</h3><p class="muted">Send a photo or your X-ray on WhatsApp and the doctors will tell you what is possible before you visit.</p><p><a href="{wa('Hello, I would like to ask about ' + t['crumb'].lower() + '.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']} →</a></p></article>
+</div></section>
+<section class="tint"><div class="wrap">{visit_html()}</div></section>
+<section><div class="wrap" style="max-width:860px">
+  <div class="section-head"><h2>Questions</h2></div>
+  {faq}
+</div></section>
+{VIDEO_JS}
+{cta_band()}"""
+
+
+def treatment_ld(t):
+    name, alt, price = t["procedure"]
+    proc = {"@type": "MedicalProcedure", "name": name, "alternateName": alt, "url": f"{SITE}/{t['slug']}",
+            "image": [f"{SITE}/assets/img/{t['hero'][0]}"] + [f"{SITE}/assets/img/{f}" for f, _ in t["photos"]],
+            "offers": {"@type": "Offer", "priceCurrency": "INR", "price": str(price), "offeredBy": {"@id": f"{SITE}/#clinic"}}}
+    return [crumbs_schema(t["slug"], t["crumb"]), faq_schema(t["faq"]), proc] + video_ld(t["videos"], t["slug"])
+
+
 def page_404():
     return f"""<section class="pagehead"><div class="wrap"><h1>Page not found</h1>
 <p class="lead">The page you were looking for is not here. Try the <a href="/">home page</a>, our <a href="/treatments.html">treatments</a> or <a href="/contact.html">contact details</a>.</p></div></section>"""
@@ -1372,6 +1446,9 @@ for _a in AREAS:
                   f"Dentist for {_a['area']} patients: Dr Sobti's Dental Care, J 12/26 Rajouri Garden, {_a['distance']} away. Implants, smile design, root canals. Open 7 days, 10 am to 7 pm.",
                   (lambda a=_a: page_area(a)), "contact.html",
                   [crumbs_schema(f"{_a['slug']}.html", f"Patients from {_a['area']}"), faq_schema(_a["faq"])], 0.6))
+
+for _t in TREATMENT_PAGES:
+    PAGES.append((_t["slug"], _t["title"], _t["desc"], (lambda t=_t: page_treatment(t)), "treatments.html", treatment_ld(_t), 0.8))
 
 
 if LIVE_BRANCHES:
@@ -1452,6 +1529,10 @@ def main():
 - [About and doctors]({SITE}/about.html)
 - [Treatments]({SITE}/treatments.html): every treatment, with links to the detailed pages
 - [In-house lab, Titanium Arts Dental Studio]({SITE}/lab.html)
+- [Same-day dental implants in Rajouri Garden]({SITE}/same-day-dental-implants-rajouri-garden.html)
+- [All-on-X full mouth implants in Rajouri Garden, with case photos]({SITE}/all-on-x-full-mouth-implants-rajouri-garden.html)
+- [Implant crowns, bridges and full-arch teeth in Rajouri Garden]({SITE}/implant-crowns-bridges-rajouri-garden.html)
+- [Same-day dentistry in Rajouri Garden: crowns in one visit]({SITE}/same-day-dentistry-rajouri-garden.html)
 - [Videos: clinic tour, patient stories, lab work]({SITE}/videos.html) · implant videos: {IMPLANTS}/videos/ · smile makeover videos: {SMILE}/videos.html
 - [Patient reviews]({SITE}/reviews.html)
 - [Contact and timings]({SITE}/contact.html)

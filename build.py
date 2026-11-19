@@ -135,9 +135,13 @@ NAV = [
 e = html.escape
 
 
-def wa(text):
+WA_HELLO = "Hi, I found you on Google."  # lets the front desk log website chats as Google (Dr, 19 Nov 2026)
+
+
+def wa(text=""):
     from urllib.parse import quote
-    return f'{CLINIC["wa_link"]}?text={quote(text)}'
+    msg = f"{WA_HELLO} {text}".strip()
+    return f'{CLINIC["wa_link"]}?text={quote(msg)}'
 
 
 WA_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3Z"/></svg>'
@@ -368,7 +372,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
 <a class="skip" href="#main">Skip to content</a>
 <div class="topbar"><div class="wrap">
   <span class="addr">{e(CLINIC['street'])}, New Delhi 110027 · Open all 7 days, 10 am to 7 pm</span>
-  <span>Call <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a> · WhatsApp <a href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a></span>
+  <span>Call <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a> · WhatsApp <a href="{wa()}" data-track="whatsapp">{CLINIC['wa_display']}</a></span>
 </div></div>
 <header class="site"><div class="wrap">
   <a class="brand" href="/" aria-label="{e(CLINIC['name'])}, home"><img src="/assets/img/logo.png" alt="{e(CLINIC['name'])}" width="560" height="167"></a>
@@ -386,7 +390,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
     <div>
       <span class="flogo"><img src="/assets/img/logo.png" alt="{e(CLINIC['name'])}" width="560" height="167" loading="lazy"></span>
       <p><strong style="color:#fff">{e(CLINIC['name'])}</strong><br>{e(CLINIC['street'])}<br>{e(CLINIC['locality'])}, {e(CLINIC['region'])} {CLINIC['postcode']}<br><span class="muted" style="color:#9fb0cf">{e(CLINIC['landmark'])}</span></p>
-      <p>Phone <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a><br>WhatsApp <a href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a><br><a href="mailto:{CLINIC['email']}">{CLINIC['email']}</a><br>Open all 7 days, 10 am to 7 pm</p>
+      <p>Phone <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a><br>WhatsApp <a href="{wa()}" data-track="whatsapp">{CLINIC['wa_display']}</a><br><a href="mailto:{CLINIC['email']}">{CLINIC['email']}</a><br>Open all 7 days, 10 am to 7 pm</p>
     </div>
     <div><h3>Clinic</h3><ul>
       <li><a href="/">Dental clinic in Rajouri Garden</a></li>
@@ -415,7 +419,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
   </div>
   <div class="legal"><span>© 2026 {e(CLINIC['name'])}, Rajouri Garden, New Delhi.</span><span>Information on this site is general and is not a diagnosis. Treatment is planned after an examination.</span></div>
 </div></footer>
-<a class="wa-float" href="{wa('Hello, I would like to book an appointment at Dr Sobti' + chr(39) + 's Dental Care.')}" data-track="whatsapp" aria-label="Chat on WhatsApp">{WA_ICON}<span>WhatsApp us</span></a>
+<a class="wa-float" href="{wa('I would like to book an appointment at Dr Sobti' + chr(39) + 's Dental Care.')}" data-track="whatsapp" aria-label="Chat on WhatsApp">{WA_ICON}<span>WhatsApp us</span></a>
 <script>
 (function(){{var b=document.querySelector('.menu-btn'),n=document.getElementById('nav');if(b&&n)b.addEventListener('click',function(){{var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)}});
 document.addEventListener('click',function(ev){{var a=ev.target.closest&&ev.target.closest('[data-track]');if(a&&window.gtag)gtag('event',a.getAttribute('data-track')+'_click',{{link_url:a.href}})}});}})();
@@ -608,7 +612,7 @@ def visit_html():
     <dl class="info">
       <div><dt>Address</dt><dd><strong>{e(CLINIC['name'])}</strong><br>{e(CLINIC['street'])}<br>{e(CLINIC['locality'])}, {e(CLINIC['region'])} {CLINIC['postcode']}<br><span class="muted">{e(CLINIC['landmark'])}</span></dd></div>
       <div><dt>Phone</dt><dd><a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a></dd></div>
-      <div><dt>WhatsApp</dt><dd><a href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a></dd></div>
+      <div><dt>WhatsApp</dt><dd><a href="{wa()}" data-track="whatsapp">{CLINIC['wa_display']}</a></dd></div>
       <div><dt>Timings</dt><dd><table class="hours"><tbody>
         <tr><td>Monday to Saturday</td><td>10:00 am – 7:00 pm</td></tr>
         <tr><td>Sunday</td><td>10:00 am – 7:00 pm</td></tr>
@@ -628,7 +632,7 @@ def social_buttons():
 def cta_band():
     return f"""<section><div class="wrap"><div class="cta">
   <div><h2>Not sure what you need?</h2><p>Send a photo or your X-ray on WhatsApp for a free first opinion, or book an in-clinic consultation (₹700) with an examination and a written plan.</p></div>
-  <div class="actions"><a class="btn gold" href="{wa('Hello, I would like a free first opinion on my teeth.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']}</a><a class="btn light" href="tel:{CLINIC['phone_tel']}" data-track="call">Call {CLINIC['phone_display']}</a></div>
+  <div class="actions"><a class="btn gold" href="{wa('I would like a free first opinion on my teeth.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']}</a><a class="btn light" href="tel:{CLINIC['phone_tel']}" data-track="call">Call {CLINIC['phone_display']}</a></div>
 </div></div></section>"""
 
 
@@ -936,7 +940,7 @@ def page_contact():
   <p class="actions" style="margin-bottom:24px">{social_buttons()}</p>
   <div class="grid g3">
     <div class="card"><h3>Call</h3><p>For appointments and emergencies.</p><p><a class="btn" href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a></p></div>
-    <div class="card"><h3>WhatsApp</h3><p>Send photos or X-rays for a free first opinion.</p><p><a class="btn gold" href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a></p></div>
+    <div class="card"><h3>WhatsApp</h3><p>Send photos or X-rays for a free first opinion.</p><p><a class="btn gold" href="{wa()}" data-track="whatsapp">{CLINIC['wa_display']}</a></p></div>
     <div class="card"><h3>Email</h3><p>For reports, records and anything that is not urgent.</p><p><a class="btn ghost" href="mailto:{CLINIC['email']}">{CLINIC['email']}</a></p></div>
   </div>
 </div></section>
@@ -977,7 +981,7 @@ def page_booking():
 <script>
 document.getElementById('book').addEventListener('submit',function(ev){{ev.preventDefault();var f=ev.target;
 if(!f.name.value.trim()||!f.phone.value.trim()){{alert('Please add your name and phone number.');return}}
-var t='Hello, I would like to book an appointment at Dr Sobti\\'s Dental Care.\\nName: '+f.name.value+'\\nPhone: '+f.phone.value+'\\nAbout: '+f.reason.value+(f.when.value?'\\nPreferred time: '+f.when.value:'')+(f.note.value?'\\nNote: '+f.note.value:'');
+var t='Hi, I found you on Google. I would like to book an appointment at Dr Sobti\\'s Dental Care.\\nName: '+f.name.value+'\\nPhone: '+f.phone.value+'\\nAbout: '+f.reason.value+(f.when.value?'\\nPreferred time: '+f.when.value:'')+(f.note.value?'\\nNote: '+f.note.value:'');
 if(window.gtag)gtag('event','booking_whatsapp',{{reason:f.reason.value}});
 window.location.href='{CLINIC['wa_link']}?text='+encodeURIComponent(t)}});
 </script>"""
@@ -1082,7 +1086,7 @@ def page_clinics():
     return pagehead("Our clinics", "Our clinics", BRAND["story"]) + f"""
 <section><div class="wrap">
   <div class="grid g2">{''.join(cards)}</div>
-  <p style="margin-top:22px">For implants, smile design and anything that needs a CBCT scan, most patients are seen at the Rajouri Garden clinic. <a href="/booking.html">Book a visit</a> or <a href="{CLINIC['wa_link']}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']}</a> and we will suggest the right clinic.</p>
+  <p style="margin-top:22px">For implants, smile design and anything that needs a CBCT scan, most patients are seen at the Rajouri Garden clinic. <a href="/booking.html">Book a visit</a> or <a href="{wa()}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']}</a> and we will suggest the right clinic.</p>
 </div></section>
 {cta_band()}"""
 
@@ -1104,7 +1108,7 @@ def page_branch(b):
     <p style="margin-top:22px" class="actions"><a class="btn" href="{b['maps']}" rel="noopener">Get directions</a> <a class="btn ghost" href="/clinics.html">All our clinics</a></p>
   </div>
 </div>
-<p style="margin-top:22px">Implant surgery, CBCT scans and lab work are done at our main clinic, <a href="/">{e(CLINIC['name'])} in Rajouri Garden</a>, open all 7 days, 10 am to 7 pm. Call <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a> or WhatsApp <a href="{CLINIC['wa_link']}" data-track="whatsapp">{CLINIC['wa_display']}</a>.</p>
+<p style="margin-top:22px">Implant surgery, CBCT scans and lab work are done at our main clinic, <a href="/">{e(CLINIC['name'])} in Rajouri Garden</a>, open all 7 days, 10 am to 7 pm. Call <a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a> or WhatsApp <a href="{wa()}" data-track="whatsapp">{CLINIC['wa_display']}</a>.</p>
 </div></section>"""
 
 
@@ -1383,7 +1387,7 @@ def page_treatment(t):
 </div></section>
 <section><div class="wrap grid g2">
   <article class="card"><h3>{e(g_label)}</h3><p class="muted">{e(g_text)}</p><p><a href="{g_url}" rel="noopener">Open the full guide →</a></p></article>
-  <article class="card"><h3>Free first opinion</h3><p class="muted">Send a photo or your X-ray on WhatsApp and the doctors will tell you what is possible before you visit.</p><p><a href="{wa('Hello, I would like to ask about ' + t['crumb'].lower() + '.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']} →</a></p></article>
+  <article class="card"><h3>Free first opinion</h3><p class="muted">Send a photo or your X-ray on WhatsApp and the doctors will tell you what is possible before you visit.</p><p><a href="{wa('I would like to ask about ' + t['crumb'].lower() + '.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']} →</a></p></article>
 </div></section>
 <section class="tint"><div class="wrap">{visit_html()}</div></section>
 <section><div class="wrap" style="max-width:860px">

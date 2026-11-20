@@ -36,7 +36,7 @@ CLINIC = {
     "maps": "https://maps.google.com/maps?cid=6577991291147149801",
     "review_link": "https://search.google.com/local/writereview?placeid=ChIJf7C_p8MDDTkR6WFwRDq4SVs",
     "rating": "5.0",
-    "review_count": 118,
+    "review_count": 121,
 }
 ADDRESS_LINE = f'{CLINIC["street"]}, {CLINIC["locality"]}, {CLINIC["region"]} {CLINIC["postcode"]}'
 MAP_EMBED = "https://maps.google.com/maps?q=Dr+Sobti%27s+Dental+Care,+J+12/26+Rajouri+Garden,+New+Delhi+110027&z=16&output=embed"
@@ -645,7 +645,7 @@ HOME_FAQ = [
     ("Which areas do your patients come from?", "Mostly West Delhi: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Implant patients also travel from elsewhere in Delhi NCR and from abroad."),
     ("Do you treat children?", "Yes. The clinic sees patients of all ages, including children, for check-ups, fillings and other routine care."),
     ("Who places dental implants at Dr Sobti's Dental Care?", "Dr Pushkar Sobti (BDS, MDS, PG in Oral Implantology, UCAM), who has placed more than 5,000 implants since 2009. A single implant with crown starts from ₹35,000 and All-on-X (All-on-4 or All-on-6) from ₹2,00,000 per jaw; the exact price follows a CBCT scan."),
-    ("How do patients rate the clinic?", "Dr Sobti's Dental Care in Rajouri Garden is rated 5.0 out of 5 from 118 Google reviews. Patients most often mention the in-house CBCT scan and lab, clear explanations before treatment and painless procedures."),
+    ("How do patients rate the clinic?", "Dr Sobti's Dental Care in Rajouri Garden is rated 5.0 out of 5 from 121 Google reviews. Patients most often mention the in-house CBCT scan and lab, clear explanations before treatment and painless procedures."),
 ]
 
 
@@ -709,7 +709,7 @@ def page_home():
 <section class="tint"><div class="wrap">
   <div class="grid g2" style="align-items:start">
     <div><div class="eyebrow">Areas we serve</div><h2>A dentist close to home in West Delhi</h2>
-    <p class="muted">Patients reach us easily from Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Rajouri Garden metro station (Blue and Pink lines) is the nearest stop.</p></div>
+    <p class="muted">Patients reach us easily from Rajouri Garden, <a href="/dentist-punjabi-bagh.html">Punjabi Bagh</a>, Tagore Garden, Subhash Nagar, Ramesh Nagar, <a href="/dentist-kirti-nagar.html">Kirti Nagar</a>, <a href="/dentist-naraina.html">Naraina</a>, <a href="/dentist-tilak-nagar.html">Tilak Nagar</a>, <a href="/dentist-janakpuri.html">Janakpuri</a>, <a href="/dentist-vikaspuri.html">Vikaspuri</a>, <a href="/dentist-paschim-vihar.html">Paschim Vihar</a>, <a href="/dentist-patel-nagar-rajinder-nagar.html">Patel Nagar and Rajinder Nagar</a> and <a href="/dentist-pitampura.html">Pitampura</a>. Rajouri Garden metro station (Blue and Pink lines) is the nearest stop. <a href="/dentist-west-delhi.html">Looking for a dentist in West Delhi? See how to reach us</a>.</p></div>
     <div><div class="eyebrow">Follow the clinic</div><h2>Find us online</h2>
     <p class="actions">{social_buttons()}</p>
     <p class="muted">Before-and-after cases, short videos and answers to common questions, posted by the doctors.</p></div>
@@ -1012,7 +1012,7 @@ FAQ_GROUPS = [
         ("How are instruments sterilised?", "In a Class B autoclave, and single-use items are used once."),
     ]),
     ("Choosing a dentist in West Delhi", [
-        ("How do patients rate Dr Sobti's Dental Care?", "Dr Sobti's Dental Care in Rajouri Garden is rated 5.0 out of 5 from 118 Google reviews (November 2026). Reviews often mention painless treatment, clear explanations and having the CBCT scan and lab in the clinic."),
+        ("How do patients rate Dr Sobti's Dental Care?", "Dr Sobti's Dental Care in Rajouri Garden is rated 5.0 out of 5 from 121 Google reviews (November 2026). Reviews often mention painless treatment, clear explanations and having the CBCT scan and lab in the clinic."),
         ("What should I look for in an implant clinic?", "Ask who places the implant and how many they have placed, whether a CBCT scan is used to plan it, which implant brand you will get, what warranty applies and whether the price is given in writing. Dr Sobti's Dental Care answers all of these in a written plan before treatment."),
         ("Do you treat patients from abroad?", "Yes. Send an X-ray or CBCT on WhatsApp for a free online assessment from Dr Pushkar Sobti, usually within 24 hours. The clinic can provide a medical visa invitation letter and plan your visits around your travel."),
         ("Do you treat children?", "Yes. The clinic sees patients of all ages, including children, for check-ups, fillings and preventive care."),
@@ -1278,7 +1278,7 @@ WEST_DELHI_FAQ = [
     ("Where is Dr Sobti's Dental Care in West Delhi?", "At J 12/26, First Floor, Rajouri Garden, New Delhi 110027, above Rajmandir. It is a short walk from Rajouri Garden metro station, where the Blue and Pink lines meet, so it is easy to reach from most of West Delhi."),
     ("Is the clinic open on Sunday?", "Yes. It is open all seven days, 10 am to 7 pm. Dr Pushkar Sobti and Dr Parul Sharma Sobti see patients by prior appointment, so please call or WhatsApp first."),
     ("Which treatments do patients from across West Delhi come for?", "Mostly dental implants and full mouth implants with Dr Pushkar Sobti, and veneers, whitening and smile design with Dr Parul Sharma Sobti, along with root canals, crowns, cleanings and children's dentistry."),
-    ("How are the reviews?", "The Rajouri Garden clinic is rated 5.0 out of 5 from 118 Google reviews. Patients most often mention clear explanations before treatment, painless procedures and the in-house scan and lab."),
+    ("How are the reviews?", "The Rajouri Garden clinic is rated 5.0 out of 5 from 121 Google reviews. Patients most often mention clear explanations before treatment, painless procedures and the in-house scan and lab."),
     ("How much does a consultation cost?", "A first opinion on WhatsApp is free. An in-clinic consultation with an examination and a written plan is ₹700."),
 ]
 
@@ -1425,7 +1425,7 @@ PAGES = [
      "Crowns, veneers and implant teeth made on site at Titanium Arts Dental Studio, the in-house digital lab of Dr Sobti's Dental Care, Rajouri Garden. Same-day crowns for many patients.",
      page_lab, "about.html", [crumbs_schema("lab.html", "Our lab")] + video_ld(LAB_VIDEOS, "lab.html"), 0.6),
     ("reviews.html", "Patient Reviews | Dr Sobti's Dental Care, Rajouri Garden",
-     "Rated 5.0 by 118 patients on Google. Read what patients say about implants, root canals, cleanings and smile work at Dr Sobti's Dental Care, Rajouri Garden.",
+     "Rated 5.0 by 121 patients on Google. Read what patients say about implants, root canals, cleanings and smile work at Dr Sobti's Dental Care, Rajouri Garden.",
      page_reviews, "reviews.html", [crumbs_schema("reviews.html", "Reviews")], 0.6),
     ("videos.html", "Videos: Clinic Tour, Patient Stories and Our Lab | Dr Sobti's Dental Care",
      "Watch a tour of Dr Sobti's Dental Care, Rajouri Garden, patient testimonials, and crowns and bridges made in our in-house lab, plus implant and smile makeover videos.",
@@ -1442,8 +1442,8 @@ PAGES = [
 ]
 
 
-PAGES.append(("dentist-west-delhi.html", "Dentist in West Delhi, Open 7 Days | Dr Sobti's Dental Care, Rajouri Garden",
-              "Dental implants, smile design and family dentistry for West Delhi at Rajouri Garden metro. Rated 5.0 from 118 Google reviews. Open 7 days, 10 am to 7 pm.",
+PAGES.append(("dentist-west-delhi.html", "Best Dentist in West Delhi | Dr Sobti's Dental Care",
+              f"Looking for the best dentist in West Delhi? Dental implants, smile design and family dentistry at Rajouri Garden metro. Rated {CLINIC['rating']} from {CLINIC['review_count']} Google reviews. Open 7 days.",
               page_west_delhi, "contact.html", [crumbs_schema("dentist-west-delhi.html", "West Delhi"), faq_schema(WEST_DELHI_FAQ)], 0.8))
 for _a in AREAS:
     PAGES.append((f"{_a['slug']}.html", f"{_a['keyword']} | Dr Sobti's Dental Care, Rajouri Garden",

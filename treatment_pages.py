@@ -165,8 +165,8 @@ TREATMENT_PAGES = [
         "photos_title": "Made in our lab",
         "machines": True,
         "videos": ["2_e0jS8wVsg", "8nA4r3d-Gt0"],
-        "guide": (f"{SMILE}/same-day-dentistry-delhi.html", "Read Dr Parul's guide to same-day dentistry",
-                  "How a same-day crown is made, E-max vs zirconia, and when one visit is not enough."),
+        "guide": ("/dental-crown-cost-delhi.html", "Read more about crowns and caps",
+                  "Zirconia or E-max, what a bridge involves, and which crowns can be made the same day."),
         "faq": [
             ("Can I get a crown in one day in Rajouri Garden?",
              "Yes. At Dr Sobti's Dental Care, J 12/26, Rajouri Garden, E-max crowns are made in our own lab and fitted in a single visit, from ₹10,000 per tooth."),

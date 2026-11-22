@@ -12,6 +12,7 @@ from pathlib import Path
 
 from videos_data import V as VIDEOS, obj as video_obj, card as video_card, JS as VIDEO_JS
 from treatment_pages import TREATMENT_PAGES
+from general_pages import GENERAL_PAGES, GENERAL_VIDEOS
 import clinic_blog
 
 ROOT = Path(__file__).parent
@@ -410,7 +411,9 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
       <li><a href="{IMPLANTS}/dental-implant-cost-delhi/">Implant cost in Delhi</a></li>
       <li><a href="{SMILE}/veneers.html">Veneers</a></li>
       <li><a href="{SMILE}/teeth-whitening-cost-delhi.html">Teeth whitening</a></li>
-      <li><a href="{SMILE}/root-canal-cost-delhi.html">Root canal</a></li>
+      <li><a href="/root-canal-cost-delhi.html">Root canal</a></li>
+      <li><a href="/teeth-cleaning-cost-delhi.html">Cleaning and air polishing</a></li>
+      <li><a href="/kids-dentist-delhi.html">Children's dentistry</a></li>
       <li><a href="/treatments.html">All treatments</a></li>
     </ul></div>
     <div><h3>Our websites</h3><ul>
@@ -469,8 +472,6 @@ TREATMENT_GROUPS = [
             ("Veneers in Delhi", f"{SMILE}/veneers.html", "from ₹10,000 per tooth"),
             ("Teeth whitening cost in Delhi", f"{SMILE}/teeth-whitening-cost-delhi.html", "from ₹8,000"),
             ("Smile makeover", f"{SMILE}/treatments.html", "case by case"),
-            ("Clear aligners (invisible braces)", f"{SMILE}/clear-aligners-cost-delhi.html", "cost"),
-            ("Braces cost in Delhi", f"{SMILE}/braces-cost-delhi.html", ""),
             ("Composite bonding", f"{SMILE}/treatments.html", ""),
         ],
         "more": (f"{SMILE}/", "drparulssobti.com"),
@@ -479,13 +480,15 @@ TREATMENT_GROUPS = [
         "cls": "teal", "title": "Everyday dental care", "who": "Both doctors and the team",
         "intro": "Check-ups, pain relief and repairs for the whole family, including children.",
         "items": [
-            ("Root canal (RCT) cost in Delhi", f"{SMILE}/root-canal-cost-delhi.html", ""),
-            ("Tooth cap and zirconia crown price", f"{SMILE}/dental-crown-cost-delhi.html", ""),
+            ("Teeth cleaning and air polishing", "/teeth-cleaning-cost-delhi.html", ""),
+            ("Crowns and caps (zirconia, E-max)", "/dental-crown-cost-delhi.html", ""),
             ("Same-day crowns and one-visit treatments", "/same-day-dentistry-rajouri-garden.html", ""),
-            ("Teeth cleaning cost (air polishing)", f"{SMILE}/teeth-cleaning-cost-delhi.html", ""),
-            ("Wisdom tooth removal", "/booking.html", ""),
+            ("Root canal, single sitting and microscopic", "/root-canal-cost-delhi.html", ""),
+            ("Children's dentistry", "/kids-dentist-delhi.html", ""),
+            ("Braces: metal, ceramic, self-ligating", "/braces-cost-delhi.html", ""),
+            ("Clear aligners (invisible braces)", "/clear-aligners-cost-delhi.html", ""),
+            ("Wisdom tooth removal", "/wisdom-tooth-removal-cost-delhi.html", ""),
             ("Fillings, extractions and dentures", "/booking.html", ""),
-            ("Children's dentistry", "/booking.html", ""),
         ],
         "more": ("/booking.html", "Book a check-up"),
     },
@@ -781,21 +784,21 @@ def page_treatments():
         ("Veneers", "Thin porcelain or composite facings that change the colour and shape of front teeth. From ₹10,000 per tooth.", f"{SMILE}/veneers.html", "Veneers"),
         ("Teeth whitening", "In-clinic whitening, from ₹8,000 depending on the case.", f"{SMILE}/teeth-whitening-cost-delhi.html", "Whitening cost"),
         ("Smile makeover", "A combined plan (whitening, veneers, bonding, aligners) designed digitally first. Priced case by case.", f"{SMILE}/treatments.html", "Smile design"),
-        ("Clear aligners", "Removable clear trays that straighten teeth gradually.", f"{SMILE}/clear-aligners-cost-delhi.html", "Aligner cost"),
-        ("Braces", "Fixed braces for teenagers and adults.", f"{SMILE}/braces-cost-delhi.html", "Braces cost"),
-        ("Root canal treatment", "Saves an infected or badly decayed tooth; often finished in one sitting.", f"{SMILE}/root-canal-cost-delhi.html", "Root canal cost"),
-        ("Crowns and bridges", "Caps made in the clinic's own lab, sometimes fitted the same day.", f"{SMILE}/dental-crown-cost-delhi.html", "Crown cost"),
+        ("Clear aligners", "Removable clear trays that straighten teeth gradually.", "/clear-aligners-cost-delhi.html", "Clear aligners"),
+        ("Braces", "Fixed braces for teenagers and adults.", "/braces-cost-delhi.html", "Braces"),
+        ("Root canal treatment", "Saves an infected or badly decayed tooth; often finished in one sitting.", "/root-canal-cost-delhi.html", "Root canal"),
+        ("Crowns and bridges", "Caps made in the clinic's own lab, sometimes fitted the same day.", "/dental-crown-cost-delhi.html", "Crowns"),
         ("Our in-house lab", "Titanium Arts Dental Studio makes our crowns, veneers and implant teeth on the same floor.", "/lab.html", "See the lab"),
-        ("Teeth cleaning", "Scaling and air polishing to remove tartar and stains.", f"{SMILE}/teeth-cleaning-cost-delhi.html", "Cleaning cost"),
-        ("Wisdom tooth removal", "Surgical removal of impacted wisdom teeth, planned on a scan when needed.", "/booking.html", "Book"),
+        ("Teeth cleaning", "Scaling and air polishing to remove tartar and stains.", "/teeth-cleaning-cost-delhi.html", "Cleaning and air polishing"),
+        ("Wisdom tooth removal", "Surgical removal of impacted wisdom teeth, planned on a scan when needed.", "/wisdom-tooth-removal-cost-delhi.html", "Wisdom teeth"),
         ("Fillings and extractions", "Tooth-coloured fillings, and gentle extractions when a tooth cannot be saved.", "/booking.html", "Book"),
         ("Dentures", "Full and partial dentures.", "/booking.html", "Book"),
-        ("Children's dentistry", "Check-ups, fillings and preventive care for children.", "/booking.html", "Book"),
+        ("Children's dentistry", "Check-ups, fillings, root canals and crowns for milk teeth, and early braces checks.", "/kids-dentist-delhi.html", "Children's dentistry"),
         ("Emergency dental care", "Toothache, swelling, a broken tooth or a lost crown. Call or WhatsApp and we will fit you in the same day where we can.", f"tel:{CLINIC['phone_tel']}", "Call now"),
     ]
     cards = "".join(f'<article class="card"><h3>{e(n)}</h3><p class="muted">{e(d)}</p><p><a href="{h}">{e(l)} →</a></p></article>' for n, d, h, l in rows)
     return pagehead("Dental treatments in Rajouri Garden", "Treatments",
-                    "Everything the clinic offers, grouped by the doctor who leads it. Detailed pages and prices are on each doctor's website.") + f"""
+                    "Everything the clinic offers. Implants are covered in detail on Dr Pushkar's website and smile design on Dr Parul's; everything else has its own page here.") + f"""
 <section><div class="wrap">{treatment_groups_html()}</div></section>
 <section class="tint"><div class="wrap">
   <div class="section-head"><h2>All treatments A to Z</h2></div>
@@ -830,7 +833,7 @@ def machine_grid(items):
 
 def page_lab():
     made = [
-        ("Zirconia crowns and bridges", "Milled in-house on a Roland dry mill. Zirconia crowns from ₹8,000 per tooth, with a warranty.", f"{SMILE}/dental-crown-cost-delhi.html", "Crown cost"),
+        ("Zirconia crowns and bridges", "Milled in-house on a Roland dry mill. Zirconia crowns from ₹8,000 per tooth, with a warranty.", "/dental-crown-cost-delhi.html", "Crowns"),
         ("E-max crowns and glass-ceramic veneers", "Milled on an Upcera wet mill. E-max crowns from ₹10,000 per tooth; veneers from ₹10,000 per tooth.", f"{SMILE}/veneers.html", "Veneers"),
         ("Teeth on implants", "Titanium parts for implant teeth, including custom abutments from pre-mill blanks, milled on our Kelkar and Upcera wet mills, so the crown, bridge or full-arch teeth fit the implant exactly.", f"{IMPLANTS}/dental-implant-cost-delhi/", "Implant cost"),
         ("Surgical guides", "3D-printed guides that carry the implant plan from the CBCT scan to the mouth.", f"{IMPLANTS}/", "Guided implants"),
@@ -1408,6 +1411,77 @@ def treatment_ld(t):
     return [crumbs_schema(t["slug"], t["crumb"]), faq_schema(t["faq"]), proc] + video_ld(t["videos"], t["slug"])
 
 
+# ---------------- General dentistry pages (moved from drparulssobti.com, 22 Nov 2026) ----------------
+
+GENERAL_WHY = [
+    ("Our own lab", "Crowns, bridges and appliances are made at Titanium Arts Dental Studio, our lab on the same floor."),
+    ("CBCT on site", "3D scans are taken in the clinic, so you don't have to go to a scan centre."),
+    ("Dental microscope", "Root canals and fine surgical work are done under magnification."),
+    ("Laughing gas", "Nitrous oxide sedation for nervous adults and children."),
+    ("Sterilisation", "Instruments go through a Class B autoclave, following ADA infection-control guidelines."),
+    ("Same-day work", "Many crowns, root canals and whitening visits finish in one sitting."),
+]
+
+
+def wa_topic(topic):
+    """WhatsApp link whose first line names the page, so the desk sees which ad page a chat came from."""
+    from urllib.parse import quote
+    return f'{CLINIC["wa_link"]}?text={quote(f"Hi, I found you on Google – {topic}")}'
+
+
+def _paras(blocks):
+    return "".join("<ul>" + "".join(f"<li>{x}</li>" for x in b) + "</ul>" if isinstance(b, list) else f"<p>{b}</p>"
+                   for b in blocks)
+
+
+def _plain(s):
+    import re
+    return html.unescape(re.sub(r"<[^>]+>", "", s))
+
+
+def page_general(g):
+    link = wa_topic(g["wa"])
+    secs = "".join(f"<h2>{h}</h2>{_paras(b)}" for h, b in g["sections"])
+    facts = "".join(f"<li><strong>{k}</strong>: {v}</li>" for k, v in g["facts"])
+    why = "".join(f'<article class="card"><h3>{e(t)}</h3><p class="muted">{e(d)}</p></article>' for t, d in GENERAL_WHY)
+    faq = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in g["faq"])
+    vids = GENERAL_VIDEOS.get(g["slug"], [])
+    videos = (f"""<section class="tint"><div class="wrap">
+  <div class="section-head"><div class="eyebrow">On video</div><h2>Watch it explained</h2></div>
+  {video_grid(vids)}
+</div></section>
+{VIDEO_JS}""" if vids else "")
+    buttons = (f'</p><p class="actions" style="margin-top:22px"><a class="btn" href="{link}" data-track="whatsapp">WhatsApp {CLINIC["wa_display"]}</a>'
+               f'<a class="btn ghost" href="tel:{CLINIC["phone_tel"]}" data-track="call">Call {CLINIC["phone_display"]}</a>')
+    return pagehead(e(g["h1"]), g["name"], e(g["intro"]) + buttons) + f"""
+<section><div class="wrap grid g2">
+  <div class="prose">{secs}</div>
+  <div>
+    <div class="pricebox"><h3>Cost</h3><p>Every mouth is different, so we don't list prices here. Send a message on <a href="{link}">WhatsApp {CLINIC['wa_display']}</a> or call <a href="tel:{CLINIC['phone_tel']}">{CLINIC['phone_display']}</a>. Tell us what you need, and a photo or X-ray helps if you have one. The front desk checks with the doctor and gets back to you with the cost.</p>
+    <p class="muted" style="margin:12px 0 0">After your check-up you get the full cost in writing, before anything is done.</p></div>
+    <div class="pricebox" style="margin-top:18px"><h3>At a glance</h3><ul>{facts}
+      <li><strong>Where</strong>: {e(ADDRESS_LINE)}, above Rajmandir</li>
+      <li><strong>Timings</strong>: open 7 days, 10 am to 7 pm</li></ul></div>
+  </div>
+</div></section>
+<section class="tint"><div class="wrap">
+  <div class="section-head"><div class="eyebrow">At our clinic</div><h2>What you get at Dr Sobti's Dental Care</h2></div>
+  <div class="grid g3">{why}</div>
+</div></section>
+{videos}
+<section><div class="wrap" style="max-width:860px">
+  <div class="section-head"><h2>Questions</h2><p class="muted">Ask anything else on <a href="{link}">WhatsApp</a>.</p></div>
+  {faq}
+  <p class="actions" style="margin-top:24px"><a class="btn" href="{link}" data-track="whatsapp">{e(g["cta"])} on WhatsApp</a><a class="btn ghost" href="/treatments.html">See all treatments</a></p>
+</div></section>"""
+
+
+def general_ld(g):
+    return ([crumbs_schema(g["slug"], g["name"]), faq_schema([(q, _plain(a)) for q, a in g["faq"]]),
+             {"@type": "MedicalProcedure", "name": g["name"], "url": f"{SITE}/{g['slug']}"}]
+            + video_ld(GENERAL_VIDEOS.get(g["slug"], []), g["slug"]))
+
+
 def page_404():
     return f"""<section class="pagehead"><div class="wrap"><h1>Page not found</h1>
 <p class="lead">The page you were looking for is not here. Try the <a href="/">home page</a>, our <a href="/treatments.html">treatments</a> or <a href="/contact.html">contact details</a>.</p></div></section>"""
@@ -1455,6 +1529,8 @@ for _a in AREAS:
 
 for _t in TREATMENT_PAGES:
     PAGES.append((_t["slug"], _t["title"], _t["desc"], (lambda t=_t: page_treatment(t)), "treatments.html", treatment_ld(_t), 0.8))
+for _g in GENERAL_PAGES:
+    PAGES.append((_g["slug"], _g["title"], _g["desc"], (lambda g=_g: page_general(g)), "treatments.html", general_ld(_g), 0.8))
 
 
 if LIVE_BRANCHES:
@@ -1514,6 +1590,7 @@ def main():
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
     prices = "; ".join(f"{n} from INR {inr(pr)}{' ' + u if u else ''}" for n, pr, u in PRICES)
     faq_md = "\n".join(f"- {q} {a}" for q, a in FAQ_ALL)
+    general_md = "".join(f"- [{g['h1']}]({SITE}/{g['slug']})\n" for g in GENERAL_PAGES)
     branches_md = ("## Our clinics\n" + f"- Main clinic: {CLINIC['name']}, {ADDRESS_LINE} (opened 2024): {SITE}/\n" + "".join(
         f"- Branch: {b['name']}, {b['street']}, {b['locality']} {b['postcode']}; phone {b['phone_display']}: {SITE}/{b['slug']}.html\n"
         for b in LIVE_BRANCHES) + f"- All clinics: {SITE}/clinics.html\n\n") if LIVE_BRANCHES else ""
@@ -1546,7 +1623,7 @@ def main():
 - [All-on-X full mouth implants in Rajouri Garden, with case photos]({SITE}/all-on-x-full-mouth-implants-rajouri-garden.html)
 - [Implant crowns, bridges and full-arch teeth in Rajouri Garden]({SITE}/implant-crowns-bridges-rajouri-garden.html)
 - [Same-day dentistry in Rajouri Garden: crowns in one visit]({SITE}/same-day-dentistry-rajouri-garden.html)
-- [Videos: clinic tour, patient stories, lab work]({SITE}/videos.html) · implant videos: {IMPLANTS}/videos/ · smile makeover videos: {SMILE}/videos.html
+{general_md}- [Videos: clinic tour, patient stories, lab work]({SITE}/videos.html) · implant videos: {IMPLANTS}/videos/ · smile makeover videos: {SMILE}/videos.html
 - [Patient reviews]({SITE}/reviews.html)
 - [Contact and timings]({SITE}/contact.html)
 - [Dentist in West Delhi: routes from Tilak Nagar, Janakpuri, Vikaspuri, Paschim Vihar and nearby colonies]({SITE}/dentist-west-delhi.html)
@@ -1556,7 +1633,7 @@ def main():
 {branches_md}## Related sites (same clinic)
 - [Dental implants in Delhi, Dr Pushkar Sobti]({IMPLANTS}/): implants, All-on-4, full mouth implants, costs
 - [Dental implant cost in Delhi]({IMPLANTS}/dental-implant-cost-delhi/)
-- [Smile design and other treatments, Dr Parul Sharma Sobti]({SMILE}/): veneers, whitening, aligners, braces, root canal, crowns, cleaning
+- [Smile design and cosmetic dentistry, Dr Parul Sharma Sobti]({SMILE}/): smile designing, veneers (direct and indirect), whitening
 
 ## Frequently asked questions
 {faq_md}

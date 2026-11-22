@@ -1,10 +1,12 @@
-# Builds the site with build.py and publishes it on GitHub Pages on every push to main.
+# Builds the site with build.py and publishes it on GitHub Pages on every push to main, and daily at 00:10 IST.
 name: Deploy
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '40 18 * * *'   # 00:10 IST daily, so dated blog posts go live on their day
 
 permissions:
   contents: read

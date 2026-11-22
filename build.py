@@ -12,6 +12,7 @@ from pathlib import Path
 
 from videos_data import V as VIDEOS, obj as video_obj, card as video_card, JS as VIDEO_JS
 from treatment_pages import TREATMENT_PAGES
+import clinic_blog
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "_site"
@@ -331,7 +332,7 @@ def faq_schema(faqs):
 # ---------------- Layout ----------------
 
 def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/share.jpg"):
-    canonical = f"{SITE}/" if path == "index.html" else f"{SITE}/{path}"
+    canonical = f"{SITE}/" if path == "index.html" else f"{SITE}/{path[:-10] if path.endswith('/index.html') else path}"
     webpage = {"@type": "WebPage", "@id": f"{canonical}#webpage", "url": canonical, "name": title, "description": desc,
                "isPartOf": {"@id": f"{SITE}/#website"},
                "about": {"@id": next((n["@id"] for n in extra_ld if n.get("@type") == "Dentist"), f"{SITE}/#clinic")},
@@ -401,6 +402,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
       <li><a href="/faq.html">Clinic facts and FAQ</a></li>
       <li><a href="/dentist-west-delhi.html">Dentist in West Delhi</a></li>
       {'<li><a href="/clinics.html">Our clinics</a></li>' if LIVE_BRANCHES else ''}
+      <li><a href="/blog/">From the clinic (blog)</a></li>
       <li><a href="/booking.html">Book an appointment</a></li>
     </ul></div>
     <div><h3>Treatments</h3><ul>
@@ -1478,8 +1480,14 @@ REDIRECTS = {
     "cosmetic-dental-fillings.html": "/treatments.html", "gallery.html": "/about.html#clinic",
     "Careers.html": "/contact.html",
     # Old-site blog page Google crawled in Jul 2026 (Search Console, 9 Nov 2026).
-    "blog.html": "/treatments.html", "blog": "/treatments.html",
+    "blog.html": "/blog/",  # /blog/ is now the clinic blog (Dr, 22 Nov 2026)
 }
+
+
+# From the clinic blog (clinic_blog.py, content/blog/): general-treatment posts, date-gated.
+PAGES.extend(clinic_blog.pages(SITE, (pagehead, wa, crumbs_schema, faq_schema)))
+if not clinic_blog.posts():  # until the first post is due, keep the old blog addresses pointing somewhere useful
+    REDIRECTS.update({"blog.html": "/treatments.html", "blog": "/treatments.html"})
 
 
 def main():
@@ -1488,12 +1496,13 @@ def main():
     OUT.mkdir()
     shutil.copytree(ROOT / "assets", OUT / "assets")
     for path, title, desc, fn, current, ld, _ in PAGES:
+        (OUT / path).parent.mkdir(parents=True, exist_ok=True)
         (OUT / path).write_text(layout(path, title, desc, fn(), current, ld), encoding="utf-8")
     (OUT / "404.html").write_text(
         layout("404.html", "Page not found | Dr Sobti's Dental Care", "Page not found.", page_404(), "")
         .replace('<meta name="viewport"', '<meta name="robots" content="noindex">\n<meta name="viewport"'), encoding="utf-8")
     urls = "".join(
-        f"<url><loc>{SITE}/{'' if p == 'index.html' else p}</loc><lastmod>{UPDATED}</lastmod><priority>{pr}</priority></url>" for p, *_, pr in PAGES)
+        f"<url><loc>{SITE}/{'' if p == 'index.html' else (p[:-10] if p.endswith('/index.html') else p)}</loc><lastmod>{UPDATED}</lastmod><priority>{pr}</priority></url>" for p, *_, pr in PAGES)
     (OUT / "sitemap.xml").write_text(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n', encoding="utf-8")
     ai_bots = ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "PerplexityBot", "Perplexity-User", "ClaudeBot",
@@ -1542,7 +1551,8 @@ def main():
 - [Contact and timings]({SITE}/contact.html)
 - [Dentist in West Delhi: routes from Tilak Nagar, Janakpuri, Vikaspuri, Paschim Vihar and nearby colonies]({SITE}/dentist-west-delhi.html)
 - [Book an appointment]({SITE}/booking.html)
-
+- [From the clinic: dental care blog]({SITE}/blog/)
+{clinic_blog.llms_lines(SITE)}
 {branches_md}## Related sites (same clinic)
 - [Dental implants in Delhi, Dr Pushkar Sobti]({IMPLANTS}/): implants, All-on-4, full mouth implants, costs
 - [Dental implant cost in Delhi]({IMPLANTS}/dental-implant-cost-delhi/)

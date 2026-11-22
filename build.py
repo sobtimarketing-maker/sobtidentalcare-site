@@ -1453,12 +1453,18 @@ def page_general(g):
 {VIDEO_JS}""" if vids else "")
     buttons = (f'</p><p class="actions" style="margin-top:22px"><a class="btn" href="{link}" data-track="whatsapp">WhatsApp {CLINIC["wa_display"]}</a>'
                f'<a class="btn ghost" href="tel:{CLINIC["phone_tel"]}" data-track="call">Call {CLINIC["phone_display"]}</a>')
+    if g.get("prices"):  # starting prices only, never exact costs (Dr, 22 Nov 2026)
+        rows = "".join(f"<li><strong>{e(i)}</strong>: {e(v)}</li>" for i, v in g["prices"])
+        price_box = f"""<div class="pricebox"><h3>Starting prices</h3><ul>{rows}</ul>
+    <p class="muted" style="margin:12px 0 0">These are starting prices. The exact cost depends on your teeth and is given in writing after the doctor examines you. Ask on <a href="{link}">WhatsApp {CLINIC['wa_display']}</a> or call <a href="tel:{CLINIC['phone_tel']}">{CLINIC['phone_display']}</a>.</p></div>"""
+    else:
+        price_box = f"""<div class="pricebox"><h3>Cost</h3><p>Every mouth is different, so we don't list prices here. Send a message on <a href="{link}">WhatsApp {CLINIC['wa_display']}</a> or call <a href="tel:{CLINIC['phone_tel']}">{CLINIC['phone_display']}</a>. Tell us what you need, and a photo or X-ray helps if you have one. The front desk checks with the doctor and gets back to you with the cost.</p>
+    <p class="muted" style="margin:12px 0 0">After your check-up you get the full cost in writing, before anything is done.</p></div>"""
     return pagehead(e(g["h1"]), g["name"], e(g["intro"]) + buttons) + f"""
 <section><div class="wrap grid g2">
   <div class="prose">{secs}</div>
   <div>
-    <div class="pricebox"><h3>Cost</h3><p>Every mouth is different, so we don't list prices here. Send a message on <a href="{link}">WhatsApp {CLINIC['wa_display']}</a> or call <a href="tel:{CLINIC['phone_tel']}">{CLINIC['phone_display']}</a>. Tell us what you need, and a photo or X-ray helps if you have one. The front desk checks with the doctor and gets back to you with the cost.</p>
-    <p class="muted" style="margin:12px 0 0">After your check-up you get the full cost in writing, before anything is done.</p></div>
+    {price_box}
     <div class="pricebox" style="margin-top:18px"><h3>At a glance</h3><ul>{facts}
       <li><strong>Where</strong>: {e(ADDRESS_LINE)}, above Rajmandir</li>
       <li><strong>Timings</strong>: open 7 days, 10 am to 7 pm</li></ul></div>

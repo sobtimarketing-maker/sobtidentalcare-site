@@ -25,7 +25,7 @@ Same-day crowns don't suit every tooth. If the tooth has an active infection, it
 
 ## Before you come
 
-If you'd like a same-day crown, send a photo or your X-ray on WhatsApp and tell us you're hoping to finish in one visit. We'll book a longer slot, so the lab is ready for you when you arrive. You can read more about [same-day dentistry in Rajouri Garden](/same-day-dentistry-rajouri-garden.html), or see [our in-house lab](/lab.html) and the machines in it.
+If you'd like a same-day crown, send a photo or your X-ray on WhatsApp and tell us you're hoping to finish in one visit. We'll book a longer slot, so the lab is ready for you when you arrive. You can read more about [dental crowns](/dental-crown-cost-delhi.html) and [same-day dentistry in Rajouri Garden](/same-day-dentistry-rajouri-garden.html), or see [our in-house lab](/lab.html) and the machines in it.
 
 We're open 7 days at our [dental clinic in Rajouri Garden](/), so a Sunday works too.
 

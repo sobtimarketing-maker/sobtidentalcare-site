@@ -636,15 +636,15 @@ def social_buttons():
 
 def cta_band():
     return f"""<section><div class="wrap"><div class="cta">
-  <div><h2>Not sure what you need?</h2><p>Send a photo or your X-ray on WhatsApp for a free first opinion, or book an in-clinic consultation (₹700) with an examination and a written plan.</p></div>
-  <div class="actions"><a class="btn gold" href="{wa('I would like a free first opinion on my teeth.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']}</a><a class="btn light" href="tel:{CLINIC['phone_tel']}" data-track="call">Call {CLINIC['phone_display']}</a></div>
+  <div><h2>Not sure what you need?</h2><p>Message us on WhatsApp or call the clinic, or book an in-clinic consultation (₹700) with an examination and a written plan.</p></div>
+  <div class="actions"><a class="btn gold" href="{wa('I would like to ask about my teeth.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']}</a><a class="btn light" href="tel:{CLINIC['phone_tel']}" data-track="call">Call {CLINIC['phone_display']}</a></div>
 </div></div></section>"""
 
 
 HOME_FAQ = [
     ("Where is Dr Sobti's Dental Care?", "On the first floor of J 12/26, Rajouri Garden, New Delhi 110027, above Rajmandir. It is a short walk from Rajouri Garden metro station and easy to reach from Punjabi Bagh, Tagore Garden, Subhash Nagar and Janakpuri."),
     ("What are the clinic timings?", "The clinic is open all seven days, Monday to Sunday, from 10 am to 7 pm. Dr Pushkar Sobti and Dr Parul Sharma Sobti see patients by prior appointment only, so please call or WhatsApp to book a time."),
-    ("How much is a consultation?", "A first opinion on WhatsApp is free: send a photo or an X-ray and the doctors will reply. An in-clinic consultation with an examination is ₹700."),
+    ("How much is a consultation?", "An in-clinic consultation with an examination is ₹700. You can message or call the clinic first with any questions."),
     ("Do you place dental implants at the clinic?", "Yes. Dr Pushkar Sobti places implants at the clinic, from single teeth to full mouth implants, planned on the clinic's own CBCT 3D scanner."),
     ("Is the clinic open on Sunday?", "Yes. Dr Sobti's Dental Care in Rajouri Garden is open on Sundays too, 10 am to 7 pm, which helps patients from across West Delhi who cannot come on weekdays."),
     ("Which areas do your patients come from?", "Mostly West Delhi: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Implant patients also travel from elsewhere in Delhi NCR and from abroad."),
@@ -806,7 +806,7 @@ def page_treatments():
 </div></section>
 <section><div class="wrap" style="max-width:860px">
   <div class="pricebox"><h3>Published prices</h3><ul>
-    <li>Free first opinion on WhatsApp (send a photo or X-ray)</li>
+    <li>Questions answered on WhatsApp or by phone</li>
     <li>In-clinic consultation with examination: ₹700</li>
     <li>Veneers: from ₹10,000 per tooth</li>
     <li>Teeth whitening: from ₹8,000, depending on the case</li>
@@ -945,7 +945,7 @@ def page_contact():
   <p class="actions" style="margin-bottom:24px">{social_buttons()}</p>
   <div class="grid g3">
     <div class="card"><h3>Call</h3><p>For appointments and emergencies.</p><p><a class="btn" href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a></p></div>
-    <div class="card"><h3>WhatsApp</h3><p>Send photos or X-rays for a free first opinion.</p><p><a class="btn gold" href="{wa()}" data-track="whatsapp">{CLINIC['wa_display']}</a></p></div>
+    <div class="card"><h3>WhatsApp</h3><p>Message us to ask a question or book a visit.</p><p><a class="btn gold" href="{wa()}" data-track="whatsapp">{CLINIC['wa_display']}</a></p></div>
     <div class="card"><h3>Email</h3><p>For reports, records and anything that is not urgent.</p><p><a class="btn ghost" href="mailto:{CLINIC['email']}">{CLINIC['email']}</a></p></div>
   </div>
 </div></section>
@@ -975,7 +975,7 @@ def page_booking():
     <div>
       <div class="card" style="margin-bottom:22px"><h3>Prefer to call?</h3><p><a href="tel:{CLINIC['phone_tel']}" data-track="call">{CLINIC['phone_display']}</a>, every day 10 am to 7 pm.</p></div>
       <div class="pricebox"><h3>Good to know</h3><ul>
-        <li>First opinion on WhatsApp is free.</li>
+        <li>Questions answered on WhatsApp or by phone.</li>
         <li>In-clinic consultation: ₹700.</li>
         <li>Bring old X-rays, scans or reports if you have them.</li>
         <li>{e(CLINIC['street'])}, above Rajmandir. <a href="{CLINIC['maps']}" rel="noopener">Map</a></li>
@@ -1003,7 +1003,7 @@ FAQ_GROUPS = [
         ("Which areas do patients come from?", "Mostly West Delhi: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri and Paschim Vihar. Implant patients also come from across Delhi NCR and from abroad."),
     ]),
     ("Costs and payment", [
-        ("How much is a dental consultation?", "A first opinion on WhatsApp is free: send a photo or X-ray. An in-clinic consultation with an examination and a written plan is ₹700."),
+        ("How much is a dental consultation?", "An in-clinic consultation with an examination and a written plan is ₹700. You can message or call the clinic first with any questions."),
         ("How much does a dental implant cost at Dr Sobti's Dental Care?", "A single implant with crown starts from ₹35,000, and All-on-X full arch implants (All-on-4 or All-on-6) start from ₹2,00,000 per jaw. The final price depends on the implant brand, bone and the type of teeth, and is given in writing after a CBCT scan."),
         ("How much do veneers and whitening cost?", "Veneers start from ₹10,000 per tooth and in-clinic teeth whitening from ₹8,000, depending on the case. A smile makeover is priced case by case after a digital design."),
         ("How much does a crown cost?", "Zirconia crowns start from ₹8,000 per tooth and E-max crowns from ₹10,000 per tooth. Both are made in the clinic's own lab."),
@@ -1019,7 +1019,7 @@ FAQ_GROUPS = [
     ("Choosing a dentist in West Delhi", [
         ("How do patients rate Dr Sobti's Dental Care?", "Dr Sobti's Dental Care in Rajouri Garden is rated 5.0 out of 5 from 121 Google reviews (November 2026). Reviews often mention painless treatment, clear explanations and having the CBCT scan and lab in the clinic."),
         ("What should I look for in an implant clinic?", "Ask who places the implant and how many they have placed, whether a CBCT scan is used to plan it, which implant brand you will get, what warranty applies and whether the price is given in writing. Dr Sobti's Dental Care answers all of these in a written plan before treatment."),
-        ("Do you treat patients from abroad?", "Yes. Send an X-ray or CBCT on WhatsApp for a free online assessment from Dr Pushkar Sobti, usually within 24 hours. The clinic can provide a medical visa invitation letter and plan your visits around your travel."),
+        ("Do you treat patients from abroad?", "Yes. Message the clinic on WhatsApp with your X-ray or CBCT and your travel dates. The clinic can provide a medical visa invitation letter and plan your visits around your travel."),
         ("Do you treat children?", "Yes. The clinic sees patients of all ages, including children, for check-ups, fillings and preventive care."),
     ]),
 ]
@@ -1134,7 +1134,7 @@ AREAS = [
         "faq": [
             ("Is there a dental clinic of Dr Sobti's in Tilak Nagar?", "No. Our clinic is in Rajouri Garden, at J 12/26, First Floor, above Rajmandir. It is three stops from Tilak Nagar on the Blue Line, which is quicker for most patients than a drive through the market."),
             ("Can I get an appointment on Sunday?", "Yes. The clinic is open all seven days from 10 am to 7 pm, including Sunday. The doctors see patients by appointment, so call or WhatsApp first."),
-            ("Can I send my X-ray before coming from Tilak Nagar?", "Yes. Send a photo of your teeth or your X-ray on WhatsApp for a free first opinion, so you know what to expect before you travel."),
+            ("Can I ask questions before coming from Tilak Nagar?", "Yes. Message us on WhatsApp or call the clinic with your questions before you travel."),
         ],
     },
     {
@@ -1182,7 +1182,7 @@ AREAS = [
         "faq": [
             ("Is there a Dr Sobti's clinic in Paschim Vihar?", "No. The clinic is in Rajouri Garden, a short drive from Paschim Vihar through Punjabi Bagh, or a short metro ride with one change to the Pink Line."),
             ("What do patients from Paschim Vihar usually come for?", "Mostly dental implants and full mouth implants with Dr Pushkar Sobti, and veneers, whitening and smile design with Dr Parul Sharma Sobti, plus root canals and crowns."),
-            ("Can I get a first opinion without travelling?", "Yes. Send a photo or your X-ray on WhatsApp for a free first opinion. An in-clinic consultation with an examination is ₹700."),
+            ("Can I ask questions before travelling?", "Yes. Message us on WhatsApp or call the clinic. An in-clinic consultation with an examination is ₹700."),
             ("What does a dental implant cost for patients from Paschim Vihar and Meera Bagh?", "A single implant starts at ₹35,000, including the CBCT scan, guided surgery, a custom abutment and a zirconia crown, with nothing extra to pay later. Your written plan after the scan gives the exact cost."),
         ],
     },
@@ -1231,7 +1231,7 @@ AREAS = [
         "faq": [
             ("Do you have a clinic in Kirti Nagar or Moti Nagar?", "No. The clinic is in Rajouri Garden, two or three stops away on the Blue Line."),
             ("Who does veneers and smile design?", "Dr Parul Sharma Sobti. She plans veneers, whitening and bonding digitally first, so you see the result before treatment starts."),
-            ("Can I send a photo first?", "Yes. Send a photo of your teeth or your X-ray on WhatsApp for a free first opinion. An in-clinic consultation is ₹700."),
+            ("Can I message before visiting?", "Yes. Message us on WhatsApp or call the clinic. An in-clinic consultation is ₹700."),
         ],
     },
     {
@@ -1263,7 +1263,7 @@ AREAS = [
         "faq": [
             ("Is Dr Sobti's Dental Care in Pitampura?", "No. The clinic is in Rajouri Garden, four stops from Netaji Subhash Place on the Pink Line, or about 8 to 9 km by road."),
             ("What is included in the implant price?", "A single implant starts at ₹35,000. That includes the CBCT scan, guided surgery, a custom abutment and a zirconia crown, with nothing extra to pay later. Your written plan after the scan gives the exact cost."),
-            ("Can I get a first opinion before travelling from Pitampura?", "Yes. Send a photo or your X-ray on WhatsApp for a free first opinion, so you know what to expect before you make the trip."),
+            ("Can I ask questions before travelling from Pitampura?", "Yes. Message us on WhatsApp or call the clinic before you make the trip."),
             ("How many trips does an implant need from Kohat Enclave or Saraswati Vihar?", "Usually three main visits: a consultation with the CBCT scan, the guided surgery, and the visit for the final tooth after healing, plus short check-ups. The scan, surgery and lab are all in one clinic, so you do not travel to three different places."),
         ],
     },
@@ -1284,7 +1284,7 @@ WEST_DELHI_FAQ = [
     ("Is the clinic open on Sunday?", "Yes. It is open all seven days, 10 am to 7 pm. Dr Pushkar Sobti and Dr Parul Sharma Sobti see patients by prior appointment, so please call or WhatsApp first."),
     ("Which treatments do patients from across West Delhi come for?", "Mostly dental implants and full mouth implants with Dr Pushkar Sobti, and veneers, whitening and smile design with Dr Parul Sharma Sobti, along with root canals, crowns, cleanings and children's dentistry."),
     ("How are the reviews?", "The Rajouri Garden clinic is rated 5.0 out of 5 from 121 Google reviews. Patients most often mention clear explanations before treatment, painless procedures and the in-house scan and lab."),
-    ("How much does a consultation cost?", "A first opinion on WhatsApp is free. An in-clinic consultation with an examination and a written plan is ₹700."),
+    ("How much does a consultation cost?", "An in-clinic consultation with an examination and a written plan is ₹700."),
 ]
 
 
@@ -1392,7 +1392,7 @@ def page_treatment(t):
 </div></section>
 <section><div class="wrap grid g2">
   <article class="card"><h3>{e(g_label)}</h3><p class="muted">{e(g_text)}</p><p><a href="{g_url}" rel="noopener">Open the full guide →</a></p></article>
-  <article class="card"><h3>Free first opinion</h3><p class="muted">Send a photo or your X-ray on WhatsApp and the doctors will tell you what is possible before you visit.</p><p><a href="{wa('I would like to ask about ' + t['crumb'].lower() + '.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']} →</a></p></article>
+  <article class="card"><h3>Ask before you visit</h3><p class="muted">Message us on WhatsApp or call the clinic with your questions, and book a visit when you are ready.</p><p><a href="{wa('I would like to ask about ' + t['crumb'].lower() + '.')}" data-track="whatsapp">WhatsApp {CLINIC['wa_display']} →</a></p></article>
 </div></section>
 <section class="tint"><div class="wrap">{visit_html()}</div></section>
 <section><div class="wrap" style="max-width:860px">
@@ -1516,7 +1516,7 @@ PAGES = [
      "J 12/26, First Floor, Rajouri Garden, New Delhi 110027, above Rajmandir. Open 7 days, 10 am to 7 pm. Call +91 87449 85976 or WhatsApp +91 80767 77307.",
      page_contact, "contact.html", [crumbs_schema("contact.html", "Contact"), faq_schema(CONTACT_FAQ)], 0.8),
     ("booking.html", "Book an Appointment | Dr Sobti's Dental Care, Rajouri Garden",
-     "Book a dental appointment at Dr Sobti's Dental Care, Rajouri Garden, on WhatsApp or by phone. Free first opinion on WhatsApp; in-clinic consultation ₹700.",
+     "Book a dental appointment at Dr Sobti's Dental Care, Rajouri Garden, on WhatsApp or by phone. In-clinic consultation ₹700.",
      page_booking, "booking.html", [crumbs_schema("booking.html", "Book")], 0.7),
     ("faq.html", "Clinic Facts, Prices and FAQ | Dr Sobti's Dental Care, Rajouri Garden",
      "Timings, address, doctors, implant and treatment prices, and answers to common questions about Dr Sobti's Dental Care, J 12/26 Rajouri Garden, New Delhi. Open 7 days.",
@@ -1609,7 +1609,7 @@ def main():
 - Map: {CLINIC['maps']} (lat {CLINIC['lat']}, lng {CLINIC['lng']})
 - Timings: Monday to Sunday, 10:00 to 19:00 (open on Sundays)
 - Phone: {CLINIC['phone_display']}. WhatsApp: {CLINIC['wa_display']}. Email: {CLINIC['email']}
-- Book: {SITE}/booking.html (opens WhatsApp). Free first opinion on WhatsApp; in-clinic consultation INR 700.
+- Book: {SITE}/booking.html (opens WhatsApp). In-clinic consultation INR 700.
 - Doctors: Dr Pushkar Sobti, implantologist (single implants, All-on-4, All-on-6, All-on-X full-arch implants, guided surgery, bone grafting); Dr Parul Sharma Sobti, aesthetic dentist (veneers, whitening, smile makeovers, root canals, crowns, cleanings).
 - Equipment: CBCT 3D scanner, dental microscope, implant surgery room, Class B autoclave, in-house CAD/CAM lab.
 - Implant brands: Osstem, Hiossen and Nobel Biocare, among others; brand named in writing on every plan.

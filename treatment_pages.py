@@ -24,7 +24,7 @@ TREATMENT_PAGES = [
             ("Is it right for you?", "<p>Same-day teeth need a firm hold in healthy bone. If the scan or the reading on the day says the implant should heal first, Dr Pushkar will tell you there and then, and the fixed tooth follows after healing. You do not lose anything: the same implant is used, only the timing changes.</p>"),
         ],
         "steps": [
-            ("Consultation and CBCT", "On the first visit, at the clinic. Free first opinion on WhatsApp before that."),
+            ("Consultation and CBCT", "On the first visit, at the clinic."),
             ("Plan and guide", "The implant is planned on screen and a surgical guide is 3D-printed in our lab."),
             ("Surgery day", "Local anaesthesia, sedation if you are anxious. Failing teeth out, implants in."),
             ("Same-day tooth", "A fixed temporary crown or bridge, milled in our lab, is fitted before you leave. A full arch is fitted within 3 days."),
@@ -32,7 +32,7 @@ TREATMENT_PAGES = [
         ],
         "facts": [("Single implant with crown", "From ₹35,000"), ("All-on-X full arch", "From ₹2,00,000 per jaw"),
                   ("Implants", "Osstem, Hiossen, Nobel (titanium)"), ("Doctor", "Dr Pushkar Sobti, 5,000+ implants"),
-                  ("Consultation", "₹700; WhatsApp opinion free")],
+                  ("Consultation", "₹700")],
         "photos": [],
         "machines": True,
         "videos": ["LQ7iloK2d2s", "8nA4r3d-Gt0", "mbwAgZtrRoo"],
@@ -71,7 +71,7 @@ TREATMENT_PAGES = [
         ],
         "facts": [("All-on-X (All-on-4 or All-on-6)", "From ₹2,00,000 per jaw"), ("Fixed teeth", "Within 3 days, in suitable cases"),
                   ("Implants", "Osstem, Hiossen, Nobel (titanium)"), ("Doctor", "Dr Pushkar Sobti, 500+ full arches"),
-                  ("Consultation", "₹700; WhatsApp opinion free")],
+                  ("Consultation", "₹700")],
         "photos": [
             ("lab-full-arch-teeth.jpg", "Full-arch teeth with pink gum"),
             ("lab-full-arch-bridge-try-in.jpg", "Final bridge beside its clear try-in"),

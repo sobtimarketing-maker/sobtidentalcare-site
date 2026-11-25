@@ -482,12 +482,15 @@ TREATMENT_GROUPS = [
         "items": [
             ("Teeth cleaning and air polishing", "/teeth-cleaning-cost-delhi.html", ""),
             ("Crowns and caps (zirconia, E-max)", "/dental-crown-cost-delhi.html", ""),
+            ("Zirconia crowns", "/zirconia-crowns-delhi.html", "made in our lab"),
+            ("Dental bridges", "/dental-bridge-delhi.html", ""),
             ("Same-day crowns and one-visit treatments", "/same-day-dentistry-rajouri-garden.html", ""),
             ("Root canal, single sitting and microscopic", "/root-canal-cost-delhi.html", ""),
             ("Children's dentistry", "/kids-dentist-delhi.html", ""),
             ("Braces: metal, ceramic, self-ligating", "/braces-cost-delhi.html", ""),
             ("Clear aligners (invisible braces)", "/clear-aligners-cost-delhi.html", ""),
-            ("Wisdom tooth removal", "/wisdom-tooth-removal-cost-delhi.html", ""),
+            ("Wisdom tooth removal", "/wisdom-tooth-removal-cost-delhi.html", "Dr Pushkar Sobti"),
+            ("TMJ and jaw pain", "/tmj-jaw-pain-treatment-delhi.html", "night guards, splints"),
             ("Fillings, extractions and dentures", "/booking.html", ""),
         ],
         "more": ("/booking.html", "Book a check-up"),
@@ -714,7 +717,7 @@ def page_home():
 <section class="tint"><div class="wrap">
   <div class="grid g2" style="align-items:start">
     <div><div class="eyebrow">Areas we serve</div><h2>A dentist close to home in West Delhi</h2>
-    <p class="muted">Patients reach us easily from Rajouri Garden, <a href="/dentist-punjabi-bagh.html">Punjabi Bagh</a>, Tagore Garden, Subhash Nagar, Ramesh Nagar, <a href="/dentist-kirti-nagar.html">Kirti Nagar</a>, <a href="/dentist-naraina.html">Naraina</a>, <a href="/dentist-tilak-nagar.html">Tilak Nagar</a>, <a href="/dentist-janakpuri.html">Janakpuri</a>, <a href="/dentist-vikaspuri.html">Vikaspuri</a>, <a href="/dentist-paschim-vihar.html">Paschim Vihar</a>, <a href="/dentist-patel-nagar-rajinder-nagar.html">Patel Nagar and Rajinder Nagar</a> and <a href="/dentist-pitampura.html">Pitampura</a>. Rajouri Garden metro station (Blue and Pink lines) is the nearest stop. <a href="/dentist-west-delhi.html">Looking for a dentist in West Delhi? See how to reach us</a>.</p></div>
+    <p class="muted">Patients reach us easily from Rajouri Garden, <a href="/dentist-punjabi-bagh.html">Punjabi Bagh</a>, Tagore Garden, Subhash Nagar, Ramesh Nagar, <a href="/dentist-kirti-nagar.html">Kirti Nagar</a>, <a href="/dentist-naraina.html">Naraina</a>, <a href="/dentist-tilak-nagar.html">Tilak Nagar</a>, <a href="/dentist-janakpuri.html">Janakpuri</a>, <a href="/dentist-vikaspuri.html">Vikaspuri</a>, <a href="/dentist-uttam-nagar.html">Uttam Nagar</a>, <a href="/dentist-paschim-vihar.html">Paschim Vihar</a>, <a href="/dentist-patel-nagar-rajinder-nagar.html">Patel Nagar and Rajinder Nagar</a> and <a href="/dentist-pitampura.html">Pitampura</a>. Rajouri Garden metro station (Blue and Pink lines) is the nearest stop. <a href="/dentist-west-delhi.html">Looking for a dentist in West Delhi? See how to reach us</a>.</p></div>
     <div><div class="eyebrow">Follow the clinic</div><h2>Find us online</h2>
     <p class="actions">{social_buttons()}</p>
     <p class="muted">Before-and-after cases, short videos and answers to common questions, posted by the doctors.</p></div>
@@ -950,7 +953,7 @@ def page_contact():
   </div>
 </div></section>
 <section><div class="wrap" style="max-width:860px">
-  <div class="section-head"><h2>Getting here</h2><p class="lead">Our <a href="/">dental clinic in Rajouri Garden</a> sees patients from Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, <a href="/dentist-tilak-nagar.html">Tilak Nagar</a>, <a href="/dentist-janakpuri.html">Janakpuri</a>, <a href="/dentist-vikaspuri.html">Vikaspuri</a>, <a href="/dentist-paschim-vihar.html">Paschim Vihar</a> and <a href="/dentist-west-delhi.html">across West Delhi</a>.</p></div>
+  <div class="section-head"><h2>Getting here</h2><p class="lead">Our <a href="/">dental clinic in Rajouri Garden</a> sees patients from Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, <a href="/dentist-tilak-nagar.html">Tilak Nagar</a>, <a href="/dentist-janakpuri.html">Janakpuri</a>, <a href="/dentist-vikaspuri.html">Vikaspuri</a>, <a href="/dentist-uttam-nagar.html">Uttam Nagar</a>, <a href="/dentist-paschim-vihar.html">Paschim Vihar</a> and <a href="/dentist-west-delhi.html">across West Delhi</a>.</p></div>
   {faq}
 </div></section>"""
 
@@ -1142,6 +1145,7 @@ AREAS = [
         "area": "Janakpuri",
         "keyword": "Dentist near Janakpuri",
         "distance": "about 4 km",
+        "drive": "about 15 to 20 minutes by car from Janakpuri District Centre along Najafgarh Road",
         "route": [
             ("By metro", "From Janakpuri East take the Blue Line towards Noida or Vaishali; Rajouri Garden is four stops away. From Janakpuri West (Blue and Magenta lines) it is five stops. The clinic is a short walk from Rajouri Garden station."),
             ("By car", "Drive along Najafgarh Road past Tilak Nagar to Rajouri Garden. The clinic has a lift, and parking is close by."),
@@ -1157,9 +1161,10 @@ AREAS = [
         "slug": "dentist-vikaspuri",
         "area": "Vikaspuri",
         "keyword": "Dentist near Vikaspuri",
-        "distance": "about 5 km",
+        "distance": "about 6 km by road",
+        "drive": "about 17 minutes by car along Najafgarh Road (Shivaji Marg)",
         "route": [
-            ("By car or cab", "Most patients from Vikaspuri come by car or cab towards Rajouri Garden. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
+            ("By car or cab", "Most patients from Vikaspuri come by car or cab: out to Najafgarh Road (Shivaji Marg), east past Janakpuri and Tilak Nagar, and into Rajouri Garden. It is about 6 km. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
             ("By metro", "Take the metro to Janakpuri West or Janakpuri East and change to the Blue Line towards Noida or Vaishali. Get off at Rajouri Garden; the clinic is a short walk away."),
         ],
         "intro": "Vikaspuri is one of West Delhi's biggest residential areas, and many of our implant and full mouth patients come from its blocks and from nearby Hastsal and Krishna Park. They travel to Rajouri Garden for a team that plans, places and makes the implant teeth under one roof.",
@@ -1170,10 +1175,28 @@ AREAS = [
         ],
     },
     {
+        "slug": "dentist-uttam-nagar",
+        "area": "Uttam Nagar",
+        "keyword": "Dentist near Uttam Nagar",
+        "distance": "about 8 km by road",
+        "drive": "about 30 minutes by car, or about 40 minutes door to door by metro",
+        "route": [
+            ("By metro", "From Uttam Nagar East take the Blue Line towards Noida or Vaishali. Rajouri Garden is six stops away (Janakpuri West, Janakpuri East, Tilak Nagar, Subhash Nagar, Tagore Garden, Rajouri Garden); from Uttam Nagar West it is seven. The clinic is a short walk from the station, above Rajmandir."),
+            ("By car or cab", "Come east on Najafgarh Road past Janakpuri and Tilak Nagar to Rajouri Garden. The clinic is on the first floor of J 12/26 with a lift, and there is parking close by."),
+        ],
+        "intro": "Uttam Nagar, Mohan Garden, Om Vihar, Bindapur and Hastsal are on the same Blue Line as our Rajouri Garden clinic, so the trip is one train with no change. People from these colonies come to us for root canals, crowns, cleanings, children's check-ups and dental implants, and we plan the visits so you make as few trips as possible.",
+        "faq": [
+            ("Is there a Dr Sobti's clinic in Uttam Nagar?", "No. Our clinic is in Rajouri Garden, six stops from Uttam Nagar East on the Blue Line, with no change of train."),
+            ("How can I keep the number of trips low?", "Many crowns are made in our own lab on the same floor, root canals can often be finished in one sitting, and CBCT scans are taken in the clinic, so you are not sent elsewhere. Tell us when you message that you are coming from Uttam Nagar and we will plan around it."),
+            ("Is the clinic open on Sunday?", "Yes. It is open all seven days, 10 am to 7 pm, by appointment. Please call or WhatsApp first."),
+        ],
+    },
+    {
         "slug": "dentist-paschim-vihar",
         "area": "Paschim Vihar",
         "keyword": "Dentist near Paschim Vihar",
         "distance": "about 4 km",
+        "drive": "about 20 minutes by car through Punjabi Bagh",
         "route": [
             ("By car or cab", "Come towards Punjabi Bagh and then Rajouri Garden. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
             ("By metro", "Take the Green Line to Punjabi Bagh, walk across to Punjabi Bagh West on the Pink Line, and ride two stops to Rajouri Garden. The clinic is a short walk from the station."),
@@ -1254,7 +1277,7 @@ AREAS = [
         "slug": "dentist-pitampura",
         "area": "Pitampura and Netaji Subhash Place",
         "keyword": "Dentist near Pitampura and Netaji Subhash Place",
-        "distance": "about 8 to 9 km by road",
+        "distance": "about 8 km by road",
         "route": [
             ("By metro", "From Netaji Subhash Place take the Pink Line; Rajouri Garden is four stops away (Shakurpur, Punjabi Bagh West, ESI Basaidarapur, Rajouri Garden). From Pitampura station, take the Red Line two stops to Netaji Subhash Place and change to the Pink Line."),
             ("By car", "Come down Ring Road past Punjabi Bagh to Rajouri Garden. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
@@ -1288,6 +1311,17 @@ WEST_DELHI_FAQ = [
 ]
 
 
+AREA_TREATMENTS = """<ul>
+  <li><a href="/teeth-cleaning-cost-delhi.html">Teeth cleaning, scaling and air polishing</a></li>
+  <li><a href="/zirconia-crowns-delhi.html">Zirconia crowns</a> and <a href="/dental-bridge-delhi.html">dental bridges</a>, made in our own lab</li>
+  <li><a href="/root-canal-cost-delhi.html">Root canal treatment</a>, often in a single sitting</li>
+  <li><a href="/kids-dentist-delhi.html">Children's dentistry</a>, with laughing gas for nervous children</li>
+  <li><a href="/wisdom-tooth-removal-cost-delhi.html">Wisdom tooth removal</a> with Dr Pushkar Sobti</li>
+  <li><a href="/tmj-jaw-pain-treatment-delhi.html">Jaw pain and TMJ</a>: bite checks, night guards and splints</li>
+  <li><a href="https://dentalimplantsdelhi.com/">Dental implants in Delhi</a> with Dr Pushkar Sobti</li>
+</ul>"""
+
+
 def area_links_html(skip=""):
     items = "".join(f'<li><a href="/{a["slug"]}.html">Patients from {e(a["area"])}</a></li>' for a in AREAS if a["slug"] != skip)
     return f'<ul>{items}<li><a href="/dentist-west-delhi.html">All of West Delhi</a></li></ul>'
@@ -1304,11 +1338,18 @@ def why_cards():
 def page_area(a):
     route = "".join(f"<div class=\"card\"><h3>{e(t)}</h3><p>{e(d)}</p></div>" for t, d in a["route"])
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(ans)}</p></details>" for q, ans in a["faq"])
+    drive = (f'<p class="muted" style="margin-top:18px">It takes {e(a["drive"])} (Google Maps, checked on a weekday late morning). Allow more time in the evening rush.</p>'
+             if a.get("drive") else "")
     return pagehead(f"{e(a['keyword'])}: Dr Sobti's Dental Care, Rajouri Garden", f"Patients from {a['area']}",
                     e(a["intro"])) + f"""
 <section><div class="wrap">
   <div class="section-head"><h2>Getting here from {e(a['area'])}</h2><p class="lead">Our <a href="/">dental clinic in Rajouri Garden</a> is {a['distance']} from {e(a['area'])}. It is open every day, 10 am to 7 pm, by appointment.</p></div>
   <div class="grid g2">{route}</div>
+  {drive}
+</div></section>
+<section><div class="wrap" style="max-width:860px">
+  <div class="section-head"><h2>What people from {e(a['area'])} come to us for</h2></div>
+  {AREA_TREATMENTS}
 </div></section>
 <section class="tint"><div class="wrap">
   <div class="section-head"><h2>Why patients from {e(a['area'])} choose us</h2></div>
@@ -1336,6 +1377,10 @@ def page_west_delhi():
 <section><div class="wrap">
   <div class="section-head"><h2>Why West Delhi patients choose Dr Sobti's</h2><p class="lead">Rated {CLINIC['rating']} from {CLINIC['review_count']} Google reviews. A family practice since 1982, with the Rajouri Garden clinic opened in 2024.</p></div>
   {why_cards()}
+</div></section>
+<section><div class="wrap" style="max-width:860px">
+  <div class="section-head"><h2>Treatments at the clinic</h2></div>
+  {AREA_TREATMENTS}
 </div></section>
 <section class="tint"><div class="wrap">
   <div class="section-head"><h2>Coming from further away</h2></div>
@@ -1614,7 +1659,7 @@ def main():
 - Equipment: CBCT 3D scanner, dental microscope, implant surgery room, Class B autoclave, in-house CAD/CAM lab.
 - Implant brands: Osstem, Hiossen and Nobel Biocare, among others; brand named in writing on every plan.
 - Starting prices: {prices}. Exact prices are given in writing after an examination.
-- Areas served: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri, Paschim Vihar and the rest of West Delhi; implant patients from across Delhi NCR and abroad.
+- Areas served: Rajouri Garden, Punjabi Bagh, Tagore Garden, Subhash Nagar, Ramesh Nagar, Tilak Nagar, Janakpuri, Vikaspuri, Uttam Nagar, Paschim Vihar and the rest of West Delhi; implant patients from across Delhi NCR and abroad.
 - Languages: English, Hindi. Payment: cash, card, bank transfer. Not on the CGHS panel.
 - Profiles: Google {SOCIAL['Google']} · Instagram {SOCIAL['Instagram']} · Facebook {SOCIAL['Facebook']} · YouTube {SOCIAL['YouTube']}
 - Last updated: {UPDATED}

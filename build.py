@@ -422,7 +422,7 @@ def layout(path, title, desc, body, current, extra_ld=(), og_image="assets/img/s
       <li><a href="{SOCIAL['Google']}" rel="noopener">Google</a> · <a href="{SOCIAL['Instagram']}" rel="noopener">Instagram</a> · <a href="{SOCIAL['Facebook']}" rel="noopener">Facebook</a> · <a href="{SOCIAL['YouTube']}" rel="noopener">YouTube</a> · <a href="{LINKEDIN_CLINIC}" rel="noopener">LinkedIn</a> · <a href="/videos.html">Videos</a></li>
     </ul></div>
   </div>
-  <div class="legal"><span>© 2026 {e(CLINIC['name'])}, Rajouri Garden, New Delhi.</span><span>Information on this site is general and is not a diagnosis. Treatment is planned after an examination.</span></div>
+  <div class="legal"><span>© 2026 {e(CLINIC['name'])}, Rajouri Garden, New Delhi.</span><span>Information on this site is general and is not a diagnosis. Treatment is planned after an examination. <a href="/privacy-policy.html">Privacy policy</a></span></div>
 </div></footer>
 <a class="wa-float" href="{wa('I would like to book an appointment at Dr Sobti' + chr(39) + 's Dental Care.')}" data-track="whatsapp" aria-label="Chat on WhatsApp">{WA_ICON}<span>WhatsApp us</span></a>
 <script>
@@ -1533,6 +1533,25 @@ def general_ld(g):
             + video_ld(GENERAL_VIDEOS.get(g["slug"], []), g["slug"]))
 
 
+def page_privacy():
+    return pagehead("Privacy policy", "Privacy policy",
+                    "How Dr Sobti's Dental Care uses the details you share with us.") + f"""<section><div class="wrap prose">
+<p>This policy covers this website, our WhatsApp numbers and the enquiry forms in our Facebook and Instagram ads. Last updated 25 November 2026.</p>
+<h2>What we collect</h2>
+<p>When you message us, call us or fill in one of our enquiry forms, we receive the details you give us: usually your name, phone number, the area you live in, and the dental problem you want help with.</p>
+<h2>How we use it</h2>
+<p>We use these details only to reply to you, to call you back, to book and remind you about appointments, and to plan your treatment. We do not sell or rent your details to anyone, and we do not share them with other clinics.</p>
+<h2>Who sees it</h2>
+<p>Only our doctors and front desk team. Your details are kept in our clinic records and lead sheets, which only the clinic team can open. Facebook, Instagram, WhatsApp and Google handle the messages and forms you send through them under their own privacy policies.</p>
+<h2>Health information</h2>
+<p>Anything you tell us about your teeth or health is kept confidential and is used only for your care.</p>
+<h2>Your choices</h2>
+<p>You can ask us at any time to stop contacting you, or to delete the details you sent us. Message us on WhatsApp at {CLINIC['wa_display']}, call {CLINIC['phone_display']} or email <a href="mailto:{CLINIC['email']}">{CLINIC['email']}</a>.</p>
+<h2>Contact</h2>
+<p>{e(CLINIC['name'])}, {e(CLINIC['street'])}, {e(CLINIC['locality'])}, {e(CLINIC['region'])} {CLINIC['postcode']}.</p>
+</div></section>"""
+
+
 def page_404():
     return f"""<section class="pagehead"><div class="wrap"><h1>Page not found</h1>
 <p class="lead">The page you were looking for is not here. Try the <a href="/">home page</a>, our <a href="/treatments.html">treatments</a> or <a href="/contact.html">contact details</a>.</p></div></section>"""
@@ -1566,6 +1585,9 @@ PAGES = [
     ("faq.html", "Clinic Facts, Prices and FAQ | Dr Sobti's Dental Care, Rajouri Garden",
      "Timings, address, doctors, implant and treatment prices, and answers to common questions about Dr Sobti's Dental Care, J 12/26 Rajouri Garden, New Delhi. Open 7 days.",
      page_faq, "contact.html", [crumbs_schema("faq.html", "FAQ"), faq_schema(FAQ_ALL)], 0.8),
+    ("privacy-policy.html", "Privacy Policy | Dr Sobti's Dental Care, Rajouri Garden",
+     "How Dr Sobti's Dental Care, Rajouri Garden uses the name, phone number and details you share by WhatsApp, phone or our ad enquiry forms.",
+     page_privacy, "contact.html", [crumbs_schema("privacy-policy.html", "Privacy policy")], 0.2),
 ]
 
 

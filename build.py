@@ -1290,6 +1290,60 @@ AREAS = [
             ("How many trips does an implant need from Kohat Enclave or Saraswati Vihar?", "Usually three main visits: a consultation with the CBCT scan, the guided surgery, and the visit for the final tooth after healing, plus short check-ups. The scan, surgery and lab are all in one clinic, so you do not travel to three different places."),
         ],
     },
+    {
+        "slug": "dentist-tagore-garden",
+        "area": "Tagore Garden",
+        "keyword": "Dentist near Tagore Garden",
+        "distance": "about 1.3 km",
+        "drive": "about 5 minutes by car from Tagore Garden metro along Najafgarh Road",
+        "route": [
+            ("On foot or by auto", "From Tagore Garden metro station it is about 1.3 km east along Najafgarh Road to J Block, Rajouri Garden. Many people walk it in under 20 minutes; an auto or e-rickshaw takes a few minutes. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift."),
+            ("By metro", "Tagore Garden is one stop from Rajouri Garden on the Blue Line towards Noida or Vaishali. The clinic is a short walk from Rajouri Garden station."),
+        ],
+        "intro": "Tagore Garden, Tagore Garden Extension and Raghubir Nagar are next door to our clinic in Rajouri Garden: one metro stop, or about five minutes by car. For families this close, we are the neighbourhood dentist for check-ups, cleanings, fillings, root canals, children's teeth and crowns, as well as implants and smile design.",
+        "faq": [
+            ("How far is the clinic from Tagore Garden?", "About 1.3 km. It is one stop on the Blue Line, or about five minutes by car along Najafgarh Road to J 12/26, Rajouri Garden, above Rajmandir."),
+            ("I have a toothache. Can I come in today?", "Call or WhatsApp the clinic first and tell the desk it is painful. They will give you the earliest slot that day or the next. The clinic is open every day, 10 am to 7 pm."),
+            ("Do you see children?", "Yes. Children's check-ups, fillings and fluoride, with laughing gas for nervous children when it helps. See children's dentistry on this site."),
+            ("Is there parking?", "Yes, there is parking close to the clinic, and a lift to the first floor."),
+        ],
+    },
+    {
+        "slug": "dentist-subhash-nagar",
+        "area": "Subhash Nagar",
+        "keyword": "Dentist near Subhash Nagar",
+        "distance": "about 3.1 km by road",
+        "drive": "about 12 minutes by car from Subhash Nagar metro",
+        "route": [
+            ("By metro", "From Subhash Nagar take the Blue Line towards Noida or Vaishali. Rajouri Garden is two stops (Tagore Garden, then Rajouri Garden). The clinic is a short walk from the station, above Rajmandir."),
+            ("By car or auto", "Come east along Najafgarh Road past Tagore Garden into Rajouri Garden. Google Maps shows about 3.1 km and 12 minutes on a Saturday afternoon. The clinic is on the first floor of J 12/26 with a lift."),
+        ],
+        "intro": "Subhash Nagar, Meenakshi Garden and Ashok Nagar are two metro stops from our clinic in Rajouri Garden. Families from these colonies come to us for regular check-ups and cleaning, painful teeth, root canals, crowns made in our own lab, braces and aligners, and children's dentistry.",
+        "faq": [
+            ("Is there a Dr Sobti's clinic in Subhash Nagar?", "No. The clinic is in Rajouri Garden, two stops from Subhash Nagar on the Blue Line, or about 12 minutes by car."),
+            ("Can a root canal be done in one visit?", "Often, yes, when the tooth is not badly infected. Some teeth need two visits. The dentist will tell you after an X-ray."),
+            ("Can I get a crown made quickly?", "Many crowns are designed and milled in our own lab on the same floor, which cuts the waiting time compared with sending them to an outside lab."),
+            ("Is the clinic open on Sunday?", "Yes. It is open all seven days, 10 am to 7 pm, by appointment. Please call or WhatsApp first."),
+        ],
+    },
+    {
+        "slug": "dentist-hari-nagar",
+        "area": "Hari Nagar",
+        "keyword": "Dentist near Hari Nagar",
+        "distance": "about 2.7 km by road",
+        "drive": "about 9 minutes by car from Hari Nagar Ghanta Ghar (Clock Tower)",
+        "route": [
+            ("By car or auto", "From the Ghanta Ghar (Clock Tower) in Hari Nagar, Google Maps routes you via Shaheed Mangal Pandey Marg into Rajouri Garden: about 2.7 km and 9 minutes on a Saturday afternoon. The clinic is on the first floor of J 12/26, above Rajmandir, with a lift and parking close by."),
+            ("By metro", "Hari Nagar has no metro station of its own. Take an auto to Tilak Nagar or Subhash Nagar on the Blue Line and ride towards Noida or Vaishali to Rajouri Garden, or to Mayapuri on the Pink Line, one stop from Rajouri Garden."),
+        ],
+        "intro": "Hari Nagar, Nanak Pura and the colonies around the Ghanta Ghar are under ten minutes by car from our clinic in Rajouri Garden. People from Hari Nagar come to us for check-ups and cleaning, painful teeth, root canals, crowns, wisdom tooth removal, jaw pain and children's dentistry, any day of the week.",
+        "faq": [
+            ("Is there a Dr Sobti's clinic in Hari Nagar?", "No. The clinic is in Rajouri Garden, about 2.7 km from the Hari Nagar Ghanta Ghar, or about 9 minutes by car."),
+            ("Who removes wisdom teeth?", "Dr Pushkar Sobti, who does the clinic's oral surgery. A scan is taken first when the tooth is close to the nerve."),
+            ("My jaw clicks and hurts. Can you help?", "Yes. The clinic checks the bite and the jaw joint, and treats jaw pain with night guards, splints and bite correction."),
+            ("Can older family members manage the visit?", "Yes. The clinic is on the first floor with a lift, and parking is close by."),
+        ],
+    },
 ]
 
 WEST_DELHI_NEARBY = [
@@ -1322,6 +1376,13 @@ AREA_TREATMENTS = """<ul>
 </ul>"""
 
 
+IMPLANT_AREA = {  # matching implant area pages on dentalimplantsdelhi.com (added 28 Nov 2026)
+    "dentist-janakpuri": "janakpuri", "dentist-vikaspuri": "vikaspuri", "dentist-paschim-vihar": "paschim-vihar",
+    "dentist-tilak-nagar": "tilak-nagar", "dentist-kirti-nagar": "moti-nagar", "dentist-punjabi-bagh": "punjabi-bagh",
+    "dentist-pitampura": "pitampura", "dentist-patel-nagar-rajinder-nagar": "karol-bagh",
+}
+
+
 def area_links_html(skip=""):
     items = "".join(f'<li><a href="/{a["slug"]}.html">Patients from {e(a["area"])}</a></li>' for a in AREAS if a["slug"] != skip)
     return f'<ul>{items}<li><a href="/dentist-west-delhi.html">All of West Delhi</a></li></ul>'
@@ -1338,6 +1399,8 @@ def why_cards():
 def page_area(a):
     route = "".join(f"<div class=\"card\"><h3>{e(t)}</h3><p>{e(d)}</p></div>" for t, d in a["route"])
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(ans)}</p></details>" for q, ans in a["faq"])
+    implant_note = (f'<p style="margin-top:14px">Planning dental implants? See <a href="{IMPLANTS}/dental-implants-{IMPLANT_AREA[a['slug']]}/">dental implants for patients from {e(a['area'])}</a>: route, visits and questions, on Dr Pushkar Sobti&#39;s implant site.</p>'
+                    if a["slug"] in IMPLANT_AREA else "")
     drive = (f'<p class="muted" style="margin-top:18px">It takes {e(a["drive"])} (Google Maps, checked on a weekday late morning). Allow more time in the evening rush.</p>'
              if a.get("drive") else "")
     return pagehead(f"{e(a['keyword'])}: Dr Sobti's Dental Care, Rajouri Garden", f"Patients from {a['area']}",
@@ -1350,6 +1413,7 @@ def page_area(a):
 <section><div class="wrap" style="max-width:860px">
   <div class="section-head"><h2>What people from {e(a['area'])} come to us for</h2></div>
   {AREA_TREATMENTS}
+  {implant_note}
 </div></section>
 <section class="tint"><div class="wrap">
   <div class="section-head"><h2>Why patients from {e(a['area'])} choose us</h2></div>
@@ -1383,7 +1447,7 @@ def page_west_delhi():
   {AREA_TREATMENTS}
 </div></section>
 <section class="tint"><div class="wrap">
-  <div class="section-head"><h2>Coming from further away</h2></div>
+  <div class="section-head"><h2>Pages for each area</h2><p class="lead">Implant patients: see <a href="{IMPLANTS}/dental-implants-west-delhi/">travel times to our implant clinic from each area</a>.</p></div>
   <div class="grid g2">{areas}</div>
 </div></section>
 <section><div class="wrap" style="max-width:860px">
